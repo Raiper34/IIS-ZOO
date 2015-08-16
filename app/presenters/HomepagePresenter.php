@@ -7,6 +7,7 @@ use Nette\Application\UI\Form;
 use Nette\Application\UI\Multiplier;
 use App\Forms\VytvoritUzivatelaForm;
 use App\Forms\VymazatUzivatelaForm;
+use App\Forms\EditovatUzivatelaForm;
 use App\Forms\PrihlasenieForm;
 
 
@@ -52,6 +53,15 @@ class HomepagePresenter extends BasePresenter
 		return new Multiplier(function ($id)
 		{
 			$form = (new VymazatUzivatelaForm($this->database, $this, $id))->create();
+			return $form;
+		});
+	}
+
+	protected function createComponentEditovatUzivatela()
+	{
+		return new Multiplier(function ($id)
+		{
+			$form = (new EditovatUzivatelaForm($this->database, $this, $id))->create();
 			return $form;
 		});
 	}

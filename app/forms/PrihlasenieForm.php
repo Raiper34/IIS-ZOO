@@ -8,12 +8,12 @@ use Nette\Application\UI\Form;
 
 class PrihlasenieForm extends Nette\Object
 {
-	private $database;
+	private $databaza;
 	private $presenter;
 
 	public function __construct(Nette\Database\Context $databaza, $presenter)
 	{
-		$this->database = $databaza;
+		$this->databaza = $databaza;
 		$this->presenter = $presenter;
 	}
 
@@ -24,12 +24,12 @@ class PrihlasenieForm extends Nette\Object
 		$form->addPassword('heslo', 'Heslo:')->setRequired('Prosim zadajte heslo.');
 		$form->addSubmit('prihlasit', 'Prihlasit');
 
-		$form->onSuccess[] = array($this, 'formSucceeded');
+		$form->onSuccess[] = array($this, 'prihlasenie');
 		return $form;
 	}
 
 
-	public function formSucceeded(Form $form, $values)
+	public function prihlasenie(Form $form, $values)
 	{
 		$user = $this->presenter->getUser();
 		$user->login($values->meno, $values->heslo);

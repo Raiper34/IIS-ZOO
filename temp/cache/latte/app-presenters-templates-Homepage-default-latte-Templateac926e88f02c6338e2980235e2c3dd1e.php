@@ -18,6 +18,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbf45dfcee8a_content')) { func
         <td><?php echo Latte\Runtime\Filters::escapeHtml($pouzivatel->id, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($pouzivatel->meno, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($pouzivatel->opravnenie, ENT_NOQUOTES) ?></td>
+        <td><?php $_l->tmp = $_control->getComponent("editovatUzivatela-$pouzivatel->id"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
         <td><?php $_l->tmp = $_control->getComponent("vymazatUzivatela-$pouzivatel->id"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
     <tr>
 <?php $iterations++; } ?>
