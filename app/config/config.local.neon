@@ -1,0 +1,12 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=127.0.0.1:3307;dbname=quickstart'
+	user: 'root'
+	password: 'usbw'
+	options:
+		lazy: yes
+
+services:
+    authenticator: App\Model\Prihlasovanie

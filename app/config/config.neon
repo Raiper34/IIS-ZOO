@@ -1,0 +1,31 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# http://nette.org/security-warning
+#
+parameters:
+
+
+php:
+	date.timezone: Europe/Prague
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	authenticator: App\Model\Prihlasovanie
+	router: App\Router::vytvoritRouter
+
+database:
+	dsn: 'mysql:host=127.0.0.1:3307;dbname=quickstart'
+	user: 'root'
+	password: 'usbw'
+	options:
+		lazy: yes

@@ -1,0 +1,32 @@
+{** {block content}
+{control commentForm}
+	<h1 n:block="title">Můj blog</h1>
+
+    {foreach $posts as $post}
+    <div class="post">
+    <h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
+        <div class="date">{$post->created_at|date:'F j, Y'}</div>
+
+        <h2>{$post->title}</h2>
+        <h2>{$pouzivatel}</h2>
+
+        <div>{$post->content}</div>
+    </div>
+    {/foreach}
+{/block} *}
+
+{block content}
+<table>
+{foreach $pouzivatelia as $pouzivatel}
+    <tr>
+        <td>{$pouzivatel->id}</td>
+        <td>{$pouzivatel->meno}</td>
+        <td>{$pouzivatel->opravnenie}</td>
+        <td>{control vymazatUzivatela-$pouzivatel->id}</td>
+    <tr>
+{/foreach}
+</table>
+
+{control vytvoritUzivatela}
+{control prihlasenie}
+{/block}
