@@ -20,6 +20,7 @@ class Container_23387215fb extends Nette\DI\Container
 					'http.context',
 					'security.user',
 					'session.session',
+					'25_App_Forms_EditovatUzivatelaForm',
 					'authenticator',
 					'application.1',
 					'application.2',
@@ -70,6 +71,9 @@ class Container_23387215fb extends Nette\DI\Container
 			'Tracy\ILogger' => array(1 => array('tracy.logger')),
 			'Tracy\BlueScreen' => array(1 => array('tracy.blueScreen')),
 			'Tracy\Bar' => array(1 => array('tracy.bar')),
+			'App\Forms\EditovatUzivatelaForm' => array(
+				1 => array('25_App_Forms_EditovatUzivatelaForm'),
+			),
 			'Nette\Security\IAuthenticator' => array(1 => array('authenticator')),
 			'App\Model\Prihlasovanie' => array(1 => array('authenticator')),
 			'App\Presenters\BasePresenter' => array(
@@ -173,6 +177,7 @@ class Container_23387215fb extends Nette\DI\Container
 			'Nette\DI\Container' => array(1 => array('container')),
 		),
 		'services' => array(
+			'25_App_Forms_EditovatUzivatelaForm' => 'App\Forms\EditovatUzivatelaForm',
 			'application.1' => 'App\Presenters\EditovaniePresenter',
 			'application.2' => 'App\Presenters\ErrorPresenter',
 			'application.3' => 'App\Presenters\HomepagePresenter',
@@ -256,6 +261,16 @@ class Container_23387215fb extends Nette\DI\Container
 			'container' => array('class' => NULL, 'parent' => NULL),
 			'tempDir' => 'C:\Users\Raiper34\Desktop\server\root\nette\app/../temp',
 		));
+	}
+
+
+	/**
+	 * @return App\Forms\EditovatUzivatelaForm
+	 */
+	public function createService__25_App_Forms_EditovatUzivatelaForm()
+	{
+		$service = new App\Forms\EditovatUzivatelaForm($this->getService('database.default.context'));
+		return $service;
 	}
 
 

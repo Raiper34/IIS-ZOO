@@ -12,7 +12,7 @@ list($_b, $_g, $_l) = $template->initialize('2cecbeb4e6', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb09669ea98d_content')) { function _lb09669ea98d_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("editovanie"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+;$_l->tmp = $_control->getComponent("editovanieForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 
 //

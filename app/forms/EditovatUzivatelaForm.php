@@ -9,18 +9,16 @@ use Nette\Application\UI\Form;
 class EditovatUzivatelaForm extends Nette\Object
 {
 	private $database;
-	private $presenter;
-	private $id;
+	public $id;
 
-	public function __construct(Nette\Database\Context $databaza, $presenter, $id)
+	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
-		$this->presenter = $presenter;
-		$this->id = $id;
 	}
 
-	public function create()
+	public function create($id)
 	{
+		$this->id = $id;
 		$form = new Form;
 		$form->addSubmit('editovat', 'Editovat');
 
@@ -36,11 +34,6 @@ class EditovatUzivatelaForm extends Nette\Object
 		$form->addSelect('opravnenie', 'Opravnenie:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'));
 		$form->addSubmit('editovat', 'Eitovat');
 
-		$zaznam = $this->database->table('pouzivatelia')->get($this->id);
-
-		//$form->setDefaults(array('meno' => 'aaa', 'opravnenie' => 'admin'));
-		$form->setDefaults($zaznam->toArray());
-
 		$form->onSuccess[] = array($this, 'formSucceededdd');
 		return $form;
 	}
@@ -48,15 +41,15 @@ class EditovatUzivatelaForm extends Nette\Object
 
 	public function formSucceeded(Form $form, $values)
 	{
-		$this->presenter->redirect('Editovanie:default', $this->id);
+		$form->getPresenter()->redirect('Editovanie:default', $this->id);
 	}
 
 	public function formSucceededdd(Form $form, $values)
 	{
 		/*$zaznam = $this->database->table('pouzivatelia')->get($this->id);
 		$zmena = array('meno' => $values->meno, 'opravnenie' => $values->opravnenie);
-		$zaznam->update($zmena);
-		$this->presenter->redirect('Homepage:default');*/
+		$zaznam->update($zmena);*/
+		$form->getPresenter()->redirect('Homepage:default');
 	}
 
 }

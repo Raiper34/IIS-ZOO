@@ -61,7 +61,7 @@ class HomepagePresenter extends BasePresenter
 	{
 		return new Multiplier(function ($id)
 		{
-			$form = (new EditovatUzivatelaForm($this->database, $this, $id))->create();
+			$form = (new EditovatUzivatelaForm($this->database))->create($id);
 			return $form;
 		});
 	}

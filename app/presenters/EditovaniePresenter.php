@@ -22,10 +22,15 @@ class EditovaniePresenter extends BasePresenter
 		$this->id = $id;
 	}
 
-	protected function createComponentEditovanie()
+	protected function createComponentEditovanieForm()
 	{
-		$form = (new EditovatUzivatelaForm($this->database, $this, $this->id))->createee();
+		$form = (new EditovatUzivatelaForm($this->database))->createee();
 		return $form;
 	}
 
+	public function actionDefault($id)
+	{
+		$zaznam = $this->database->table('pouzivatelia')->get($id);
+		$this["editovanieForm"]->setDefaults($zaznam->toArray());
+	}
 }
