@@ -4,13 +4,11 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
-use Nette\Application\UI\Multiplier;
-use App\Forms\VytvoritUzivatelaForm;
-use App\Forms\VymazatUzivatelaForm;
-use App\Forms\EditovatUzivatelaForm;
 use App\Forms\PrihlasenieForm;
 
-
+/*
+ * Hlavna stranka, zobrazuje iba prihlasenie
+ */
 class HomepagePresenter extends BasePresenter
 {
 	private $database;
@@ -22,48 +20,20 @@ class HomepagePresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$user = $this->getUser();
-		//$user->login('god', 'god');
-
-		/*$this->template->posts = $this->database->table('posts')->order('created_at DESC')->limit(5);
-		$this->template->pouzivatel = $user->getIdentity()->meno;*/
-		$this->template->pouzivatelia = $this->database->table('pouzivatelia');
+		$uzivatel = $this->getUser();
+		//$uzivatel->login('0', '0');
+		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny hed redirectujem
+		{
+			$this->redirect('Uzivatelia:vypis');
+		}
 	}
 
-	/*protected function createComponentCommentForm()
-	{
-	    $form = (new \App\Forms\SignFormFactory())->create();
-	    return $form;
-	}*/
-
-	protected function createComponentVytvoritUzivatela()
-	{
-		$form = (new VytvoritUzivatelaForm($this->database, $this))->create();
-		return $form;
-	}
-
+	/*
+	 * Vytvorenie prihlasovacieho formu
+	 */
 	protected function createComponentPrihlasenie()
 	{
-		$form = (new PrihlasenieForm($this->database, $this))->create();
+		$form = (new PrihlasenieForm($this->database, $this))->vytvorit();
 		return $form;
 	}
-
-	protected function createComponentVymazatUzivatela()
-	{
-		return new Multiplier(function ($id)
-		{
-			$form = (new VymazatUzivatelaForm($this->database, $this, $id))->create();
-			return $form;
-		});
-	}
-
-	protected function createComponentEditovatUzivatela()
-	{
-		return new Multiplier(function ($id)
-		{
-			$form = (new EditovatUzivatelaForm($this->database))->create($id);
-			return $form;
-		});
-	}
-
 }

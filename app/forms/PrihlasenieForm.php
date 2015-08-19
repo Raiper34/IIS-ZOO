@@ -5,7 +5,9 @@ namespace App\Forms;
 use Nette;
 use Nette\Application\UI\Form;
 
-
+/*
+ * Tovarna na prihlasovacie formy
+ */
 class PrihlasenieForm extends Nette\Object
 {
 	private $databaza;
@@ -17,23 +19,27 @@ class PrihlasenieForm extends Nette\Object
 		$this->presenter = $presenter;
 	}
 
-	public function create()
+	/*
+	 * Vytvori form na prihlasenie
+	 */
+	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addText('meno', 'Meno:')->setRequired('Prosim zadajte meno.');
-		$form->addPassword('heslo', 'Heslo:')->setRequired('Prosim zadajte heslo.');
-		$form->addSubmit('prihlasit', 'Prihlasit');
+		$form->addText('RodneCislo', 'Rodné číslo:')->setRequired();
+		$form->addPassword('heslo', 'Heslo:')->setRequired();
+		$form->addSubmit('prihlasit', 'Prihlásiť');
 
 		$form->onSuccess[] = array($this, 'prihlasenie');
 		return $form;
 	}
 
-
+	/*
+	 * Prihlasenie uzivatela po odoslani formularu
+	 */
 	public function prihlasenie(Form $form, $values)
 	{
-		$user = $this->presenter->getUser();
-		$user->login($values->meno, $values->heslo);
-		$this->presenter->redirect('Homepage:default');
+		$uzivatel = $this->presenter->getUser();
+		$uzivatel->login($values->RodneCislo, $values->heslo);
+		$this->presenter->redirect('Uzivatelia:default');
 	}
-
 }

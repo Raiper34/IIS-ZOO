@@ -66,7 +66,8 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <?php $iterations = 0; foreach ($flashes as $flash) { ?>	<div<?php if ($_l->tmp = array_filter(array('flash', $flash->type))) echo ' class="', Latte\Runtime\Filters::escapeHtml(implode(" ", array_unique($_l->tmp)), ENT_COMPAT), '"' ?>
 ><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; } ?>
-
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Uzivatelia:vypis"), ENT_COMPAT) ?>">Zamestnanci</a>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Uzivatelia:vypis"), ENT_COMPAT) ?>">Zamestnanci</a>
 <?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?>
 
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>

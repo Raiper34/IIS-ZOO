@@ -5,9 +5,12 @@ namespace App\Model;
 use Nette;
 use Nette\Security;
 
+/*
+ * Prihlasovanie uzivatela
+ */
 class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticator
 {
-	private $database;
+    private $database;
 
     function __construct(Nette\Database\Context $databaza)
     {
@@ -16,26 +19,26 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
 
     function authenticate(array $pouzivatel)
     {
-        $username = $pouzivatel[0];
-        $password = $pouzivatel[1];
-        $row = $this->database->table('pouzivatelia')->where('meno', $username)->fetch();
-
-        if ($row == null) //overenie ci taky uzivatel vobec je v 
+        $RodneCislo = $pouzivatel[0];
+        $heslo = $pouzivatel[1];
+        $zaznam = $this->database->table('zamestnanec')->where('RodneCislo', $RodneCislo)->fetch();
+        dump($zaznam);
+        if ($zaznam == null) //overenie ci taky uzivatel vobec je v 
         {
-            throw new Nette\Security\AuthenticationException('User not found.');
+            throw new Nette\Security\AuthenticationException('Používateľ sa nenašiel!');
         }
 
-        /*if (Nette\Security\Passwords::verify($password, $row->heslo) == null) //overenie ci je heslo spravne
+        /*if (Nette\Security\heslos::verify($heslo, $zaznam->heslo) == null) //overenie ci je heslo spravne
         {
-            throw new Nette\Security\AuthenticationException('Invalid password.');
+            thzaznam new Nette\Security\AuthenticationException('Invalid heslo.');
         }*/
 
-        if ($password != $row->heslo) //overenie ci je heslo spravne
+        if ($heslo != $zaznam->heslo) //overenie ci je heslo spravne
         {
-            throw new Nette\Security\AuthenticationException('Invalid password.');
+            throw new Nette\Security\AuthenticationException('Nesprávne heslo!');
         }
 
-        return new Nette\Security\Identity($row->id, $row->opravnenie, array('meno' => $row->meno)); //vratenie uzivatela
+        return new Nette\Security\Identity($zaznam->RodneCislo, $zaznam->funkcia, array('meno' => $zaznam->meno)); //vratenie uzivatela
     }
 }
 

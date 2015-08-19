@@ -1,0 +1,22 @@
+{block content}
+<table>
+    <tr>
+        <td>Rodné číslo</td>
+        <td>Meno</td>
+        <td>Priezvisko</td>
+        <td>Dátum narodenia</td>
+    </tr>
+{foreach $zamestnanci as $zamestnanec}
+    <tr>
+        <td>{$zamestnanec->RodneCislo}</td>
+        <td>{$zamestnanec->meno}</td>
+        <td>{$zamestnanec->priezvisko}</td>
+        <td>{$zamestnanec->datumNarodenia}</td>
+        <td>{control editovatButton-$zamestnanec->RodneCislo}</td>
+        <td>{control vymazatButton-$zamestnanec->RodneCislo}</td>
+    <tr>
+{/foreach}
+</table>
+
+{control vytvoritForm}
+{/block}

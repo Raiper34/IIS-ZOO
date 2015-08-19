@@ -21,6 +21,7 @@ CREATE TABLE zamestnanec(
 RodneCislo BIGINT NOT NULL,
 meno VARCHAR(25) NOT NULL,
 priezvisko VARCHAR(25) NOT NULL,
+heslo VARCHAR(25) NOT NULL,
 titul VARCHAR(10),
 datumNarodenia DATE NOT NULL,
 adresa VARCHAR(50) NOT NULL,

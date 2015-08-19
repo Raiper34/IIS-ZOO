@@ -1,18 +1,18 @@
 <?php
-// source: C:\Users\Raiper34\Desktop\server\root\nette\app\presenters/templates/Homepage/default.latte
+// source: C:\Users\Raiper34\Desktop\server\root\nette\app\presenters/templates/Uzivatelia/editovanie.latte
 
-class Templateac926e88f02c6338e2980235e2c3dd1e extends Latte\Template {
+class Template3ea0833e8c332682933a73efc737110f extends Latte\Template {
 function render() {
 foreach ($this->params as $__k => $__v) $$__k = $__v; unset($__k, $__v);
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('b65b2f65e4', 'html')
+list($_b, $_g, $_l) = $template->initialize('d15693201c', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbf45dfcee8a_content')) { function _lbf45dfcee8a_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("prihlasenie"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+if (!function_exists($_b->blocks['content'][] = '_lbd69bf56f88_content')) { function _lbd69bf56f88_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+;$_l->tmp = $_control->getComponent("editovatForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
 }}
 
 //

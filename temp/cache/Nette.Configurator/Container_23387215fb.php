@@ -169,18 +169,18 @@ class Container_23387215fb extends Nette\DI\Container
 					'application.5',
 				),
 			),
-			'App\Presenters\EditovaniePresenter' => array(array('application.1')),
-			'App\Presenters\ErrorPresenter' => array(array('application.2')),
-			'App\Presenters\HomepagePresenter' => array(array('application.3')),
+			'App\Presenters\ErrorPresenter' => array(array('application.1')),
+			'App\Presenters\HomepagePresenter' => array(array('application.2')),
+			'App\Presenters\UzivateliaPresenter' => array(array('application.3')),
 			'NetteModule\ErrorPresenter' => array(array('application.4')),
 			'NetteModule\MicroPresenter' => array(array('application.5')),
 			'Nette\DI\Container' => array(1 => array('container')),
 		),
 		'services' => array(
 			'25_App_Forms_EditovatUzivatelaForm' => 'App\Forms\EditovatUzivatelaForm',
-			'application.1' => 'App\Presenters\EditovaniePresenter',
-			'application.2' => 'App\Presenters\ErrorPresenter',
-			'application.3' => 'App\Presenters\HomepagePresenter',
+			'application.1' => 'App\Presenters\ErrorPresenter',
+			'application.2' => 'App\Presenters\HomepagePresenter',
+			'application.3' => 'App\Presenters\UzivateliaPresenter',
 			'application.4' => 'NetteModule\ErrorPresenter',
 			'application.5' => 'NetteModule\MicroPresenter',
 			'application.application' => 'Nette\Application\Application',
@@ -219,9 +219,9 @@ class Container_23387215fb extends Nette\DI\Container
 				'application.5' => TRUE,
 			),
 			'nette.presenter' => array(
-				'application.1' => 'App\Presenters\EditovaniePresenter',
-				'application.2' => 'App\Presenters\ErrorPresenter',
-				'application.3' => 'App\Presenters\HomepagePresenter',
+				'application.1' => 'App\Presenters\ErrorPresenter',
+				'application.2' => 'App\Presenters\HomepagePresenter',
+				'application.3' => 'App\Presenters\UzivateliaPresenter',
 				'application.4' => 'NetteModule\ErrorPresenter',
 				'application.5' => 'NetteModule\MicroPresenter',
 			),
@@ -275,23 +275,9 @@ class Container_23387215fb extends Nette\DI\Container
 
 
 	/**
-	 * @return App\Presenters\EditovaniePresenter
-	 */
-	public function createServiceApplication__1()
-	{
-		$service = new App\Presenters\EditovaniePresenter($this->getService('database.default.context'));
-		$service->injectPrimary($this, $this->getService('application.presenterFactory'), $this->getService('routing.router'),
-			$this->getService('http.request'), $this->getService('http.response'), $this->getService('session.session'),
-			$this->getService('security.user'), $this->getService('latte.templateFactory'));
-		$service->invalidLinkMode = 5;
-		return $service;
-	}
-
-
-	/**
 	 * @return App\Presenters\ErrorPresenter
 	 */
-	public function createServiceApplication__2()
+	public function createServiceApplication__1()
 	{
 		$service = new App\Presenters\ErrorPresenter($this->getService('tracy.logger'));
 		$service->injectPrimary($this, $this->getService('application.presenterFactory'), $this->getService('routing.router'),
@@ -305,9 +291,23 @@ class Container_23387215fb extends Nette\DI\Container
 	/**
 	 * @return App\Presenters\HomepagePresenter
 	 */
-	public function createServiceApplication__3()
+	public function createServiceApplication__2()
 	{
 		$service = new App\Presenters\HomepagePresenter($this->getService('database.default.context'));
+		$service->injectPrimary($this, $this->getService('application.presenterFactory'), $this->getService('routing.router'),
+			$this->getService('http.request'), $this->getService('http.response'), $this->getService('session.session'),
+			$this->getService('security.user'), $this->getService('latte.templateFactory'));
+		$service->invalidLinkMode = 5;
+		return $service;
+	}
+
+
+	/**
+	 * @return App\Presenters\UzivateliaPresenter
+	 */
+	public function createServiceApplication__3()
+	{
+		$service = new App\Presenters\UzivateliaPresenter($this->getService('database.default.context'));
 		$service->injectPrimary($this, $this->getService('application.presenterFactory'), $this->getService('routing.router'),
 			$this->getService('http.request'), $this->getService('http.response'), $this->getService('session.session'),
 			$this->getService('security.user'), $this->getService('latte.templateFactory'));
