@@ -63,10 +63,13 @@ class UzivateliaPresenter extends BasePresenter
 
 	public function renderViac($RodneCislo)
 	{
-		$this->RodneCislo = $RodneCislo;
 		$this->template->zamestnanec = $this->database->table('zamestnanec')->get($RodneCislo);
 	}
 
+	public function actionViac($RodneCislo)
+	{
+		$this->RodneCislo = $RodneCislo;
+	}
 	protected function createComponentEditovatButton()
 	{
 		$form = new Form;
