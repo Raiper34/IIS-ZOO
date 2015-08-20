@@ -30,3 +30,7 @@ database:
 	password: 'usbw'
 	options:
 		lazy: yes
+
+forms:
+	messages:
+		REQUIRED: 'Povinné pole!'

@@ -636,6 +636,7 @@ class Container_23387215fb extends Nette\DI\Container
 	public function initialize()
 	{
 		date_default_timezone_set('Europe/Prague');
+		Nette\Forms\Validator::$messages[Nette\Forms\Form::REQUIRED] = 'Povinné pole!';
 		header('X-Frame-Options: SAMEORIGIN');
 		header('X-Powered-By: Nette Framework');
 		header('Content-Type: text/html; charset=utf-8');

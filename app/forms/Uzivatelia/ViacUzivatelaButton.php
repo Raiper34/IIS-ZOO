@@ -8,7 +8,7 @@ use Nette\Application\UI\Form;
 /*
  * Tovarenska metoda na tlacidla na editovanie uzivatela
  */
-class EditovatUzivatelaButton extends Nette\Object
+class ViacUzivatelaButton extends Nette\Object
 {
 	private $database;
 	public $RodneCislo;
@@ -25,7 +25,7 @@ class EditovatUzivatelaButton extends Nette\Object
 	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addSubmit('editovat', 'Editovať');
+		$form->addSubmit('viac', 'Viac');
 
 		$form->onSuccess[] = array($this, 'uspesne');
 		return $form;
@@ -34,9 +34,9 @@ class EditovatUzivatelaButton extends Nette\Object
 	/*
 	 * Po kliknuti sa presmerujeme na editacnu stranku
 	 */
-	public function uspesne(Form $form, $values)
+	public function uspesne(Form $form, $hodnoty)
 	{
-		$form->getPresenter()->redirect('Uzivatelia:editovanie', $this->RodneCislo);
+		$form->getPresenter()->redirect('Uzivatelia:viac', $this->RodneCislo);
 	}
 
 }

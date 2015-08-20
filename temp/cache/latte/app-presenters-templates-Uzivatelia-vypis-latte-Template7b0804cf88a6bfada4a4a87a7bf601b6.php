@@ -12,11 +12,13 @@ list($_b, $_g, $_l) = $template->initialize('8f6b2093f6', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb75ae437bfa_content')) { function _lb75ae437bfa_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><table>
+;$_l->tmp = $_control->getComponent("vytvoritForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+<table>
     <tr>
         <td>Rodné číslo</td>
         <td>Meno</td>
         <td>Priezvisko</td>
+        <td>Funkcia</td>
         <td>Dátum narodenia</td>
     </tr>
 <?php $iterations = 0; foreach ($zamestnanci as $zamestnanec) { ?>
@@ -24,14 +26,13 @@ if (!function_exists($_b->blocks['content'][] = '_lb75ae437bfa_content')) { func
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->RodneCislo, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->meno, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></td>
+        <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->funkcia, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->datumNarodenia, ENT_NOQUOTES) ?></td>
-        <td><?php $_l->tmp = $_control->getComponent("editovatButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
-        <td><?php $_l->tmp = $_control->getComponent("vymazatButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
+        <td><?php $_l->tmp = $_control->getComponent("viacButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
     <tr>
 <?php $iterations++; } ?>
 </table>
-
-<?php $_l->tmp = $_control->getComponent("vytvoritForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+<?php
 }}
 
 //
