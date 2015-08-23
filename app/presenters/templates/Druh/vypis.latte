@@ -1,0 +1,16 @@
+{block content}
+{control vytvoritForm}
+<table>
+    <tr>
+        <td>Identifikačné číslo</td>
+        <td>Názov</td>
+    </tr>
+{foreach $druhy as $druh}
+    <tr>
+        <td>{$druh->IDDruhuZivocicha}</td>
+        <td>{$druh->nazov}</td>
+        <td>{control viacButton-$druh->IDDruhuZivocicha}</td>
+    <tr>
+{/foreach}
+</table>
+{/block}

@@ -7,7 +7,7 @@ use Nette\Application\UI\Form;
 use Nette\Application\UI\Multiplier;
 use App\Forms\VytvoritUzivatelaForm;
 use App\Forms\VymazatUzivatelaButton;
-use App\Forms\ViacUzivatelaButton;
+use App\Forms\ViacButton;
 use App\Forms\EditovatUzivatelaForm;
 
 /*
@@ -54,7 +54,7 @@ class UzivateliaPresenter extends BasePresenter
 	{
 		return new Multiplier(function ($RodneCislo)
 		{
-			$form = (new ViacUzivatelaButton($this->database, $RodneCislo))->vytvorit();
+			$form = (new ViacButton($this->database, $RodneCislo, 'Uzivatelia:viac'))->vytvorit();
 			return $form;
 		});
 	}
