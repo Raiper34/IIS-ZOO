@@ -11,13 +11,13 @@ use Nette\Application\UI\Form;
 class ViacButton extends Nette\Object
 {
 	private $database;
-	public $RodneCislo;
+	public $Id;
 	public $stranka;
 
-	public function __construct(Nette\Database\Context $databaza, $RodneCislo, $stranka)
+	public function __construct(Nette\Database\Context $databaza, $Id, $stranka)
 	{
 		$this->database = $databaza;
-		$this->RodneCislo = $RodneCislo;
+		$this->Id = $Id;
 		$this->stranka = $stranka;
 	}
 
@@ -38,7 +38,7 @@ class ViacButton extends Nette\Object
 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
-		$form->getPresenter()->redirect($this->stranka, $this->RodneCislo);
+		$form->getPresenter()->redirect($this->stranka, $this->Id);
 	}
 
 }
