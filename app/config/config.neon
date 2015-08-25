@@ -22,7 +22,6 @@ session:
 services:
 	authenticator: App\Model\Prihlasovanie
 	router: App\Router::vytvoritRouter
-	- App\Forms\EditovatUzivatelaForm
 
 database:
 	dsn: 'mysql:host=127.0.0.1:3307;dbname=quickstart'

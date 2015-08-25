@@ -5,15 +5,15 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Multiplier;
-use App\Forms\VytvoritUzivatelaForm;
-use App\Forms\VymazatUzivatelaButton;
+use App\Forms\VytvoritZamestnancaForm;
+use App\Forms\VymazatZamestnancaButton;
 use App\Forms\ViacButton;
-use App\Forms\EditovatUzivatelaForm;
+use App\Forms\EditovatZamestnancaForm;
 
 /*
  * Stranky s uzivatelmi a prislusnych akciami
  */
-class UzivateliaPresenter extends BasePresenter
+class ZamestnanecPresenter extends BasePresenter
 {
 	private $database;
 	private $tovarna;
@@ -26,7 +26,7 @@ class UzivateliaPresenter extends BasePresenter
 
 	public function actionDefault()
 	{
-		$this->redirect('Uzivatelia:vypis');
+		$this->redirect('Zamestnanec:vypis');
 	}
 
 	/************************************ Vypis ****************************************/
@@ -43,7 +43,7 @@ class UzivateliaPresenter extends BasePresenter
 	 */
 	protected function createComponentVytvoritForm()
 	{
-		$form = (new VytvoritUzivatelaForm($this->database, $this))->vytvorit();
+		$form = (new VytvoritZamestnancaForm($this->database, $this))->vytvorit();
 		return $form;
 	}
 
@@ -54,7 +54,7 @@ class UzivateliaPresenter extends BasePresenter
 	{
 		return new Multiplier(function ($RodneCislo)
 		{
-			$form = (new ViacButton($this->database, $RodneCislo, 'Uzivatelia:viac'))->vytvorit();
+			$form = (new ViacButton($this->database, $RodneCislo, 'Zamestnanec:viac'))->vytvorit();
 			return $form;
 		});
 	}
@@ -81,7 +81,7 @@ class UzivateliaPresenter extends BasePresenter
 
 	public function uspesneEditovatButton(Form $form, $hodnoty)
 	{
-		$this->redirect('Uzivatelia:editovat', $this->RodneCislo);
+		$this->redirect('Zamestnanec:editovat', $this->RodneCislo);
 	}
 
 	protected function createComponentVymazatButton()
@@ -96,7 +96,7 @@ class UzivateliaPresenter extends BasePresenter
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
 		$this->database->table('zamestnanec')->where('RodneCislo', $this->RodneCislo)->delete();
-		$form->getPresenter()->redirect('Uzivatelia:vypis');
+		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
 
 	/********************************* Editovat  ***********************************/
@@ -126,7 +126,7 @@ class UzivateliaPresenter extends BasePresenter
 	 */
 	protected function createComponentEditovatForm()
 	{
-		$this->tovarna = new EditovatUzivatelaForm($this->database, $this->RodneCislo);
+		$this->tovarna = new EditovatZamestnancaForm($this->database, $this->RodneCislo);
 		$form = $this->tovarna->vytvorit();
 		return $form;
 	}

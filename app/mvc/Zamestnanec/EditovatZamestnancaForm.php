@@ -8,7 +8,7 @@ use Nette\Application\UI\Form;
 /*
  * Tovarenska classa na vytvaranie editacnych formularov
  */
-class EditovatUzivatelaForm extends Nette\Object
+class EditovatZamestnancaForm extends Nette\Object
 {
 	private $database;
 	public $RodneCislo;
@@ -46,7 +46,7 @@ class EditovatUzivatelaForm extends Nette\Object
 		//$zaznam->datumNarodenia = $zaznam->datumNarodenia + ' 00:00:00';
 		$zaznam->datumNarodenia = new \Date($zaznam->datumNarodenia);
 		$zaznam->update($hodnoty);
-		$form->getPresenter()->redirect('Uzivatelia:vypis');
+		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
 
 }

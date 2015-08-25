@@ -24,7 +24,7 @@ class HomepagePresenter extends BasePresenter
 		//$uzivatel->login('0', '0');
 		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny hed redirectujem
 		{
-			$this->redirect('Uzivatelia:vypis');
+			$this->redirect('Zamestnanec:vypis');
 		}
 	}
 

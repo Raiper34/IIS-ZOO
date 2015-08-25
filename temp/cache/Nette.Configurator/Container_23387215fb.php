@@ -20,7 +20,6 @@ class Container_23387215fb extends Nette\DI\Container
 					'http.context',
 					'security.user',
 					'session.session',
-					'25_App_Forms_EditovatUzivatelaForm',
 					'authenticator',
 					'application.1',
 					'application.2',
@@ -72,9 +71,6 @@ class Container_23387215fb extends Nette\DI\Container
 			'Tracy\ILogger' => array(1 => array('tracy.logger')),
 			'Tracy\BlueScreen' => array(1 => array('tracy.blueScreen')),
 			'Tracy\Bar' => array(1 => array('tracy.bar')),
-			'App\Forms\EditovatUzivatelaForm' => array(
-				1 => array('25_App_Forms_EditovatUzivatelaForm'),
-			),
 			'Nette\Security\IAuthenticator' => array(1 => array('authenticator')),
 			'App\Model\Prihlasovanie' => array(1 => array('authenticator')),
 			'App\Presenters\BasePresenter' => array(
@@ -186,17 +182,16 @@ class Container_23387215fb extends Nette\DI\Container
 			'App\Presenters\DruhPresenter' => array(array('application.1')),
 			'App\Presenters\ErrorPresenter' => array(array('application.2')),
 			'App\Presenters\HomepagePresenter' => array(array('application.3')),
-			'App\Presenters\UzivateliaPresenter' => array(array('application.4')),
+			'App\Presenters\ZamestnanecPresenter' => array(array('application.4')),
 			'NetteModule\ErrorPresenter' => array(array('application.5')),
 			'NetteModule\MicroPresenter' => array(array('application.6')),
 			'Nette\DI\Container' => array(1 => array('container')),
 		),
 		'services' => array(
-			'25_App_Forms_EditovatUzivatelaForm' => 'App\Forms\EditovatUzivatelaForm',
 			'application.1' => 'App\Presenters\DruhPresenter',
 			'application.2' => 'App\Presenters\ErrorPresenter',
 			'application.3' => 'App\Presenters\HomepagePresenter',
-			'application.4' => 'App\Presenters\UzivateliaPresenter',
+			'application.4' => 'App\Presenters\ZamestnanecPresenter',
 			'application.5' => 'NetteModule\ErrorPresenter',
 			'application.6' => 'NetteModule\MicroPresenter',
 			'application.application' => 'Nette\Application\Application',
@@ -239,7 +234,7 @@ class Container_23387215fb extends Nette\DI\Container
 				'application.1' => 'App\Presenters\DruhPresenter',
 				'application.2' => 'App\Presenters\ErrorPresenter',
 				'application.3' => 'App\Presenters\HomepagePresenter',
-				'application.4' => 'App\Presenters\UzivateliaPresenter',
+				'application.4' => 'App\Presenters\ZamestnanecPresenter',
 				'application.5' => 'NetteModule\ErrorPresenter',
 				'application.6' => 'NetteModule\MicroPresenter',
 			),
@@ -279,16 +274,6 @@ class Container_23387215fb extends Nette\DI\Container
 			'container' => array('class' => NULL, 'parent' => NULL),
 			'tempDir' => 'C:\Users\Raiper34\Desktop\server\root\nette\app/../temp',
 		));
-	}
-
-
-	/**
-	 * @return App\Forms\EditovatUzivatelaForm
-	 */
-	public function createService__25_App_Forms_EditovatUzivatelaForm()
-	{
-		$service = new App\Forms\EditovatUzivatelaForm($this->getService('database.default.context'));
-		return $service;
 	}
 
 
@@ -335,11 +320,11 @@ class Container_23387215fb extends Nette\DI\Container
 
 
 	/**
-	 * @return App\Presenters\UzivateliaPresenter
+	 * @return App\Presenters\ZamestnanecPresenter
 	 */
 	public function createServiceApplication__4()
 	{
-		$service = new App\Presenters\UzivateliaPresenter($this->getService('database.default.context'));
+		$service = new App\Presenters\ZamestnanecPresenter($this->getService('database.default.context'));
 		$service->injectPrimary($this, $this->getService('application.presenterFactory'), $this->getService('routing.router'),
 			$this->getService('http.request'), $this->getService('http.response'), $this->getService('session.session'),
 			$this->getService('security.user'), $this->getService('latte.templateFactory'));

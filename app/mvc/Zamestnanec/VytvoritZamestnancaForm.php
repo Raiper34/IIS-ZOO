@@ -8,7 +8,7 @@ use Nette\Application\UI\Form;
 /*
  * Tovarenska metoda formu na pridavanie uzivatelov
  */
-class VytvoritUzivatelaForm extends Nette\Object
+class VytvoritZamestnancaForm extends Nette\Object
 {
 	private $database;
 
@@ -46,7 +46,7 @@ class VytvoritUzivatelaForm extends Nette\Object
 		$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
 		$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
 		$this->database->table('zamestnanec')->insert($hodnoty);
-		$form->getPresenter()->redirect('Uzivatelia:vypis');
+		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
 
 }
