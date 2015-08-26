@@ -1,0 +1,25 @@
+{block content}
+<h3>Základné informácie:</h3>
+{control vymazatButton}
+<strong>Identifiačné číslo:</strong> {$umiestnenie->IDUmiestnenia} <br>
+<strong>Názov:</strong> {$umiestnenie->nazov} <br>
+<strong>Šírka:</strong> {$umiestnenie->sirka} <br>
+<strong>Dĺžka:</strong> {$umiestnenie->dlzka} <br>
+<strong>Výška:</strong> {$umiestnenie->vyska} <br>
+
+{if $klietka}
+Umiestnenie je typu klietka <br>
+<strong>Typ:</strong> {$klietka->typ} <br>
+<strong>Podstielka:</strong> {$klietka->podstielka} <br>
+<strong>Lokacia:</strong> {$klietka->lokacia} <br>
+{else}
+Umiestnenie je typu Vybeh <br>
+<strong>Terén:</strong> {$vybeh->teren} <br>
+<strong>Povrch:</strong> {$vybeh->povrch} <br>
+<strong>Ohradenie:</strong> {$vybeh->ohradenie} <br>
+{/if}
+{control editovatButton}
+<h3>V umiestnení sa nachádza:</h3>
+
+<h3>Umiestnenie spravuje:</h3>
+{/block}

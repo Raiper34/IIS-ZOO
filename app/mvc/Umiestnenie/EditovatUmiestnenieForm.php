@@ -5,12 +5,10 @@ namespace App\Forms;
 use Nette;
 use Nette\Application\UI\Form;
 
-
-class VytvoritDruhForm extends Nette\Object
+class EditovatUmiestnenieForm extends Nette\Object
 {
 	private $database;
 	public $Id;
-	private $mod;
 
 	public function __construct(Nette\Database\Context $databaza)
 	{
@@ -21,14 +19,15 @@ class VytvoritDruhForm extends Nette\Object
 	{
 		$form = new Form;
 		$form->addText('nazov', 'Názov:')->setRequired();
-		$form->addSubmit('vytvorit', 'Vytvoriť');
+		$form->addSubmit('editovat', 'Editovať');
 		$form->onSuccess[] = array($this, 'uspesne');
 		return $form;
 	}
- 
+
 	public function uspesne(Form $form, $hodnoty)
 	{
-		$this->database->table('druhZivocicha')->insert($hodnoty);
+		$zaznam = $this->database->table('druhZivocicha')->get($this->Id);
+		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Druh:vypis');
 	}
 

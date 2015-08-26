@@ -1,0 +1,58 @@
+{block content}
+{control pridatKlietkuButton}
+{control pridatVybehButton}
+<table>
+    <tr>
+        <th>Umiestnenia typu klietka</th>
+    </tr>
+    <tr>
+        <td>Identifikačné číslo</td>
+        <td>Názov</td>
+        <td>Šírka</td>
+        <td>Dĺžka</td>
+        <td>Výška</td>
+        <td>Typ</td>
+        <td>Podstielka</td>
+        <td>Lokácia</td>
+    </tr>
+{foreach $umiestneniaKlietka as $umiestnenie}
+    <tr>
+        <td>{$umiestnenie->IDUmiestnenia}</td>
+        <td>{$umiestnenie->nazov}</td>
+        <td>{$umiestnenie->sirka}</td>
+        <td>{$umiestnenie->dlzka}</td>
+        <td>{$umiestnenie->vyska}</td>
+        <td>{$umiestnenie->typ}</td>
+        <td>{$umiestnenie->podstielka}</td>
+        <td>{$umiestnenie->lokacia}</td>
+        <td>{control viacButton-$umiestnenie->IDUmiestnenia}</td>
+    <tr>
+{/foreach}
+    <tr>
+        <th>Umiestnenia typu vybeh</th>
+    </tr>
+    <tr>
+        <td>Identifikačné číslo</td>
+        <td>Názov</td>
+        <td>Šírka</td>
+        <td>Dĺžka</td>
+        <td>Výška</td>
+        <td>Terén</td>
+        <td>Povch</td>
+        <td>Ohradenie</td>
+    </tr>
+{foreach $umiestneniaVybeh as $umiestnenie}
+    <tr>
+        <td>{$umiestnenie->IDUmiestnenia}</td>
+        <td>{$umiestnenie->nazov}</td>
+        <td>{$umiestnenie->sirka}</td>
+        <td>{$umiestnenie->dlzka}</td>
+        <td>{$umiestnenie->vyska}</td>
+        <td>{$umiestnenie->teren}</td>
+        <td>{$umiestnenie->povrch}</td>
+        <td>{$umiestnenie->ohradenie}</td>
+        <td>{control viacButton-$umiestnenie->IDUmiestnenia}</td>
+    <tr>
+{/foreach}
+</table>
+{/block}
