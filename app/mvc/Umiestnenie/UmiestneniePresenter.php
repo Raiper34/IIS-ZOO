@@ -113,7 +113,15 @@ class UmiestneniePresenter extends BasePresenter
 
 	public function uspesneEditovatButton(Form $form, $hodnoty)
 	{
-		$this->redirect('Umiestnenie:editovat', $this->Id);
+		if($this->database->table('klietka')->get($this->Id))
+		{
+			$mod = 0;
+		}
+		else
+		{
+			$mod = 1;
+		}
+		$this->redirect('Umiestnenie:editovat', $this->Id, $mod);
 	}
 
 	protected function createComponentVymazatButton()
@@ -134,19 +142,41 @@ class UmiestneniePresenter extends BasePresenter
 	}
 
 	/***************** Eitovat ***********************/
-	public function actionEditovat($Id)
+	public function actionEditovat($Id, $mod)
 	{
 		$this->Id = $Id;
-		$zaznam = $this->database->table('druhZivocicha')->get($Id);
+		$this->template->mod = $mod;
+		$zaznam = $this->database->table('umiestnenie')->get($Id);
 		$zaznam = $zaznam->toArray();
 
-		$this["editovatForm"]->setDefaults($zaznam);
+		if($mod == 0)
+		{
+			$this["editovatKlietkuForm"]->components['umiestnenie']->setDefaults($zaznam);
+			$zaznam = $this->database->table('klietka')->get($Id);
+			$zaznam = $zaznam->toArray();
+			$this["editovatKlietkuForm"]->components['klietka']->setDefaults($zaznam);
+		}
+		else
+		{
+			$this["editovatVybehForm"]->components['umiestnenie']->setDefaults($zaznam);
+			$zaznam = $this->database->table('vybeh')->get($Id);
+			$zaznam = $zaznam->toArray();
+			$this["editovatVybehForm"]->components['vybeh']->setDefaults($zaznam);
+		}
+
 		$this->tovarna->Id = $Id;
 	}
 
-	protected function createComponentEditovatForm()
+	protected function createComponentEditovatKlietkuForm()
 	{
-		$this->tovarna = (new EditovatDruhForm($this->database));
+		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 0));
+		$form = $this->tovarna->vytvorit();
+		return $form;
+	}
+
+	protected function createComponentEditovatVybehForm()
+	{
+		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 1));
 		$form = $this->tovarna->vytvorit();
 		return $form;
 	}

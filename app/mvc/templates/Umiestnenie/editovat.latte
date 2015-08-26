@@ -1,3 +1,7 @@
 {block content}
-{control editovatForm}
+{if $mod}
+{control editovatVybehForm}
+{else}
+{control editovatKlietkuForm}
+{/if}
 {/block}
