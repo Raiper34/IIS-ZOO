@@ -19,7 +19,6 @@ if (!function_exists($_b->blocks['content'][] = '_lb12edeffee9_content')) { func
         <td>Meno</td>
         <td>Priezvisko</td>
         <td>Funkcia</td>
-        <td>Dátum narodenia</td>
     </tr>
 <?php $iterations = 0; foreach ($zamestnanci as $zamestnanec) { ?>
     <tr>
@@ -27,7 +26,6 @@ if (!function_exists($_b->blocks['content'][] = '_lb12edeffee9_content')) { func
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->meno, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->funkcia, ENT_NOQUOTES) ?></td>
-        <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->datumNarodenia, ENT_NOQUOTES) ?></td>
         <td><?php $_l->tmp = $_control->getComponent("viacButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
     <tr>
 <?php $iterations++; } ?>

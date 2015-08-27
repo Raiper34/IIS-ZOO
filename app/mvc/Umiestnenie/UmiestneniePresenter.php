@@ -30,8 +30,7 @@ class UmiestneniePresenter extends BasePresenter
 	public function renderVypis()
 	{
 		//$this->template->umiestnenia = $this->database->table('umiestnenie');
-		$this->template->umiestneniaKlietka = $this->database->query('SELECT * FROM umiestnenie NATURAL JOIN klietka');
-		$this->template->umiestneniaVybeh = $this->database->query('SELECT * FROM umiestnenie NATURAL JOIN vybeh');
+		$this->template->umiestnenia = $this->database->query('SELECT * FROM umiestnenie NATURAL JOIN klietka UNION SELECT * FROM umiestnenie NATURAL JOIN vybeh');
 	}
 
 	protected function createComponentViacButton()

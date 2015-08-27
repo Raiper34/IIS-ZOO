@@ -6,7 +6,6 @@
         <td>Meno</td>
         <td>Priezvisko</td>
         <td>Funkcia</td>
-        <td>Dátum narodenia</td>
     </tr>
 {foreach $zamestnanci as $zamestnanec}
     <tr>
@@ -14,7 +13,6 @@
         <td>{$zamestnanec->meno}</td>
         <td>{$zamestnanec->priezvisko}</td>
         <td>{$zamestnanec->funkcia}</td>
-        <td>{$zamestnanec->datumNarodenia}</td>
         <td>{control viacButton-$zamestnanec->RodneCislo}</td>
     <tr>
 {/foreach}
