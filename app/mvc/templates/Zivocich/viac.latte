@@ -1,0 +1,20 @@
+{block content}
+{control vymazatButton}
+<h3>Základné informácie:</h3>
+<strong>Identifikačné číslo:</strong> {$zivocich->IDZivocicha} <br>
+<strong>Meno:</strong> {$zivocich->meno} <br>
+<strong>Dátum Narodenia:</strong> {$zivocich->datumNarodenia} <br>
+<strong>Dátum úmrtia:</strong> {$zivocich->datumUmrtia} <br>
+<strong>Trieda:</strong> {$zivocich->trieda} <br>
+<strong>Rad:</strong> {$zivocich->rad} <br>
+<strong>Čelaď:</strong> {$zivocich->celad} <br>
+<strong>Rod:</strong> {$zivocich->rod} <br>
+<strong>Druh:</strong> <a href="{link Druh:viac, $druh->IDDruhuZivocicha}">{$druh->nazov}</a> <br>
+<strong>Umiestnenie:</strong> <a href="{link Umiestnenie:viac, $umiestnenie->IDUmiestnenia}">{$umiestnenie->nazov}</a> <br>
+
+{control editovatButton}
+
+<h3>O tohoto živočícha sa stará:</h3>
+
+<h3>Bol testovaný:</h3>
+{/block}

@@ -43,8 +43,8 @@ class EditovatZamestnancaForm extends Nette\Object
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$zaznam = $this->database->table('zamestnanec')->get($this->RodneCislo);
-		//$zaznam->datumNarodenia = $zaznam->datumNarodenia + ' 00:00:00';
-		$zaznam->datumNarodenia = new \Date($zaznam->datumNarodenia);
+		$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
+		$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
 		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}

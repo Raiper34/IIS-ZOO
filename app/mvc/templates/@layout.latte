@@ -19,8 +19,9 @@
 <body>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 	<a href="{link Zamestnanec:vypis}">Zamestnanci</a>
-	<a href="{link Druh:default}">Druh zivocicha</a>
-	<a href="{link Umiestnenie:default}">Umiestnenia</a>
+	<a href="{link Druh:vypis}">Druh zivocicha</a>
+	<a href="{link Umiestnenie:vypis}">Umiestnenia</a>
+	<a href="{link Zivocich:vypis}">Zivocichi</a>
 	{include content}
 
 	{block scripts}

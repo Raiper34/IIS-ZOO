@@ -27,7 +27,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 		$form->addText('meno', 'Meno:')->setRequired();
 		$form->addText('priezvisko', 'Priezvisko:')->setRequired();
 		$form->addText('titul', 'Titul:')->setRequired();
-		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');;
+		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');
 		$form->addText('adresa', 'Adresa:')->setRequired();
 		$form->addText('IBAN', 'IBAN:')->setRequired();
 		$form->addPassword('heslo', 'Heslo:')->setRequired('');

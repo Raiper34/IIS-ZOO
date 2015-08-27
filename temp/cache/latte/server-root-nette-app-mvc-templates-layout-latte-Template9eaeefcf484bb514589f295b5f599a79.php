@@ -67,8 +67,9 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 ><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; } ?>
 	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:vypis"), ENT_COMPAT) ?>">Zamestnanci</a>
-	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:default"), ENT_COMPAT) ?>">Druh zivocicha</a>
-	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:default"), ENT_COMPAT) ?>">Umiestnenia</a>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:vypis"), ENT_COMPAT) ?>">Druh zivocicha</a>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>">Umiestnenia</a>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:vypis"), ENT_COMPAT) ?>">Zivocichi</a>
 <?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?>
 
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>

@@ -1,0 +1,16 @@
+{block content}
+{control vytvoritForm}
+<table>
+    <tr>
+        <td>Identifikačné číslo</td>
+        <td>Meno</td>
+    </tr>
+{foreach $zivocichi as $zivocich}
+    <tr>
+        <td>{$zivocich->IDZivocicha}</td>
+        <td>{$zivocich->meno}</td>
+        <td>{control viacButton-$zivocich->IDZivocicha}</td>
+    <tr>
+{/foreach}
+</table>
+{/block}
