@@ -1,0 +1,21 @@
+{block content}
+{control vytvoritForm}
+<table>
+    <tr>
+        <td>Testovaný živočích</td>
+        <td>Testujúci zamestnanec</td>
+        <td>Hmotnosť živočícha</td>
+        <td>Rozmer živočícha</td>
+        <td>Dátum testu</td>
+    </tr>
+{foreach $testy as $test}
+    <tr>
+        <td><a href="{link Zivocich:viac, $test->IDZivocicha}">{$test->menoZivocicha}</a></td>
+        <td><a href="{link Zamestnanec:viac, $test->RodneCislo}">{$test->menoZamestnanca} {$test->priezvisko}</a></td>
+        <td>{$test->hmotnostZivocicha}</td>
+        <td>{$test->rozmerZivocicha}</td>
+        <td>{$test->datumTestu}</td>
+    <tr>
+{/foreach}
+</table>
+{/block}

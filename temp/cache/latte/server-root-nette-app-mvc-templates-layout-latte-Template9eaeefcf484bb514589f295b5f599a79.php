@@ -70,6 +70,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:vypis"), ENT_COMPAT) ?>">Druh zivocicha</a>
 	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>">Umiestnenia</a>
 	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:vypis"), ENT_COMPAT) ?>">Zivocichi</a>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Test:vypis"), ENT_COMPAT) ?>">Testy</a>
 <?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?>
 
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
