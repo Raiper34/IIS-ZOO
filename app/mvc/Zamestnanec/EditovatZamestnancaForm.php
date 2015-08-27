@@ -28,7 +28,7 @@ class EditovatZamestnancaForm extends Nette\Object
 		$form->addText('meno', 'Meno:')->setRequired();
 		$form->addText('priezvisko', 'Priezvisko:')->setRequired();
 		$form->addText('titul', 'Titul:')->setRequired();
-		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');;
+		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');;
 		$form->addText('adresa', 'Adresa:')->setRequired();
 		$form->addText('IBAN', 'IBAN:')->setRequired();
 		$form->addSelect('funkcia', 'Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'));
@@ -43,8 +43,6 @@ class EditovatZamestnancaForm extends Nette\Object
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$zaznam = $this->database->table('zamestnanec')->get($this->RodneCislo);
-		$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
-		$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
 		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}

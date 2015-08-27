@@ -19,8 +19,8 @@ class VytvoritZivocichaForm extends Nette\Object
 	{
 		$form = new Form;
 		$form->addText('meno', 'Meno:')->setRequired();
-		$form->addText('datumNarodenia', 'Dátum narodenia(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');;
-		$form->addText('datumUmrtia', 'Dátum úmrtia(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');;
+		$form->addText('datumNarodenia', 'Dátum narodenia(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
+		$form->addText('datumUmrtia', 'Dátum úmrtia(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
 		$form->addText('trieda', 'Trieda:')->setRequired();
 		$form->addText('rad', 'Rad:')->setRequired();
 		$form->addText('celad', 'Čelaď:')->setRequired();
@@ -55,12 +55,6 @@ class VytvoritZivocichaForm extends Nette\Object
 	 */ 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
-		$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
-
-		$hodnoty->datumUmrtia = $hodnoty->datumUmrtia + ' 00:00:00';
-		$hodnoty->datumUmrtia = new \DateTime($hodnoty->datumUmrtia);
-
 		$this->database->table('zivocich')->insert($hodnoty);
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}

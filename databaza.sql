@@ -53,9 +53,9 @@ PRIMARY KEY(IDDruhuZivocicha)
 CREATE TABLE umiestnenie(
 IDUmiestnenia BIGINT NOT NULL AUTO_INCREMENT,
 nazov VARCHAR(25) NOT NULL,
-sirka INT NOT NULL,
-dlzka INT NOT NULL,
-vyska INT,
+sirka FLOAT NOT NULL,
+dlzka FLOAT NOT NULL,
+vyska FLOAT,
 PRIMARY KEY(IDUmiestnenia)
 );
 
@@ -128,7 +128,7 @@ ALTER TABLE vybeh ADD FOREIGN KEY(IDUmiestnenia) REFERENCES umiestnenie(IDUmiest
 INSERT INTO umiestnenie (IDUmiestnenia, nazov, sirka, dlzka, vyska) VALUES('001', 'Výbeh Levi', '1500.5', '800', '2');
 INSERT INTO druhZivocicha (IDDruhuZivocicha, nazov) VALUES('001', 'Lev');
 INSERT INTO zivocich (IDZivocicha, meno, datumNarodenia, datumUmrtia, trieda, rad, celad, rod, IDDruhuZivocicha, IDUmiestnenia) VALUES('001', 'Alex', '1993-12-15', null, 'cicavci', 'šelmy', 'kočkovité', 'Panthera', '001', '001');
-INSERT INTO zamestnanec (RodneCislo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('8802012131','Michal', 'Burgh', 'MGR', '1993-12-15', 'Trnava, 745', 'zverolekár', 'CZ6508000000192000145399');
+INSERT INTO zamestnanec (RodneCislo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('8802012131','Michal', 'Burgh', 'MGR', '1993-12-15', 'Trnava, 745', 'pracovnik', 'CZ6508000000192000145399');
 INSERT INTO staraSa (IDZivocicha, RodneCislo) VALUES('001', '8802012131');
 
 

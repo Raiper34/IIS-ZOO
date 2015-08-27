@@ -64,11 +64,7 @@ class TestPresenter extends BasePresenter
 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		$hodnoty->datumTestu = $hodnoty->datumTestu + ' 00:00:00';
-		$hodnoty->datumTestu = new \DateTime($hodnoty->datumTestu);
-
 		$this->database->table('testoval')->insert($hodnoty);
-
 		$this->redirect('Test:vypis');
 	}
 

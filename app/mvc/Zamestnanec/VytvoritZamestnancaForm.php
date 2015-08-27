@@ -27,10 +27,10 @@ class VytvoritZamestnancaForm extends Nette\Object
 		$form->addText('meno', 'Meno:')->setRequired();
 		$form->addText('priezvisko', 'Priezvisko:')->setRequired();
 		$form->addText('titul', 'Titul:')->setRequired();
-		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');
+		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
 		$form->addText('adresa', 'Adresa:')->setRequired();
 		$form->addText('IBAN', 'IBAN:')->setRequired();
-		$form->addPassword('heslo', 'Heslo:')->setRequired('');
+		$form->addPassword('heslo', 'Heslo:')->setRequired();
 		$form->addSelect('funkcia', 'Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'));
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 
@@ -43,8 +43,9 @@ class VytvoritZamestnancaForm extends Nette\Object
 	 */ 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
-		$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
+		//dump($hodnoty);
+		//$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
+		//$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
 		$this->database->table('zamestnanec')->insert($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
