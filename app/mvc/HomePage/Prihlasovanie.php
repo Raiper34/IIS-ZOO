@@ -22,7 +22,6 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
         $RodneCislo = $pouzivatel[0];
         $heslo = $pouzivatel[1];
         $zaznam = $this->database->table('zamestnanec')->where('RodneCislo', $RodneCislo)->fetch();
-        dump($zaznam);
         if ($zaznam == null) //overenie ci taky uzivatel vobec je v 
         {
             throw new Nette\Security\AuthenticationException('Používateľ sa nenašiel!');
@@ -38,8 +37,6 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
             throw new Nette\Security\AuthenticationException('Nesprávne heslo!');
         }
 
-        return new Nette\Security\Identity($zaznam->RodneCislo, $zaznam->funkcia, array('meno' => $zaznam->meno)); //vratenie uzivatela
+        return new Nette\Security\Identity($zaznam->RodneCislo, $zaznam->funkcia, array('meno' => $zaznam->meno . ' ' . $zaznam->priezvisko)); //vratenie uzivatela
     }
 }
-
- ?>

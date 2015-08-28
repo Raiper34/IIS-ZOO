@@ -12,7 +12,14 @@ list($_b, $_g, $_l) = $template->initialize('c33401d291', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb059bc5a94e_content')) { function _lb059bc5a94e_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("prihlasenie"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;
+?><div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+<?php $_l->tmp = $_control->getComponent("prihlasenie"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+<?php
 }}
 
 //

@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 /*
  * Tovarna na prihlasovacie formy
@@ -13,10 +14,9 @@ class PrihlasenieForm extends Nette\Object
 	private $databaza;
 	private $presenter;
 
-	public function __construct(Nette\Database\Context $databaza, $presenter)
+	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->databaza = $databaza;
-		$this->presenter = $presenter;
 	}
 
 	/*
@@ -30,6 +30,7 @@ class PrihlasenieForm extends Nette\Object
 		$form->addSubmit('prihlasit', 'Prihlásiť');
 
 		$form->onSuccess[] = array($this, 'prihlasenie');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 
@@ -38,8 +39,9 @@ class PrihlasenieForm extends Nette\Object
 	 */
 	public function prihlasenie(Form $form, $values)
 	{
-		$uzivatel = $this->presenter->getUser();
+		$uzivatel = $form->getPresenter()->getUser();
 		$uzivatel->login($values->RodneCislo, $values->heslo);
-		$this->presenter->redirect('Uzivatelia:default');
+		$uzivatel->setExpiration('1 hour', FALSE);
+		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
 }

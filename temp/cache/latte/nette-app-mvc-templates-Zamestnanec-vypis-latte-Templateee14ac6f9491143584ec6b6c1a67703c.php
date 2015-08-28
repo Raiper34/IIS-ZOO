@@ -31,10 +31,10 @@ if (!function_exists($_b->blocks['content'][] = '_lb12edeffee9_content')) { func
 
 <table class="table table-bordered table-hover">
     <tr>
-        <td>Rodné číslo</td>
-        <td>Meno</td>
-        <td>Priezvisko</td>
-        <td>Funkcia</td>
+        <th>Rodné číslo</th>
+        <th>Meno</td>
+        <th>Priezvisko</th>
+        <th>Funkcia</th>
     </tr>
 <?php $iterations = 0; foreach ($zamestnanci as $zamestnanec) { ?>
     <tr>

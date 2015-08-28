@@ -31,11 +31,11 @@ if (!function_exists($_b->blocks['content'][] = '_lb0ed93c508f_content')) { func
 
 <table class="table table-bordered table-hover">
     <tr>
-        <td>Testovaný živočích</td>
-        <td>Testujúci zamestnanec</td>
-        <td>Hmotnosť živočícha</td>
-        <td>Rozmer živočícha</td>
-        <td>Dátum testu</td>
+        <th>Testovaný živočích</th>
+        <th>Testujúci zamestnanec</th>
+        <th>Hmotnosť živočícha</th>
+        <th>Rozmer živočícha</th>
+        <th>Dátum testu</th>
     </tr>
 <?php $iterations = 0; foreach ($testy as $test) { ?>
     <tr>

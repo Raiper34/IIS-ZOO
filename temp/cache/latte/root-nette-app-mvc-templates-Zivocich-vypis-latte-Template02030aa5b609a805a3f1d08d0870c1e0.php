@@ -31,8 +31,8 @@ if (!function_exists($_b->blocks['content'][] = '_lbbc475a6108_content')) { func
 
 <table class="table table-bordered table-hover">
     <tr>
-        <td>Identifikačné číslo</td>
-        <td>Meno</td>
+        <th>Identifikačné číslo</th>
+        <th>Meno</th>
     </tr>
 <?php $iterations = 0; foreach ($zivocichi as $zivocich) { ?>
     <tr>

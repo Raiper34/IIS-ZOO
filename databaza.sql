@@ -1,18 +1,18 @@
 -- -------------------------------------
 -- -------- vymazanie tabuliek ---------
 -- -------------------------------------
+DROP TABLE IF EXISTS staraSa;
+DROP TABLE IF EXISTS spravuje;
+DROP TABLE IF EXISTS obsahuje;
+
+DROP TABLE IF EXISTS klietka;
+DROP TABLE IF EXISTS vybeh;
+
 DROP TABLE IF EXISTS zamestnanec;
 DROP TABLE IF EXISTS zivocich;
 DROP TABLE IF EXISTS druhZivocicha;
 DROP TABLE IF EXISTS testoval;
 DROP TABLE IF EXISTS umiestnenie;
-
-DROP TABLE IF EXISTS klietka;
-DROP TABLE IF EXISTS vybeh;
-
-DROP TABLE IF EXISTS staraSa;
-DROP TABLE IF EXISTS spravuje;
-DROP TABLE IF EXISTS obsahuje;
 
 -- -------------------------------------
 -- -------- vytvorenie tabuliek ---------
@@ -28,7 +28,8 @@ adresa VARCHAR(50) NOT NULL,
 funkcia VARCHAR(25) NOT NULL,
 IBAN VARCHAR(24),
 PRIMARY KEY(RodneCislo)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE zivocich(
 IDZivocicha BIGINT NOT NULL AUTO_INCREMENT,
@@ -42,13 +43,15 @@ rod VARCHAR(25) NOT NULL,
 IDDruhuZivocicha BIGINT NOT NULL,
 IDUmiestnenia BIGINT NOT NULL,
 PRIMARY KEY(IDZivocicha)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE druhZivocicha(
 IDDruhuZivocicha BIGINT NOT NULL AUTO_INCREMENT,
 nazov VARCHAR(25) NOT NULL,
 PRIMARY KEY(IDDruhuZivocicha)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE umiestnenie(
 IDUmiestnenia BIGINT NOT NULL AUTO_INCREMENT,
@@ -57,7 +60,8 @@ sirka FLOAT NOT NULL,
 dlzka FLOAT NOT NULL,
 vyska FLOAT,
 PRIMARY KEY(IDUmiestnenia)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE testoval(
 IDZivocicha BIGINT NOT NULL,
@@ -66,7 +70,8 @@ hmotnostZivocicha FLOAT NOT NULL,
 rozmerZivocicha FLOAT NOT NULL,
 datumTestu DATE NOT NULL,
 PRIMARY KEY(IDZivocicha, RodneCislo)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 -- ---------------------------------
 
 CREATE TABLE klietka(
@@ -75,7 +80,8 @@ typ VARCHAR(25) NOT NULL,
 podstielka VARCHAR(25) NOT NULL,
 lokacia VARCHAR(25) NOT NULL,
 PRIMARY KEY(IDUmiestnenia)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE vybeh(
 IDUmiestnenia BIGINT NOT NULL,
@@ -83,26 +89,30 @@ teren VARCHAR(25) NOT NULL,
 povrch VARCHAR(25) NOT NULL,
 ohradenie VARCHAR(25) NOT NULL,
 PRIMARY KEY(IDUMIESTNENIA)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 -- ---------------------------------
 
 CREATE TABLE staraSa(
 IDZivocicha BIGINT NOT NULL,
 RodneCislo BIGINT NOT NULL,
 PRIMARY KEY(IDZivocicha, RodneCislo)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE spravuje(
 IDUmiestnenia BIGINT NOT NULL,
 RodneCislo BIGINT NOT NULL,
 PRIMARY KEY(IDUmiestnenia, RodneCislo)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE obsahuje(
 IDUmiestnenia BIGINT NOT NULL,
 IDDruhuZivocicha BIGINT NOT NULL,
 PRIMARY KEY(IDUmiestnenia, IDDruhuZivocicha)
-);
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- -------------------------------------
 -- ---- pridanie cudzich klucov --------

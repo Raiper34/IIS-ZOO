@@ -31,8 +31,8 @@ if (!function_exists($_b->blocks['content'][] = '_lb41dca56bd7_content')) { func
 
 <table class="table table-bordered table-hover">
     <tr>
-        <td>Identifikačné číslo</td>
-        <td>Názov</td>
+        <th>Identifikačné číslo</th>
+        <th>Názov</th>
     </tr>
 <?php $iterations = 0; foreach ($druhy as $druh) { ?>
     <tr>

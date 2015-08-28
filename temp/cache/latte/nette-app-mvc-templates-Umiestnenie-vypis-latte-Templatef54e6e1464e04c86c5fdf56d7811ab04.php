@@ -51,8 +51,8 @@ if (!function_exists($_b->blocks['content'][] = '_lbbf90cc1176_content')) { func
 <div class="row">
 	<table class="table table-bordered table-hover">
 	    <tr>
-	        <td>Identifikačné číslo</td>
-	        <td>Názov</td>
+	        <th>Identifikačné číslo</th>
+	        <th>Názov</th>
 	    </tr>
 <?php $iterations = 0; foreach ($umiestnenia as $umiestnenie) { ?>
 	    <tr>
