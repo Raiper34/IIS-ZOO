@@ -70,12 +70,6 @@ class UmiestneniePresenter extends BasePresenter
 		$this->redirect('Umiestnenie:pridat', 1);
 	}
 
-	/******************* Pridat Vybeh/Klietku *****************/
-	public function actionPridat($mod)
-	{
-		$this->template->mod = $mod;
-	}
-
 	protected function createComponentVytvoritKliektuForm()
 	{
 		$form = (new VytvoritUmiestnenieForm($this->database, 0))->vytvorit();
@@ -99,19 +93,7 @@ class UmiestneniePresenter extends BasePresenter
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
-	}
 
-	protected function createComponentEditovatButton()
-	{
-		$form = new Form;
-		$form->addSubmit('editovat', 'Editovať')->setAttribute('class', 'btn btn-success');
-
-		$form->onSuccess[] = array($this, 'uspesneEditovatButton');
-		return $form;
-	}
-
-	public function uspesneEditovatButton(Form $form, $hodnoty)
-	{
 		if($this->database->table('klietka')->get($this->Id))
 		{
 			$mod = 0;
@@ -120,30 +102,7 @@ class UmiestneniePresenter extends BasePresenter
 		{
 			$mod = 1;
 		}
-		$this->redirect('Umiestnenie:editovat', $this->Id, $mod);
-	}
 
-	protected function createComponentVymazatButton()
-	{
-		$form = new Form;
-		$form->addSubmit('vymazat', 'Vymazať')->setAttribute('class', 'btn btn-danger');
-
-		$form->onSuccess[] = array($this, 'uspesneVymazatButton');
-		return $form;
-	}
-
-	public function uspesneVymazatButton(Form $form, $hodnoty)
-	{
-		$this->database->table('klietka')->where('IDUmiestnenia', $this->Id)->delete();
-		$this->database->table('vybeh')->where('IDUmiestnenia', $this->Id)->delete();
-		$this->database->table('umiestnenie')->where('IDUmiestnenia', $this->Id)->delete();
-		$form->getPresenter()->redirect('Umiestnenie:vypis');
-	}
-
-	/***************** Eitovat ***********************/
-	public function actionEditovat($Id, $mod)
-	{
-		$this->Id = $Id;
 		$this->template->mod = $mod;
 		$zaznam = $this->database->table('umiestnenie')->get($Id);
 		$zaznam = $zaznam->toArray();
@@ -166,6 +125,23 @@ class UmiestneniePresenter extends BasePresenter
 		$this->tovarna->Id = $Id;
 	}
 
+	protected function createComponentVymazatButton()
+	{
+		$form = new Form;
+		$form->addSubmit('vymazat', 'Vymazať')->setAttribute('class', 'btn btn-danger');
+
+		$form->onSuccess[] = array($this, 'uspesneVymazatButton');
+		return $form;
+	}
+
+	public function uspesneVymazatButton(Form $form, $hodnoty)
+	{
+		$this->database->table('klietka')->where('IDUmiestnenia', $this->Id)->delete();
+		$this->database->table('vybeh')->where('IDUmiestnenia', $this->Id)->delete();
+		$this->database->table('umiestnenie')->where('IDUmiestnenia', $this->Id)->delete();
+		$form->getPresenter()->redirect('Umiestnenie:vypis');
+	}
+
 	protected function createComponentEditovatKlietkuForm()
 	{
 		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 0));
@@ -178,7 +154,5 @@ class UmiestneniePresenter extends BasePresenter
 		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 1));
 		$form = $this->tovarna->vytvorit();
 		return $form;
-	}
-
-	
+	}	
 }

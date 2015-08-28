@@ -58,6 +58,11 @@ class DruhPresenter extends BasePresenter
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
+		$zaznam = $this->database->table('druhZivocicha')->get($Id);
+		$zaznam = $zaznam->toArray();
+
+		$this["editovatForm"]->setDefaults($zaznam);
+		$this->tovarna->Id = $Id;
 	}
 	protected function createComponentEditovatButton()
 	{
@@ -86,17 +91,6 @@ class DruhPresenter extends BasePresenter
 	{
 		$this->database->table('druhZivocicha')->where('IDDruhuZivocicha', $this->Id)->delete();
 		$form->getPresenter()->redirect('Druh:vypis');
-	}
-
-	/***************** Eitovat ***********************/
-	public function actionEditovat($Id)
-	{
-		$this->Id = $Id;
-		$zaznam = $this->database->table('druhZivocicha')->get($Id);
-		$zaznam = $zaznam->toArray();
-
-		$this["editovatForm"]->setDefaults($zaznam);
-		$this->tovarna->Id = $Id;
 	}
 
 	protected function createComponentEditovatForm()

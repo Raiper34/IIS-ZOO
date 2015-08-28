@@ -61,6 +61,24 @@ class ZivocichPresenter extends BasePresenter
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
+		$zaznam = $this->database->table('zivocich')->get($Id);
+		$zaznam = $zaznam->toArray();
+
+		//Prevod datumu z databaze na korespondujuci datum pre uzivatela
+		$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
+		$rok =  $datum['year'];
+		$mesiac = $datum['month'];
+		$den = $datum['day'];
+		$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
+
+		$datum = date_parse($zaznam['datumUmrtia']); //iba roky mesiace a dni
+		$rok =  $datum['year'];
+		$mesiac = $datum['month'];
+		$den = $datum['day'];
+		$zaznam['datumUmrtia'] = $rok . '-' . $mesiac . '-' . $den;
+
+		$this["editovatForm"]->setDefaults($zaznam);
+		$this->tovarna->Id = $Id;
 	}
 	protected function createComponentEditovatButton()
 	{
@@ -89,30 +107,6 @@ class ZivocichPresenter extends BasePresenter
 	{
 		$this->database->table('zivocich')->where('IDZivocicha', $this->Id)->delete();
 		$form->getPresenter()->redirect('Zivocich:vypis');
-	}
-
-	/********************************* Editovat  ***********************************/
-	public function actionEditovat($Id)
-	{
-		$this->Id = $Id;
-		$zaznam = $this->database->table('zivocich')->get($Id);
-		$zaznam = $zaznam->toArray();
-
-		//Prevod datumu z databaze na korespondujuci datum pre uzivatela
-		$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
-		$rok =  $datum['year'];
-		$mesiac = $datum['month'];
-		$den = $datum['day'];
-		$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
-
-		$datum = date_parse($zaznam['datumUmrtia']); //iba roky mesiace a dni
-		$rok =  $datum['year'];
-		$mesiac = $datum['month'];
-		$den = $datum['day'];
-		$zaznam['datumUmrtia'] = $rok . '-' . $mesiac . '-' . $den;
-
-		$this["editovatForm"]->setDefaults($zaznam);
-		$this->tovarna->Id = $Id;
 	}
 
 	protected function createComponentEditovatForm()

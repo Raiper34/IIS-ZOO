@@ -69,6 +69,18 @@ class ZamestnanecPresenter extends BasePresenter
 	public function actionViac($RodneCislo)
 	{
 		$this->RodneCislo = $RodneCislo;
+		$zaznam = $this->database->table('zamestnanec')->get($RodneCislo);
+		$zaznam = $zaznam->toArray();
+
+		//Prevod datumu z databaze na korespondujuci datum pre uzivatela
+		$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
+		$rok =  $datum['year'];
+		$mesiac = $datum['month'];
+		$den = $datum['day'];
+		$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
+
+		$this["editovatForm"]->setDefaults($zaznam);
+		$this->tovarna->RodneCislo = $RodneCislo;
 	}
 	protected function createComponentEditovatButton()
 	{
@@ -99,31 +111,6 @@ class ZamestnanecPresenter extends BasePresenter
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
 
-	/********************************* Editovat  ***********************************/
-
-	/*
-	 * Stranka s viac informáciami
-	 */
-	public function actionEditovat($RodneCislo)
-	{
-		$this->RodneCislo = $RodneCislo;
-		$zaznam = $this->database->table('zamestnanec')->get($RodneCislo);
-		$zaznam = $zaznam->toArray();
-
-		//Prevod datumu z databaze na korespondujuci datum pre uzivatela
-		$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
-		$rok =  $datum['year'];
-		$mesiac = $datum['month'];
-		$den = $datum['day'];
-		$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
-
-		$this["editovatForm"]->setDefaults($zaznam);
-		$this->tovarna->RodneCislo = $RodneCislo;
-	}
-
-	/*
-	 * Vytvorenie formu na editovanie
-	 */
 	protected function createComponentEditovatForm()
 	{
 		$this->tovarna = new EditovatZamestnancaForm($this->database, $this->RodneCislo);

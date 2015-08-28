@@ -12,7 +12,30 @@ list($_b, $_g, $_l) = $template->initialize('a6d9799ef5', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { function _lbd2683a82ae_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-;$_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+?><div class="row">
+	<div class="col-md-1">
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
+		  Editovať
+		</button>
+		<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+		      </div>
+		      <div class="modal-body">
+<?php $_l->tmp = $_control->getComponent("editovatForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-1">
+<?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+	</div>
+</div>
+
 <h3>Základné informácie:</h3>
 <strong>Identifikačné číslo:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($zivocich->IDZivocicha, ENT_NOQUOTES) ?> <br>
 <strong>Meno:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($zivocich->meno, ENT_NOQUOTES) ?> <br>
@@ -26,8 +49,6 @@ if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { func
 "><?php echo Latte\Runtime\Filters::escapeHtml($druh->nazov, ENT_NOQUOTES) ?></a> <br>
 <strong>Umiestnenie:</strong> <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:viac", array($umiestnenie->IDUmiestnenia)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->nazov, ENT_NOQUOTES) ?></a> <br>
-
-<?php $_l->tmp = $_control->getComponent("editovatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 
 <h3>O tohoto živočícha sa stará:</h3>
 

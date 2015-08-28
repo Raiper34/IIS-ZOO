@@ -30,7 +30,7 @@ class EditovatDruhForm extends Nette\Object
 	{
 		$zaznam = $this->database->table('druhZivocicha')->get($this->Id);
 		$zaznam->update($hodnoty);
-		$form->getPresenter()->redirect('Druh:vypis');
+		$form->getPresenter()->redirect('Druh:viac', $this->Id);
 	}
 
 }

@@ -63,7 +63,7 @@ class EditovatZivocichaForm extends Nette\Object
 	{
 		$zaznam = $this->database->table('zivocich')->get($this->Id);
 		$zaznam->update($hodnoty);
-		$form->getPresenter()->redirect('Zivocich:vypis');
+		$form->getPresenter()->redirect('Zivocich:viac', $this->Id);
 	}
 
 }

@@ -62,7 +62,7 @@ class EditovatUmiestnenieForm extends Nette\Object
 			$zaznam = $this->database->table('vybeh')->get($this->Id);
 			$zaznam->update($hodnoty['vybeh']);
 		}
-		$form->getPresenter()->redirect('Umiestnenie:vypis');
+		$form->getPresenter()->redirect('Umiestnenie:viac', $this->Id);
 	}
 
 }

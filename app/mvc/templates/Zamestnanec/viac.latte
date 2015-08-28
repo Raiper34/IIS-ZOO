@@ -1,5 +1,27 @@
 {block content}
-{control vymazatButton}
+<div class="row">
+	<div class="col-md-1">
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
+		  Editovať
+		</button>
+		<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+		      </div>
+		      <div class="modal-body">
+		        {control editovatForm}
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-1">
+		{control vymazatButton}
+	</div>
+</div>
 <h3>Základné informácie:</h3>
 <strong>Rodné číslo:</strong> {$zamestnanec->RodneCislo} <br>
 <strong>Meno:</strong> {$zamestnanec->meno} <br>
@@ -9,7 +31,6 @@
 <strong>Adresa:</strong> {$zamestnanec->adresa} <br>
 <strong>Funkcia:</strong> {$zamestnanec->funkcia} <br>
 <strong>IBAN:</strong> {$zamestnanec->IBAN} <br>
-{control editovatButton}
 
 <h3>Spravuje umiestnenia:</h3>
 

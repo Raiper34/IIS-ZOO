@@ -88,9 +88,9 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav menu-button navbar-right">
                     <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:vypis"), ENT_COMPAT) ?>">Zamestnanci</a><li>
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:vypis"), ENT_COMPAT) ?>">Druh zivocicha</a><li>
+                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:vypis"), ENT_COMPAT) ?>">Druhy živočíchov</a><li>
                     <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>">Umiestnenia</a><li>
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:vypis"), ENT_COMPAT) ?>">Zivocichi</a><li>
+                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:vypis"), ENT_COMPAT) ?>">Živočíchy</a><li>
                     <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Test:vypis"), ENT_COMPAT) ?>">Testy</a><li>
                 </ul>
             </div>

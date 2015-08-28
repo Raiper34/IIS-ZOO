@@ -46,7 +46,7 @@ class EditovatZamestnancaForm extends Nette\Object
 	{
 		$zaznam = $this->database->table('zamestnanec')->get($this->RodneCislo);
 		$zaznam->update($hodnoty);
-		$form->getPresenter()->redirect('Zamestnanec:vypis');
+		$form->getPresenter()->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 
 }
