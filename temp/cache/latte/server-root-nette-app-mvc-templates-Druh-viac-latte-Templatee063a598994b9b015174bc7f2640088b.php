@@ -13,10 +13,11 @@ list($_b, $_g, $_l) = $template->initialize('21daa3f979', 'html')
 //
 if (!function_exists($_b->blocks['content'][] = '_lb97748bdc28_content')) { function _lb97748bdc28_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><h3>Základné informácie:</h3>
-<?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+<div class="row"><div class="col-md-1"><?php $_l->tmp = $_control->getComponent("editovatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+</div><div class="col-md-1"><?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></div></div>
+
 <strong>Identifiačné číslo:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($druh->IDDruhuZivocicha, ENT_NOQUOTES) ?> <br>
 <strong>Názov:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($druh->nazov, ENT_NOQUOTES) ?> <br>
-<?php $_l->tmp = $_control->getComponent("editovatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 <h3>Živočíchy tohoto druhu:</h3>
 <?php
 }}

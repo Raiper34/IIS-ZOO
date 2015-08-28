@@ -27,7 +27,7 @@ class ViacButton extends Nette\Object
 	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addSubmit('viac', 'Viac');
+		$form->addSubmit('viac', 'Viac')->setAttribute('class', 'btn btn-warning');
 
 		$form->onSuccess[] = array($this, 'uspesne');
 		return $form;

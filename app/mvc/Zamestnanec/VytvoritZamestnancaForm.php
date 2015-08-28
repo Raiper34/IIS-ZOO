@@ -35,6 +35,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new \Nextras\Forms\Rendering\Bs3FormRenderer);
 		return $form;
 	}
 

@@ -73,7 +73,7 @@ class ZamestnanecPresenter extends BasePresenter
 	protected function createComponentEditovatButton()
 	{
 		$form = new Form;
-		$form->addSubmit('editovat', 'Editovať');
+		$form->addSubmit('editovat', 'Editovať')->setAttribute('class', 'btn btn-success');
 
 		$form->onSuccess[] = array($this, 'uspesneEditovatButton');
 		return $form;
@@ -87,7 +87,7 @@ class ZamestnanecPresenter extends BasePresenter
 	protected function createComponentVymazatButton()
 	{
 		$form = new Form;
-		$form->addSubmit('vymazat', 'Vymazať');
+		$form->addSubmit('vymazat', 'Vymazať')->setAttribute('class', 'btn btn-danger');
 
 		$form->onSuccess[] = array($this, 'uspesneVymazatButton');
 		return $form;
