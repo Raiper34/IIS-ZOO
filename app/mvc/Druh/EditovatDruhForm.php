@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 class EditovatDruhForm extends Nette\Object
 {
@@ -21,6 +22,7 @@ class EditovatDruhForm extends Nette\Object
 		$form->addText('nazov', 'Názov:')->setRequired();
 		$form->addSubmit('editovat', 'Editovať');
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 

@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 
 class VytvoritZivocichaForm extends Nette\Object
@@ -47,6 +48,7 @@ class VytvoritZivocichaForm extends Nette\Object
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 

@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 class EditovatUmiestnenieForm extends Nette\Object
 {
@@ -43,6 +44,7 @@ class EditovatUmiestnenieForm extends Nette\Object
 
 		$form->addSubmit('editovat', 'Editovať');
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 

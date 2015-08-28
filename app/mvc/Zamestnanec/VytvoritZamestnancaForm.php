@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 /*
  * Tovarenska metoda formu na pridavanie uzivatelov
@@ -35,7 +36,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 
 		$form->onSuccess[] = array($this, 'uspesne');
-		$form->setRenderer(new \Nextras\Forms\Rendering\Bs3FormRenderer);
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 

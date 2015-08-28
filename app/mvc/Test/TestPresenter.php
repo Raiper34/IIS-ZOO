@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 class TestPresenter extends BasePresenter
 {
@@ -59,6 +60,7 @@ class TestPresenter extends BasePresenter
 		
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 

@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 /*
  * Tovarenska classa na vytvaranie editacnych formularov
@@ -51,6 +52,7 @@ class EditovatZivocichaForm extends Nette\Object
 		$form->addSelect('IDUmiestnenia', 'Umiestnenie:', $hodnotyUmiestnenia);
 		$form->addSubmit('editovat', 'Editovať');
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 

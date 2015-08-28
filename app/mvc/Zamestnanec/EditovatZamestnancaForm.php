@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Test\Bs3FormRenderer;
 
 /*
  * Tovarenska classa na vytvaranie editacnych formularov
@@ -34,6 +35,7 @@ class EditovatZamestnancaForm extends Nette\Object
 		$form->addSelect('funkcia', 'Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'));
 		$form->addSubmit('editovat', 'Editovať');
 		$form->onSuccess[] = array($this, 'uspesne');
+		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 
