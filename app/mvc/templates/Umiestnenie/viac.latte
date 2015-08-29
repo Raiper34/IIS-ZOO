@@ -45,7 +45,11 @@ Umiestnenie je typu Vybeh <br>
 <strong>Povrch:</strong> {$vybeh->povrch} <br>
 <strong>Ohradenie:</strong> {$vybeh->ohradenie} <br>
 {/if}
+
 <h3>V umiestnení sa nachádza:</h3>
+{foreach $zivocichy as $zivocich}
+	<a href="{link Zivocich:viac, $zivocich->IDZivocicha}">{$zivocich->meno}</a> <br>
+{/foreach}
 
 <h3>Umiestnenie spravuje:</h3>
 {/block}

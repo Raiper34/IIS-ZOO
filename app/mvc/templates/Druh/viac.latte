@@ -27,4 +27,7 @@
 <strong>Identifiačné číslo:</strong> {$druh->IDDruhuZivocicha} <br>
 <strong>Názov:</strong> {$druh->nazov} <br>
 <h3>Živočíchy tohoto druhu:</h3>
+{foreach $zivocichy as $zivocich}
+	<a href="{link Zivocich:viac, $zivocich->IDZivocicha}">{$zivocich->meno}</a> <br>
+{/foreach}
 {/block}

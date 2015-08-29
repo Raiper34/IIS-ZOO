@@ -86,6 +86,7 @@ class UmiestneniePresenter extends BasePresenter
 	public function renderViac($Id)
 	{
 		$this->template->umiestnenie = $this->database->table('umiestnenie')->get($Id);
+		$this->template->zivocichy = $this->database->table('zivocich')->where('IDUmiestnenia', $Id);
 		$this->template->klietka = $this->database->table('klietka')->get($Id);
 		$this->template->vybeh = $this->database->table('vybeh')->get($Id);
 	}

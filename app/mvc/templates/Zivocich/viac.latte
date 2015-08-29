@@ -23,6 +23,8 @@
 	</div>
 </div>
 
+
+
 <h3>Základné informácie:</h3>
 <strong>Identifikačné číslo:</strong> {$zivocich->IDZivocicha} <br>
 <strong>Meno:</strong> {$zivocich->meno} <br>
@@ -35,7 +37,34 @@
 <strong>Druh:</strong> <a href="{link Druh:viac, $druh->IDDruhuZivocicha}">{$druh->nazov}</a> <br>
 <strong>Umiestnenie:</strong> <a href="{link Umiestnenie:viac, $umiestnenie->IDUmiestnenia}">{$umiestnenie->nazov}</a> <br>
 
+
+
+
+
 <h3>O tohoto živočícha sa stará:</h3>
 
+
+
+
+
+
+
 <h3>Bol testovaný:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Zamestnanec, ktorý test vykonal</th>
+	    <th>Hmotnosť živočícha</th>
+	    <th>Rozmer živočícha</th>
+	    <th>Dátum Testu</th>
+	</tr>
+{foreach $testy as $test}
+	<tr>
+		<td><a href="{link Zamestnanec:viac, $test->RodneCislo}">{$test->meno} {$test->priezvisko}</a></td> 
+		<td>{$test->hmotnostZivocicha}</td> 
+		<td>{$test->rozmerZivocicha}</td> 
+		<td>{$test->datumTestu}</td>
+	</tr>
+{/foreach}
+</table>
+<a href="{link Test:vypis}" class="btn btn-primary">Pridať test</a>
 {/block}

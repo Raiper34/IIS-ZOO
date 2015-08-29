@@ -53,6 +53,7 @@ class DruhPresenter extends BasePresenter
 	public function renderViac($Id)
 	{
 		$this->template->druh = $this->database->table('druhZivocicha')->get($Id);
+		$this->template->zivocichy = $this->database->table('zivocich')->where('IDDruhuZivocicha', $Id);
 	}
 
 	public function actionViac($Id)

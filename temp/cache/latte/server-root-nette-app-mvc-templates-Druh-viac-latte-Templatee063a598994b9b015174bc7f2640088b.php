@@ -40,7 +40,10 @@ if (!function_exists($_b->blocks['content'][] = '_lb97748bdc28_content')) { func
 <strong>Identifiačné číslo:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($druh->IDDruhuZivocicha, ENT_NOQUOTES) ?> <br>
 <strong>Názov:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($druh->nazov, ENT_NOQUOTES) ?> <br>
 <h3>Živočíchy tohoto druhu:</h3>
-<?php
+<?php $iterations = 0; foreach ($zivocichy as $zivocich) { ?>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:viac", array($zivocich->IDZivocicha)), ENT_COMPAT) ?>
+"><?php echo Latte\Runtime\Filters::escapeHtml($zivocich->meno, ENT_NOQUOTES) ?></a> <br>
+<?php $iterations++; } 
 }}
 
 //

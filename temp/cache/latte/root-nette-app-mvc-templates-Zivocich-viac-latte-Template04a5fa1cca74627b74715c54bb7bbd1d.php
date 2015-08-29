@@ -36,6 +36,8 @@ if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { func
 	</div>
 </div>
 
+
+
 <h3>Základné informácie:</h3>
 <strong>Identifikačné číslo:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($zivocich->IDZivocicha, ENT_NOQUOTES) ?> <br>
 <strong>Meno:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($zivocich->meno, ENT_NOQUOTES) ?> <br>
@@ -50,9 +52,37 @@ if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { func
 <strong>Umiestnenie:</strong> <a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:viac", array($umiestnenie->IDUmiestnenia)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->nazov, ENT_NOQUOTES) ?></a> <br>
 
+
+
+
+
 <h3>O tohoto živočícha sa stará:</h3>
 
+
+
+
+
+
+
 <h3>Bol testovaný:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Zamestnanec, ktorý test vykonal</th>
+	    <th>Hmotnosť živočícha</th>
+	    <th>Rozmer živočícha</th>
+	    <th>Dátum Testu</th>
+	</tr>
+<?php $iterations = 0; foreach ($testy as $test) { ?>
+	<tr>
+		<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:viac", array($test->RodneCislo)), ENT_COMPAT) ?>
+"><?php echo Latte\Runtime\Filters::escapeHtml($test->meno, ENT_NOQUOTES) ?> <?php echo Latte\Runtime\Filters::escapeHtml($test->priezvisko, ENT_NOQUOTES) ?></a></td> 
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($test->hmotnostZivocicha, ENT_NOQUOTES) ?></td> 
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($test->rozmerZivocicha, ENT_NOQUOTES) ?></td> 
+		<td><?php echo Latte\Runtime\Filters::escapeHtml($test->datumTestu, ENT_NOQUOTES) ?></td>
+	</tr>
+<?php $iterations++; } ?>
+</table>
+<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Test:vypis"), ENT_COMPAT) ?>" class="btn btn-primary">Pridať test</a>
 <?php
 }}
 

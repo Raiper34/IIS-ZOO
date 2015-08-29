@@ -56,6 +56,8 @@ class ZivocichPresenter extends BasePresenter
 		$this->template->zivocich = $this->database->table('zivocich')->get($Id);
 		$this->template->druh = $this->database->table('druhZivocicha')->get($this->template->zivocich->IDDruhuZivocicha);
 		$this->template->umiestnenie = $this->database->table('umiestnenie')->get($this->template->zivocich->IDUmiestnenia);
+
+		$this->template->testy = $this->database->query('SELECT * FROM testoval NATURAL JOIN zamestnanec WHERE IDZivocicha = ' . $Id);
 	}
 
 	public function actionViac($Id)

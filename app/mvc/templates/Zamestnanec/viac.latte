@@ -22,6 +22,9 @@
 		{control vymazatButton}
 	</div>
 </div>
+
+
+
 <h3>Základné informácie:</h3>
 <strong>Rodné číslo:</strong> {$zamestnanec->RodneCislo} <br>
 <strong>Meno:</strong> {$zamestnanec->meno} <br>
@@ -32,9 +35,87 @@
 <strong>Funkcia:</strong> {$zamestnanec->funkcia} <br>
 <strong>IBAN:</strong> {$zamestnanec->IBAN} <br>
 
-<h3>Spravuje umiestnenia:</h3>
 
-<h3>Stará sa o zvieratá:</h3>
+
+
+
+<h3>Spravuje umiestnenia:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Umiestnenie</th>
+	</tr>
+{foreach $umiestnenia as $umiestnenie}
+	<tr>
+		<td><a href="{link Umiestnenie:viac, $umiestnenie->IDUmiestnenia}">{$umiestnenie->nazov}</a></td>  
+	</tr>
+{/foreach}
+</table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+	Pridať
+</button>
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			</div>
+			     <div class="modal-body">
+			        {control pridatSpravuje}
+			    </div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<h3>Stará sa o:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Živočích</th>
+	</tr>
+{foreach $zivocichy as $zivocich}
+	<tr>
+		<td><a href="{link Zivocich:viac, $zivocich->IDZivocicha}">{$zivocich->meno}</a></td>  
+		<td>{control odstranitStaraSaButton-$zivocich->IDZivocicha}</td>
+	</tr>
+{/foreach}
+</table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
+	Pridať
+</button>
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			</div>
+			     <div class="modal-body">
+			        {control pridatStaraSa}
+			    </div>
+		</div>
+	</div>
+</div>
+
+
+
 
 <h3>Testoval:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Živočích, ktorého testoval</th>
+	    <th>Dátum Testu</th>
+	</tr>
+{foreach $testy as $test}
+	<tr>
+		<td><a href="{link Zivocich:viac, $test->IDZivocicha}">{$test->meno}</a></td>  
+		<td>{$test->datumTestu}</td>
+	</tr>
+{/foreach}
+</table>
+<a href="{link Test:vypis}" class="btn btn-primary">Pridať test</a>
 {/block}

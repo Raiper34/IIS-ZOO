@@ -54,7 +54,12 @@ Umiestnenie je typu Vybeh <br>
 <strong>Povrch:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($vybeh->povrch, ENT_NOQUOTES) ?> <br>
 <strong>Ohradenie:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($vybeh->ohradenie, ENT_NOQUOTES) ?> <br>
 <?php } ?>
+
 <h3>V umiestnení sa nachádza:</h3>
+<?php $iterations = 0; foreach ($zivocichy as $zivocich) { ?>
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:viac", array($zivocich->IDZivocicha)), ENT_COMPAT) ?>
+"><?php echo Latte\Runtime\Filters::escapeHtml($zivocich->meno, ENT_NOQUOTES) ?></a> <br>
+<?php $iterations++; } ?>
 
 <h3>Umiestnenie spravuje:</h3>
 <?php
