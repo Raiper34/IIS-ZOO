@@ -47,6 +47,7 @@
 {foreach $umiestnenia as $umiestnenie}
 	<tr>
 		<td><a href="{link Umiestnenie:viac, $umiestnenie->IDUmiestnenia}">{$umiestnenie->nazov}</a></td>  
+		<td>{control odstranitSpravujeButton-$umiestnenie->IDUmiestnenia}</td>
 	</tr>
 {/foreach}
 </table>

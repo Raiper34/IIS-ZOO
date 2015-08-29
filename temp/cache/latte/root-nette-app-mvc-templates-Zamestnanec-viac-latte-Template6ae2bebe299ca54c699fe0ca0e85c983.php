@@ -61,6 +61,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb038e2b8113_content')) { func
 	<tr>
 		<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:viac", array($umiestnenie->IDUmiestnenia)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->nazov, ENT_NOQUOTES) ?></a></td>  
+		<td><?php $_l->tmp = $_control->getComponent("odstranitSpravujeButton-$umiestnenie->IDUmiestnenia"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
 	</tr>
 <?php $iterations++; } ?>
 </table>

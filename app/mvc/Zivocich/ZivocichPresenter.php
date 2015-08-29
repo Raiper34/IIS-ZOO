@@ -8,6 +8,7 @@ use Nette\Application\UI\Multiplier;
 use App\Forms\VytvoritZivocichaForm;
 use App\Forms\ViacButton;
 use App\Forms\EditovatZivocichaForm;
+use Test\Bs3FormRenderer;
 
 /*
  * Stranky s uzivatelmi a prislusnych akciami
@@ -58,6 +59,7 @@ class ZivocichPresenter extends BasePresenter
 		$this->template->umiestnenie = $this->database->table('umiestnenie')->get($this->template->zivocich->IDUmiestnenia);
 
 		$this->template->testy = $this->database->query('SELECT * FROM testoval NATURAL JOIN zamestnanec WHERE IDZivocicha = ' . $Id);
+		$this->template->zamestnanci = $this->database->query('SELECT * FROM staraSa NATURAL JOIN zamestnanec WHERE IDZivocicha = ' . $Id);
 	}
 
 	public function actionViac($Id)
@@ -118,5 +120,51 @@ class ZivocichPresenter extends BasePresenter
 		return $form;
 	}
 	
+	protected function createComponentPridatStaraSa()
+	{
+		$form = new Form;
+
+		$hodnoty = array();
+		$prvky = $this->database->table('zamestnanec');
+		foreach($prvky as $prvok)
+		{
+			$hodnoty[$prvok->RodneCislo] = $prvok->meno . ' ' .$prvok->priezvisko;
+		}
+		$form->addSelect('RodneCislo', 'Zamestnanec:', $hodnoty);
+
+		$form->addSubmit('pridat', 'Pridať');
+
+		$form->onSuccess[] = array($this, 'uspesneStaraSa');
+		$form->setRenderer(new Bs3FormRenderer);
+		return $form;
+	}
+
+	public function uspesneStaraSa(Form $form, $hodnoty)
+	{
+		$hodnoty->IDZivocicha = $this->Id;
+		if($this->database->table('staraSa')->where('RodneCislo', $hodnoty->RodneCislo)->where('IDZivocicha', $this->Id)->count() == 0)
+		{
+			$this->database->table('staraSa')->insert($hodnoty);
+		}
+		$this->redirect('Zivocich:viac', $this->Id);
+	}
+
+	protected function createComponentOdstranitStaraSaButton()
+	{
+		return new Multiplier(function ($RodneCislo)
+		{
+			$form = new Form;
+			$form->addSubmit('odstranit', 'Odstrániť')->setAttribute('class', 'btn btn-danger');
+			$form->addHidden('RodneCislo')->setValue($RodneCislo);;
+
+			$form->onSuccess[] = array($this, 'uspesneOdstranitStaraSa');
+			return $form;
+		});
+	}
+
+	public function uspesneOdstranitStaraSa($form)
+	{
+		$this->database->table('staraSa')->where('IDZivocicha', $this->Id)->where('RodneCislo', $form['RodneCislo']->getValue())->delete();
+	}
 
 }

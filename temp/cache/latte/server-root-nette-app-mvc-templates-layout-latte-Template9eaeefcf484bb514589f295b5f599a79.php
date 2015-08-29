@@ -52,8 +52,7 @@ if (empty($_l->extends) && !empty($_control->snippetMode)) {
 <head>
 	<meta charset="utf-8">
 
-	<title><?php if (isset($_b->blocks["title"])) { ob_start(); Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'title', $template->getParameters()); echo $template->striptags(ob_get_clean()) ?>
- | <?php } ?>Nette Sandbox</title>
+	<title>IIS FIT ZOO</title>
 
 	<!--Vlastne -->
 	<link rel="stylesheet" href="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/css/style.css">

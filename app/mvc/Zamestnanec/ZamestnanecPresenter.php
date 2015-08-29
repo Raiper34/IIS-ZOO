@@ -97,15 +97,34 @@ class ZamestnanecPresenter extends BasePresenter
 		{
 			$form = new Form;
 			$form->addSubmit('odstranit', 'Odstrániť')->setAttribute('class', 'btn btn-danger');
+			$form->addHidden('id')->setValue($id);;
 
 			$form->onSuccess[] = array($this, 'uspesneOdstranitStaraSa');
 			return $form;
 		});
 	}
 
-	public function uspesneOdstranitStaraSa()
+	public function uspesneOdstranitStaraSa($form)
 	{
-		//$this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)where('RodneCislo', $this->RodneCislo)->delete();
+		$this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->where('IDZivocicha', $form['id']->getValue())->delete();
+	}
+
+	protected function createComponentOdstranitSpravujeButton()
+	{
+		return new Multiplier(function ($id)
+		{
+			$form = new Form;
+			$form->addSubmit('odstranit', 'Odstrániť')->setAttribute('class', 'btn btn-danger');
+			$form->addHidden('id')->setValue($id);;
+
+			$form->onSuccess[] = array($this, 'uspesneOdstranitSpravuje');
+			return $form;
+		});
+	}
+
+	public function uspesneOdstranitSpravuje($form)
+	{
+		$this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->where('IDUmiestnenia', $form['id']->getValue())->delete();
 	}
 
 	protected function createComponentPridatStaraSa()
@@ -130,7 +149,10 @@ class ZamestnanecPresenter extends BasePresenter
 	public function uspesneStaraSa(Form $form, $hodnoty)
 	{
 		$hodnoty->RodneCislo = $this->RodneCislo;
-		$this->database->table('staraSa')->insert($hodnoty);
+		if($this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->where('IDZivocicha', $hodnoty->IDZivocicha)->count() == 0)
+		{
+			$this->database->table('staraSa')->insert($hodnoty);
+		}
 		$this->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 
@@ -156,7 +178,10 @@ class ZamestnanecPresenter extends BasePresenter
 	public function uspesneSpravuje(Form $form, $hodnoty)
 	{
 		$hodnoty->RodneCislo = $this->RodneCislo;
-		$this->database->table('spravuje')->insert($hodnoty);
+		if($this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->where('IDUmiestnenia', $hodnoty->IDUmiestnenia)->count() == 0)
+		{
+			$this->database->table('spravuje')->insert($hodnoty);
+		}
 		$this->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 

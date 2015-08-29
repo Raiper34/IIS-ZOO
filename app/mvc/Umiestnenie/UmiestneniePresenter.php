@@ -8,7 +8,7 @@ use Nette\Application\UI\Multiplier;
 use App\Forms\ViacButton;
 use App\Forms\VytvoritUmiestnenieForm;
 use App\Forms\EditovatUmiestnenieForm;
-
+use Test\Bs3FormRenderer;
 
 class UmiestneniePresenter extends BasePresenter
 {
@@ -89,6 +89,8 @@ class UmiestneniePresenter extends BasePresenter
 		$this->template->zivocichy = $this->database->table('zivocich')->where('IDUmiestnenia', $Id);
 		$this->template->klietka = $this->database->table('klietka')->get($Id);
 		$this->template->vybeh = $this->database->table('vybeh')->get($Id);
+
+		$this->template->zamestnanci = $this->database->query('SELECT * FROM spravuje NATURAL JOIN zamestnanec WHERE IDUmiestnenia = ' . $Id);
 	}
 
 	public function actionViac($Id)
@@ -155,5 +157,52 @@ class UmiestneniePresenter extends BasePresenter
 		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 1));
 		$form = $this->tovarna->vytvorit();
 		return $form;
+	}
+
+	protected function createComponentPridatSpravuje()
+	{
+		$form = new Form;
+
+		$hodnoty = array();
+		$prvky = $this->database->table('zamestnanec');
+		foreach($prvky as $prvok)
+		{
+			$hodnoty[$prvok->RodneCislo] = $prvok->meno . ' ' . $prvok->priezvisko;
+		}
+		$form->addSelect('RodneCislo', 'Rodné číslo:', $hodnoty);
+
+		$form->addSubmit('pridat', 'Pridať');
+
+		$form->onSuccess[] = array($this, 'uspesneSpravuje');
+		$form->setRenderer(new Bs3FormRenderer);
+		return $form;
+	}
+
+	public function uspesneSpravuje(Form $form, $hodnoty)
+	{
+		$hodnoty->IDUmiestnenia = $this->Id;
+		if($this->database->table('spravuje')->where('RodneCislo', $hodnoty->RodneCislo)->where('IDUmiestnenia', $this->Id)->count() == 0)
+		{
+			$this->database->table('spravuje')->insert($hodnoty);
+		}
+		$this->redirect('Umiestnenie:viac', $this->Id);
 	}	
+
+	protected function createComponentOdstranitSpravujeButton()
+	{
+		return new Multiplier(function ($RodneCislo)
+		{
+			$form = new Form;
+			$form->addSubmit('odstranit', 'Odstrániť')->setAttribute('class', 'btn btn-danger');
+			$form->addHidden('RodneCislo')->setValue($RodneCislo);;
+
+			$form->onSuccess[] = array($this, 'uspesneOdstranitSpravuje');
+			return $form;
+		});
+	}
+
+	public function uspesneOdstranitSpravuje($form)
+	{
+		$this->database->table('spravuje')->where('IDUmiestnenia', $this->Id)->where('RodneCislo', $form['RodneCislo']->getValue())->delete();
+	}
 }

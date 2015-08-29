@@ -55,13 +55,53 @@ Umiestnenie je typu Vybeh <br>
 <strong>Ohradenie:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($vybeh->ohradenie, ENT_NOQUOTES) ?> <br>
 <?php } ?>
 
+
+
+
+
+
 <h3>V umiestnení sa nachádza:</h3>
 <?php $iterations = 0; foreach ($zivocichy as $zivocich) { ?>
 	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:viac", array($zivocich->IDZivocicha)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($zivocich->meno, ENT_NOQUOTES) ?></a> <br>
 <?php $iterations++; } ?>
 
+
+
+
+
+
 <h3>Umiestnenie spravuje:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Zamestnanec</th>
+	</tr>
+<?php $iterations = 0; foreach ($zamestnanci as $zamestnanec) { ?>
+	<tr>
+		<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:viac", array($zamestnanec->RodneCislo)), ENT_COMPAT) ?>
+"><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->meno, ENT_NOQUOTES) ?>
+ <?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></a></td>  
+		<td><?php $_l->tmp = $_control->getComponent("odstranitSpravujeButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
+	</tr>
+<?php $iterations++; } ?>
+</table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+	Pridať
+</button>
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			</div>
+			     <div class="modal-body">
+<?php $_l->tmp = $_control->getComponent("pridatSpravuje"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
+			    </div>
+		</div>
+	</div>
+</div>
 <?php
 }}
 

@@ -46,10 +46,48 @@ Umiestnenie je typu Vybeh <br>
 <strong>Ohradenie:</strong> {$vybeh->ohradenie} <br>
 {/if}
 
+
+
+
+
+
 <h3>V umiestnení sa nachádza:</h3>
 {foreach $zivocichy as $zivocich}
 	<a href="{link Zivocich:viac, $zivocich->IDZivocicha}">{$zivocich->meno}</a> <br>
 {/foreach}
 
+
+
+
+
+
 <h3>Umiestnenie spravuje:</h3>
+<table class="table table-bordered table-hover">
+	<tr>
+	    <th>Zamestnanec</th>
+	</tr>
+{foreach $zamestnanci as $zamestnanec}
+	<tr>
+		<td><a href="{link Zamestnanec:viac, $zamestnanec->RodneCislo}">{$zamestnanec->meno} {$zamestnanec->priezvisko}</a></td>  
+		<td>{control odstranitSpravujeButton-$zamestnanec->RodneCislo}</td>
+	</tr>
+{/foreach}
+</table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+	Pridať
+</button>
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			</div>
+			     <div class="modal-body">
+			        {control pridatSpravuje}
+			    </div>
+		</div>
+	</div>
+</div>
 {/block}

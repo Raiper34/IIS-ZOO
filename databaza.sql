@@ -64,12 +64,13 @@ PRIMARY KEY(IDUmiestnenia)
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE testoval(
+IDTestu BIGINT NOT NULL AUTO_INCREMENT,
 IDZivocicha BIGINT NOT NULL,
 RodneCislo BIGINT NOT NULL,
 hmotnostZivocicha FLOAT NOT NULL,
 rozmerZivocicha FLOAT NOT NULL,
 datumTestu DATE NOT NULL,
-PRIMARY KEY(IDZivocicha, RodneCislo)
+PRIMARY KEY(IDTestu)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 -- ---------------------------------
