@@ -21,7 +21,7 @@ class VytvoritDruhForm extends Nette\Object
 	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addText('nazov', 'Názov:')->setRequired();
+		$form->addText('nazov', '*Názov:')->setRequired();
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 		$form->onSuccess[] = array($this, 'uspesne');
 		$form->setRenderer(new Bs3FormRenderer);

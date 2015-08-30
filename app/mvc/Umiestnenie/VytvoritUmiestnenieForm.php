@@ -22,24 +22,24 @@ class VytvoritUmiestnenieForm extends Nette\Object
 	{
 		$form = new Form;
 		$umiestnenie = $form->addContainer('umiestnenie');
-		$umiestnenie->addText('nazov', 'Názov:')->setRequired();
-		$umiestnenie->addText('sirka', 'Šírka:')->setRequired()->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
-		$umiestnenie->addText('dlzka', 'Dĺžka:')->setRequired()->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
-		$umiestnenie->addText('vyska', 'Výška:')->setRequired()->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
+		$umiestnenie->addText('nazov', '*Názov:')->setRequired();
+		$umiestnenie->addText('sirka', 'Šírka:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
+		$umiestnenie->addText('dlzka', 'Dĺžka:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
+		$umiestnenie->addText('vyska', 'Výška:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
 
 		if($this->mod == 0) //typ klietka
 		{
 			$klietka = $form->addContainer('klietka');
-			$klietka->addText('typ', 'Typ:')->setRequired();
-			$klietka->addText('podstielka', 'Podstielka:')->setRequired();
-			$klietka->addText('lokacia', 'Lokácia:')->setRequired();
+			$klietka->addText('typ', 'Typ:');
+			$klietka->addText('podstielka', 'Podstielka:');
+			$klietka->addText('lokacia', 'Lokácia:');
 		}
 		else //typ vybeh
 		{
 			$vybeh = $form->addContainer('vybeh');
-			$vybeh->addText('teren', 'Terén:')->setRequired();
-			$vybeh->addText('povrch', 'Povrch:')->setRequired();
-			$vybeh->addText('ohradenie', 'Ohradenie:')->setRequired();
+			$vybeh->addText('teren', 'Terén:');
+			$vybeh->addText('povrch', 'Povrch:');
+			$vybeh->addText('ohradenie', 'Ohradenie:');
 		}
 
 		$form->addSubmit('vytvorit', 'Vytvoriť');

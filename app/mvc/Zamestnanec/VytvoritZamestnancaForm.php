@@ -24,15 +24,15 @@ class VytvoritZamestnancaForm extends Nette\Object
 	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addText('RodneCislo', 'Rodné Číslo:')->setRequired()->addRule(Form::INTEGER, 'Rodné číslo môže obsahovať iba číslice!');
-		$form->addText('meno', 'Meno:')->setRequired();
-		$form->addText('priezvisko', 'Priezvisko:')->setRequired();
-		$form->addText('titul', 'Titul:')->setRequired();
-		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
-		$form->addText('adresa', 'Adresa:')->setRequired();
-		$form->addText('IBAN', 'IBAN:')->setRequired();
-		$form->addPassword('heslo', 'Heslo:')->setRequired();
-		$form->addSelect('funkcia', 'Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'));
+		$form->addText('RodneCislo', '*Rodné Číslo:')->setRequired()->addRule(Form::INTEGER, 'Rodné číslo môže obsahovať iba číslice!');
+		$form->addText('meno', '*Meno:')->setRequired();
+		$form->addText('priezvisko', '*Priezvisko:')->setRequired();
+		$form->addText('titul', 'Titul:');
+		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->addCondition(Form::FILLED)->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
+		$form->addText('adresa', 'Adresa:');
+		$form->addText('IBAN', 'IBAN:');
+		$form->addPassword('heslo', '*Heslo:')->setRequired();
+		$form->addSelect('funkcia', '*Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'))->setRequired();
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 
 		$form->onSuccess[] = array($this, 'uspesne');

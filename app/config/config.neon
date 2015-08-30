@@ -32,4 +32,4 @@ database:
 
 forms:
 	messages:
-		REQUIRED: 'Povinné pole!'
+		REQUIRED: 'Polia označené * sú povinné!'

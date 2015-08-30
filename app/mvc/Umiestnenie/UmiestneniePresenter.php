@@ -139,10 +139,17 @@ class UmiestneniePresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
-		$this->database->table('klietka')->where('IDUmiestnenia', $this->Id)->delete();
-		$this->database->table('vybeh')->where('IDUmiestnenia', $this->Id)->delete();
-		$this->database->table('umiestnenie')->where('IDUmiestnenia', $this->Id)->delete();
-		$form->getPresenter()->redirect('Umiestnenie:vypis');
+		if($this->database->table('zivocich')->where('IDUmiestnenia', $this->Id)->count() == 0)
+		{
+			$this->database->table('klietka')->where('IDUmiestnenia', $this->Id)->delete();
+			$this->database->table('vybeh')->where('IDUmiestnenia', $this->Id)->delete();
+			$this->database->table('umiestnenie')->where('IDUmiestnenia', $this->Id)->delete();
+			$form->getPresenter()->redirect('Umiestnenie:vypis');
+		}
+		else
+		{
+			$form->getPresenter()->flashMessage('Ak chcete odstrániť toto umiestnenie, najprv premiestnite všetky živočíchy z tohoto umiestnenia!');
+		}
 	}
 
 	protected function createComponentEditovatKlietkuForm()

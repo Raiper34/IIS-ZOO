@@ -23,8 +23,8 @@ meno VARCHAR(25) NOT NULL,
 priezvisko VARCHAR(25) NOT NULL,
 heslo VARCHAR(25) NOT NULL,
 titul VARCHAR(10),
-datumNarodenia DATE NOT NULL,
-adresa VARCHAR(50) NOT NULL,
+datumNarodenia DATE,
+adresa VARCHAR(50),
 funkcia VARCHAR(25) NOT NULL,
 IBAN VARCHAR(24),
 PRIMARY KEY(RodneCislo)
@@ -34,12 +34,12 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 CREATE TABLE zivocich(
 IDZivocicha BIGINT NOT NULL AUTO_INCREMENT,
 meno VARCHAR(25) NOT NULL,
-datumNarodenia DATE NOT NULL,
+datumNarodenia DATE,
 datumUmrtia DATE,
-trieda VARCHAR(25) NOT NULL,
-rad VARCHAR(25) NOT NULL,
-celad VARCHAR(25) NOT NULL,
-rod VARCHAR(25) NOT NULL,
+trieda VARCHAR(25),
+rad VARCHAR(25),
+celad VARCHAR(25),
+rod VARCHAR(25),
 IDDruhuZivocicha BIGINT NOT NULL,
 IDUmiestnenia BIGINT NOT NULL,
 PRIMARY KEY(IDZivocicha)
@@ -56,8 +56,8 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 CREATE TABLE umiestnenie(
 IDUmiestnenia BIGINT NOT NULL AUTO_INCREMENT,
 nazov VARCHAR(25) NOT NULL,
-sirka FLOAT NOT NULL,
-dlzka FLOAT NOT NULL,
+sirka FLOAT,
+dlzka FLOAT,
 vyska FLOAT,
 PRIMARY KEY(IDUmiestnenia)
 )
@@ -67,8 +67,8 @@ CREATE TABLE testoval(
 IDTestu BIGINT NOT NULL AUTO_INCREMENT,
 IDZivocicha BIGINT NOT NULL,
 RodneCislo BIGINT NOT NULL,
-hmotnostZivocicha FLOAT NOT NULL,
-rozmerZivocicha FLOAT NOT NULL,
+hmotnostZivocicha FLOAT,
+rozmerZivocicha FLOAT,
 datumTestu DATE NOT NULL,
 PRIMARY KEY(IDTestu)
 )
@@ -77,18 +77,18 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE klietka(
 IDUmiestnenia BIGINT NOT NULL,
-typ VARCHAR(25) NOT NULL,
-podstielka VARCHAR(25) NOT NULL,
-lokacia VARCHAR(25) NOT NULL,
+typ VARCHAR(25),
+podstielka VARCHAR(25),
+lokacia VARCHAR(25),
 PRIMARY KEY(IDUmiestnenia)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 CREATE TABLE vybeh(
 IDUmiestnenia BIGINT NOT NULL,
-teren VARCHAR(25) NOT NULL,
-povrch VARCHAR(25) NOT NULL,
-ohradenie VARCHAR(25) NOT NULL,
+teren VARCHAR(25),
+povrch VARCHAR(25),
+ohradenie VARCHAR(25),
 PRIMARY KEY(IDUMIESTNENIA)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;

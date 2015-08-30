@@ -19,13 +19,13 @@ class VytvoritZivocichaForm extends Nette\Object
 	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addText('meno', 'Meno:')->setRequired();
-		$form->addText('datumNarodenia', 'Dátum narodenia(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
-		$form->addText('datumUmrtia', 'Dátum úmrtia(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
-		$form->addText('trieda', 'Trieda:')->setRequired();
-		$form->addText('rad', 'Rad:')->setRequired();
-		$form->addText('celad', 'Čelaď:')->setRequired();
-		$form->addText('rod', 'Rod:')->setRequired();
+		$form->addText('meno', '*Meno:')->setRequired();
+		$form->addText('datumNarodenia', 'Dátum narodenia(YYYY-MM-DD):')->addCondition(Form::FILLED)->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
+		$form->addText('datumUmrtia', 'Dátum úmrtia(YYYY-MM-DD):')->addCondition(Form::FILLED)->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');
+		$form->addText('trieda', 'Trieda:');
+		$form->addText('rad', 'Rad:');
+		$form->addText('celad', 'Čelaď:');
+		$form->addText('rod', 'Rod:');
 
 		//Druh zivocicha
 		$hodnotyDruhu = array();
@@ -34,7 +34,7 @@ class VytvoritZivocichaForm extends Nette\Object
 		{
 			$hodnotyDruhu[$druhZivocicha->IDDruhuZivocicha] = $druhZivocicha->nazov;
 		}
-		$form->addSelect('IDDruhuZivocicha', 'Druh:', $hodnotyDruhu);
+		$form->addSelect('IDDruhuZivocicha', '*Druh:', $hodnotyDruhu)->setRequired();
 
 		//Umiestnenia
 		$hodnotyUmiestnenia = array();
@@ -43,7 +43,7 @@ class VytvoritZivocichaForm extends Nette\Object
 		{
 			$hodnotyUmiestnenia[$umiestnenie->IDUmiestnenia] = $umiestnenie->nazov;
 		}
-		$form->addSelect('IDUmiestnenia', 'Umiestnenie:', $hodnotyUmiestnenia);
+		$form->addSelect('IDUmiestnenia', '*Umiestnenie:', $hodnotyUmiestnenia)->setRequired();
 
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 

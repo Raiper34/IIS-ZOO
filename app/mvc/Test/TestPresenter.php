@@ -43,7 +43,7 @@ class TestPresenter extends BasePresenter
 		{
 			$hodnotyZivocich[$zivocich->IDZivocicha] = $zivocich->meno;
 		}
-		$form->addSelect('IDZivocicha', 'Živočích:', $hodnotyZivocich);
+		$form->addSelect('IDZivocicha', '*Živočích:', $hodnotyZivocich)->setRequired();
 
 		//Zamestnanec
 		$hodnotyZamestnancov = array();
@@ -52,11 +52,11 @@ class TestPresenter extends BasePresenter
 		{
 			$hodnotyZamestnancov[$zamestnanec->RodneCislo] = $zamestnanec->meno . " " . $zamestnanec->priezvisko;
 		}
-		$form->addSelect('RodneCislo', 'Zamestnanec:', $hodnotyZamestnancov);
+		$form->addSelect('RodneCislo', '*Zamestnanec:', $hodnotyZamestnancov)->setRequired();
 
-		$form->addText('hmotnostZivocicha', 'Hmotnosť živočícha:')->setRequired()->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');;
-		$form->addText('rozmerZivocicha', 'Rozmer živočícha:')->setRequired()->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');;
-		$form->addText('datumTestu', 'Dátum testu(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');;
+		$form->addText('hmotnostZivocicha', 'Hmotnosť živočícha:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
+		$form->addText('rozmerZivocicha', 'Rozmer živočícha:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
+		$form->addText('datumTestu', '*Dátum testu(YYYY-MM-DD):')->setRequired()->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){2}-([0-9]){2}');
 		
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 		$form->onSuccess[] = array($this, 'uspesne');

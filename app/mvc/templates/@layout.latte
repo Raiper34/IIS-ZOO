@@ -23,7 +23,6 @@
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 	
 	<!-- Navbar -->
     <div class="navbar navbar-inverse menu">
@@ -48,6 +47,11 @@
         </div>
     </div>
 
+    <div n:foreach="$flashes as $flash">
+        <script type="text/javascript">
+            alert({$flash->message});
+        </script>
+    </div>
 
 	<div class="container">{include content}</div>
 

@@ -69,9 +69,6 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 </head>
 
 <body>
-<?php $iterations = 0; foreach ($flashes as $flash) { ?>	<div<?php if ($_l->tmp = array_filter(array('flash', $flash->type))) echo ' class="', Latte\Runtime\Filters::escapeHtml(implode(" ", array_unique($_l->tmp)), ENT_COMPAT), '"' ?>
-><?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
-<?php $iterations++; } ?>
 	
 	<!-- Navbar -->
     <div class="navbar navbar-inverse menu">
@@ -96,6 +93,12 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
         </div>
     </div>
 
+<?php $iterations = 0; foreach ($flashes as $flash) { ?>    <div>
+        <script type="text/javascript">
+            alert(<?php echo Latte\Runtime\Filters::escapeJs($flash->message) ?>);
+        </script>
+    </div>
+<?php $iterations++; } ?>
 
 	<div class="container"><?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?></div>
 

@@ -90,8 +90,15 @@ class DruhPresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
-		$this->database->table('druhZivocicha')->where('IDDruhuZivocicha', $this->Id)->delete();
-		$form->getPresenter()->redirect('Druh:vypis');
+		if($this->database->table('zivocich')->where('IDDruhuZivocicha', $this->Id)->count() == 0)
+		{
+			$this->database->table('druhZivocicha')->where('IDDruhuZivocicha', $this->Id)->delete();
+			$form->getPresenter()->redirect('Druh:vypis');
+		}
+		else
+		{
+			$form->getPresenter()->flashMessage('Ak chcete vymazať tento druh živočícha, zmente druhy živočíchom, ktorý majú nastavený tento druh!');
+		}
 	}
 
 	protected function createComponentEditovatForm()
