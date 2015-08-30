@@ -1,17 +1,17 @@
 <?php
-// source: C:\Users\Raiper34\Desktop\server\root\nette\app\mvc/templates/Umiestnenie/vypis.latte
+// source: C:\Users\Raiper34\Desktop\server\root\nette\app\mvc/templates/Umiestnenie/vypisVolne.latte
 
-class Templatef54e6e1464e04c86c5fdf56d7811ab04 extends Latte\Template {
+class Templatea3b33478f407a66b9045564cd1524c22 extends Latte\Template {
 function render() {
 foreach ($this->params as $__k => $__v) $$__k = $__v; unset($__k, $__v);
 // prolog Latte\Macros\CoreMacros
-list($_b, $_g, $_l) = $template->initialize('9b7e35a3f6', 'html')
+list($_b, $_g, $_l) = $template->initialize('ccf3931c7c', 'html')
 ;
 // prolog Latte\Macros\BlockMacros
 //
 // block content
 //
-if (!function_exists($_b->blocks['content'][] = '_lbbf90cc1176_content')) { function _lbbf90cc1176_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
+if (!function_exists($_b->blocks['content'][] = '_lb666fc4dca6_content')) { function _lb666fc4dca6_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
 ?><div class="row">
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
 	  Pridať výbeh
@@ -47,9 +47,9 @@ if (!function_exists($_b->blocks['content'][] = '_lbbf90cc1176_content')) { func
 	  </div>
 	</div>
 
-<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypisVolne"), ENT_COMPAT) ?>" class="btn btn-success">Vypísať iba voľné</a>
-
+	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>" class="btn btn-success">Vypísať všetky</a>
 </div>
+
 
 <div class="row">
 	<table class="table table-bordered table-hover">

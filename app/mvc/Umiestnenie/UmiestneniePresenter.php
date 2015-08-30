@@ -82,6 +82,14 @@ class UmiestneniePresenter extends BasePresenter
 		return $form;
 	}
 
+	/******************* Vypis volne *******************/
+
+	public function renderVypisVolne()
+	{
+		//$this->template->umiestnenia = $this->database->table('umiestnenie');
+		$this->template->umiestnenia = $this->database->query('SELECT * FROM umiestnenie U WHERE 0 = (SELECT COUNT(*) FROM zivocich Z WHERE U.IDUmiestnenia = Z.IDUmiestnenia)');
+	}
+
 	/******************* Viac ************************/
 	public function renderViac($Id)
 	{
