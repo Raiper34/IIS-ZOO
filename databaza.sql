@@ -1,3 +1,7 @@
+SET NAMES utf8;
+SET foreign_key_checks = 0;
+SET time_zone = 'SYSTEM';
+
 -- -------------------------------------
 -- -------- vymazanie tabuliek ---------
 -- -------------------------------------

@@ -2,11 +2,10 @@ parameters:
 
 
 database:
-	dsn: 'mysql:host=127.0.0.1:3307;dbname=quickstart'
+	dsn: 'mysql:host=127.0.0.1:3307;dbname=zoo'
 	user: 'root'
 	password: 'usbw'
 	options:
-		lazy: yes
 
 services:
     authenticator: App\Model\Prihlasovanie

@@ -534,7 +534,7 @@ class Container_23387215fb extends Nette\DI\Container
 	 */
 	public function createServiceDatabase__default__connection()
 	{
-		$service = new Nette\Database\Connection('mysql:host=127.0.0.1:3307;dbname=quickstart', 'root', 'usbw', array('lazy' => TRUE));
+		$service = new Nette\Database\Connection('mysql:host=127.0.0.1:3307;dbname=zoo', 'root', 'usbw', NULL);
 		$this->getService('tracy.blueScreen')->addPanel('Nette\Bridges\DatabaseTracy\ConnectionPanel::renderException');
 		Nette\Database\Helpers::createDebugPanel($service, TRUE, 'default');
 		return $service;
@@ -702,7 +702,7 @@ class Container_23387215fb extends Nette\DI\Container
 	public function createServiceSession__session()
 	{
 		$service = new Nette\Http\Session($this->getService('http.request'), $this->getService('http.response'));
-		$service->setExpiration('14 days');
+		$service->setExpiration('1 hours');
 		return $service;
 	}
 

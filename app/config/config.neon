@@ -16,7 +16,7 @@ application:
 
 
 session:
-	expiration: 14 days
+	expiration: 1 hours
 
 
 services:
@@ -24,11 +24,10 @@ services:
 	router: App\Router::vytvoritRouter
 
 database:
-	dsn: 'mysql:host=127.0.0.1:3307;dbname=quickstart'
+	dsn: 'mysql:host=127.0.0.1:3307;dbname=zoo'
 	user: 'root'
 	password: 'usbw'
 	options:
-		lazy: yes
 
 forms:
 	messages:
