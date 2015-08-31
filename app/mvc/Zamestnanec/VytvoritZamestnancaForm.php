@@ -32,7 +32,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 		$form->addText('adresa', 'Adresa:');
 		$form->addText('IBAN', 'IBAN:');
 		$form->addPassword('heslo', '*Heslo:')->setRequired();
-		$form->addSelect('funkcia', '*Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'))->setRequired();
+		$form->addSelect('funkcia', '*Funkcia:', array('riaditeľ' => 'Riaditeľ', 'zamestnanec' => 'Zamestnanec'))->setRequired();
 		$form->addSubmit('vytvorit', 'Vytvoriť');
 
 		$form->onSuccess[] = array($this, 'uspesne');

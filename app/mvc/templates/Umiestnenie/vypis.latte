@@ -1,56 +1,58 @@
 {block content}
-<div class="row">
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
-	  Pridať výbeh
-	</button>
-	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Pridať výbeh</h4>
-	      </div>
-	      <div class="modal-body">
-	        {control vytvoritVybehForm}
-	      </div>
-	    </div>
-	  </div>
+	<div class="row">
+		{if $user->identity->roles[0] == 'riaditeľ'}
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+			  Pridať výbeh
+			</button>
+			<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Pridať výbeh</h4>
+			      </div>
+			      <div class="modal-body">
+			        {control vytvoritVybehForm}
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+			  Pridať klietku
+			</button>
+			<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Pridať klietku</h4>
+			      </div>
+			      <div class="modal-body">
+			        {control vytvoritKliektuForm}
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		{/if}
+
+	<a href="{link Umiestnenie:vypisVolne}" class="btn btn-success">Vypísať iba voľné</a>
+
 	</div>
 
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
-	  Pridať klietku
-	</button>
-	<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Pridať klietku</h4>
-	      </div>
-	      <div class="modal-body">
-	        {control vytvoritKliektuForm}
-	      </div>
-	    </div>
-	  </div>
+	<div class="row">
+		<table class="table table-bordered table-hover">
+		    <tr>
+		        <th>Identifikačné číslo</th>
+		        <th>Názov</th>
+		    </tr>
+		{foreach $umiestnenia as $umiestnenie}
+		    <tr>
+		        <td>{$umiestnenie->IDUmiestnenia}</td>
+		        <td>{$umiestnenie->nazov}</td>
+		        <td>{control viacButton-$umiestnenie->IDUmiestnenia}</td>
+		    <tr>
+		{/foreach}
+		</table>
 	</div>
-
-<a href="{link Umiestnenie:vypisVolne}" class="btn btn-success">Vypísať iba voľné</a>
-
-</div>
-
-<div class="row">
-	<table class="table table-bordered table-hover">
-	    <tr>
-	        <th>Identifikačné číslo</th>
-	        <th>Názov</th>
-	    </tr>
-	{foreach $umiestnenia as $umiestnenie}
-	    <tr>
-	        <td>{$umiestnenie->IDUmiestnenia}</td>
-	        <td>{$umiestnenie->nazov}</td>
-	        <td>{control viacButton-$umiestnenie->IDUmiestnenia}</td>
-	    <tr>
-	{/foreach}
-	</table>
-</div>
 {/block}

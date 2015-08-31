@@ -37,6 +37,14 @@ class ZamestnanecPresenter extends BasePresenter
 	 */
 	public function renderVypis()
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
+		else if($this->getUser()->roles[0] != 'riaditeľ')
+		{
+			$this->redirect('Homepage:prava');
+		}
 		$this->template->zamestnanci = $this->database->table('zamestnanec');
 	}
 
@@ -65,6 +73,14 @@ class ZamestnanecPresenter extends BasePresenter
 
 	public function renderViac($RodneCislo)
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
+		else if($this->getUser()->roles[0] != 'riaditeľ')
+		{
+			$this->redirect('Homepage:prava');
+		}
 		$this->template->zamestnanec = $this->database->table('zamestnanec')->get($RodneCislo);
 
 		$this->template->testy = $this->database->query('SELECT * FROM testoval NATURAL JOIN zivocich WHERE RodneCislo = ' . $RodneCislo);

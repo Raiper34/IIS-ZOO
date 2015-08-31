@@ -31,6 +31,10 @@ class DruhPresenter extends BasePresenter
 	/******************* Vypis ***********************/
 	public function renderVypis()
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->druhy = $this->database->table('druhZivocicha');
 	}
 
@@ -52,6 +56,10 @@ class DruhPresenter extends BasePresenter
 	/******************* Viac ************************/
 	public function renderViac($Id)
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->druh = $this->database->table('druhZivocicha')->get($Id);
 		$this->template->zivocichy = $this->database->table('zivocich')->where('IDDruhuZivocicha', $Id);
 	}

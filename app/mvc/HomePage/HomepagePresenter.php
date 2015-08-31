@@ -20,10 +20,15 @@ class HomepagePresenter extends BasePresenter
 
 	public function renderDefault()
 	{
+		$this->redirect('Homepage:prihlasenie');
+	}
+
+	public function renderPrihlasenie()
+	{
 		$uzivatel = $this->getUser();
 		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny hed redirectujem
 		{
-			$this->redirect('Zamestnanec:vypis');
+			$this->redirect('Umiestnenie:vypis');
 		}
 	}
 

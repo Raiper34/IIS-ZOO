@@ -25,6 +25,10 @@ class TestPresenter extends BasePresenter
 	/******************* Vypis ***********************/
 	public function renderVypis()
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->testy = $this->database->query(
 			'SELECT T.RodneCislo, T.IDZivocicha, Zi.meno as menoZivocicha, Za.meno as menoZamestnanca, Za.priezvisko, T.hmotnostZivocicha, T.rozmerZivocicha, T.datumTestu 
 			FROM testoval T, zamestnanec Za, zivocich Zi 

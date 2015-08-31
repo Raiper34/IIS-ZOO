@@ -27,11 +27,6 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
             throw new Nette\Security\AuthenticationException('Používateľ sa nenašiel!');
         }
 
-        /*if (Nette\Security\heslos::verify($heslo, $zaznam->heslo) == null) //overenie ci je heslo spravne
-        {
-            thzaznam new Nette\Security\AuthenticationException('Invalid heslo.');
-        }*/
-
         if ($heslo != $zaznam->heslo) //overenie ci je heslo spravne
         {
             throw new Nette\Security\AuthenticationException('Nesprávne heslo!');

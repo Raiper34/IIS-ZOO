@@ -32,6 +32,10 @@ class ZivocichPresenter extends BasePresenter
 	/************************************ Vypis ****************************************/
 	public function renderVypis()
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->zivocichi = $this->database->table('zivocich');
 	}
 
@@ -54,6 +58,10 @@ class ZivocichPresenter extends BasePresenter
 
 	public function renderViac($Id)
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->zivocich = $this->database->table('zivocich')->get($Id);
 		$this->template->druh = $this->database->table('druhZivocicha')->get($this->template->zivocich->IDDruhuZivocicha);
 		$this->template->umiestnenie = $this->database->table('umiestnenie')->get($this->template->zivocich->IDUmiestnenia);

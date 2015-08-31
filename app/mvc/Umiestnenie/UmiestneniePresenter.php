@@ -29,7 +29,10 @@ class UmiestneniePresenter extends BasePresenter
 	/******************* Vypis ***********************/
 	public function renderVypis()
 	{
-		//$this->template->umiestnenia = $this->database->table('umiestnenie');
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->umiestnenia = $this->database->query('SELECT * FROM umiestnenie NATURAL JOIN klietka UNION SELECT * FROM umiestnenie NATURAL JOIN vybeh');
 	}
 
@@ -86,13 +89,20 @@ class UmiestneniePresenter extends BasePresenter
 
 	public function renderVypisVolne()
 	{
-		//$this->template->umiestnenia = $this->database->table('umiestnenie');
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->umiestnenia = $this->database->query('SELECT * FROM umiestnenie U WHERE 0 = (SELECT COUNT(*) FROM zivocich Z WHERE U.IDUmiestnenia = Z.IDUmiestnenia)');
 	}
 
 	/******************* Viac ************************/
 	public function renderViac($Id)
 	{
+		if(!$this->getUser()->isLoggedIn())
+		{
+			$this->redirect('Homepage:prihlasenie');
+		}
 		$this->template->umiestnenie = $this->database->table('umiestnenie')->get($Id);
 		$this->template->zivocichy = $this->database->table('zivocich')->where('IDUmiestnenia', $Id);
 		$this->template->klietka = $this->database->table('klietka')->get($Id);

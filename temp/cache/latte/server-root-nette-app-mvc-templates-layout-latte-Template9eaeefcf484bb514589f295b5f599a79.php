@@ -72,7 +72,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 	
 	<!-- Navbar -->
 <?php if ($user->isLoggedIn()) { ?>
-        <div class="navbar navbar-inverse menu">
+        <div class="navbar navbar-inverse menu" id="moj-navbar">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -84,7 +84,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav menu-button">
-<?php if ($user->identity->roles[0] == 'admin') { ?>
+<?php if ($user->identity->roles[0] == 'riaditeľ') { ?>
                             <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:vypis"), ENT_COMPAT) ?>">Zamestnanci</a><li>
 <?php } ?>
                             <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>">Umiestnenia</a><li>
@@ -115,7 +115,6 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 
 
 	<div class="container"><?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?></div>
-
 
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
 

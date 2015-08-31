@@ -12,60 +12,62 @@ list($_b, $_g, $_l) = $template->initialize('ccf3931c7c', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb666fc4dca6_content')) { function _lb666fc4dca6_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><div class="row">
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
-	  Pridať výbeh
-	</button>
-	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Pridať výbeh</h4>
-	      </div>
-	      <div class="modal-body">
+?>	<div class="row">
+<?php if ($user->identity->roles[0] == 'riaditeľ') { ?>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+			  Pridať výbeh
+			</button>
+			<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Pridať výbeh</h4>
+			      </div>
+			      <div class="modal-body">
 <?php $_l->tmp = $_control->getComponent("vytvoritVybehForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
-	  Pridať klietku
-	</button>
-	<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Pridať klietku</h4>
-	      </div>
-	      <div class="modal-body">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+			  Pridať klietku
+			</button>
+			<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Pridať klietku</h4>
+			      </div>
+			      <div class="modal-body">
 <?php $_l->tmp = $_control->getComponent("vytvoritKliektuForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
-	      </div>
-	    </div>
-	  </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<?php } ?>
+
+		<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>" class="btn btn-success">Vypísať všetky</a>
 	</div>
 
-	<a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>" class="btn btn-success">Vypísať všetky</a>
-</div>
 
-
-<div class="row">
-	<table class="table table-bordered table-hover">
-	    <tr>
-	        <th>Identifikačné číslo</th>
-	        <th>Názov</th>
-	    </tr>
+	<div class="row">
+		<table class="table table-bordered table-hover">
+		    <tr>
+		        <th>Identifikačné číslo</th>
+		        <th>Názov</th>
+		    </tr>
 <?php $iterations = 0; foreach ($umiestnenia as $umiestnenie) { ?>
-	    <tr>
-	        <td><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->IDUmiestnenia, ENT_NOQUOTES) ?></td>
-	        <td><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->nazov, ENT_NOQUOTES) ?></td>
-	        <td><?php $_l->tmp = $_control->getComponent("viacButton-$umiestnenie->IDUmiestnenia"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
-	    <tr>
+		    <tr>
+		        <td><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->IDUmiestnenia, ENT_NOQUOTES) ?></td>
+		        <td><?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->nazov, ENT_NOQUOTES) ?></td>
+		        <td><?php $_l->tmp = $_control->getComponent("viacButton-$umiestnenie->IDUmiestnenia"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
+		    <tr>
 <?php $iterations++; } ?>
-	</table>
-</div>
+		</table>
+	</div>
 <?php
 }}
 

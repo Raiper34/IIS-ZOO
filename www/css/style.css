@@ -49,3 +49,19 @@ form .error {
 	color: #D00;
 	font-weight: bold;
 }
+
+#moj-navbar
+{
+	background-image: url("../images/backgroundHead.png");
+	border-radius: 0px;
+}
+
+#moj-navbar li a
+{
+    color: white !important;
+}
+
+#moj-navbar li a:hover
+{
+    color: gray !important;   
+}

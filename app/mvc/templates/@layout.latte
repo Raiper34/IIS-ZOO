@@ -26,7 +26,7 @@
 	
 	<!-- Navbar -->
     {if $user->isLoggedIn()}
-        <div class="navbar navbar-inverse menu">
+        <div class="navbar navbar-inverse menu" id="moj-navbar">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -38,7 +38,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav menu-button">
-                        {if $user->identity->roles[0] == 'admin'}
+                        {if $user->identity->roles[0] == 'riaditeľ'}
                             <li><a href="{link Zamestnanec:vypis}">Zamestnanci</a><li>
                         {/if}
                             <li><a href="{link Umiestnenie:vypis}">Umiestnenia</a><li>
@@ -66,7 +66,6 @@
 
 
 	<div class="container">{include content}</div>
-
 
 	{block scripts}
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

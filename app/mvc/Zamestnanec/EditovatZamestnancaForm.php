@@ -32,7 +32,7 @@ class EditovatZamestnancaForm extends Nette\Object
 		$form->addText('datumNarodenia', "Dátum narodenia(YYYY-MM-DD):")->addCondition(Form::FILLED)->addRule(Form::PATTERN, 'Nesprávny fomrát', '([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}');;
 		$form->addText('adresa', 'Adresa:');
 		$form->addText('IBAN', 'IBAN:');
-		$form->addSelect('funkcia', '*Funkcia:', array('pracovnik' => 'Pracovnik', 'admin' => 'Admin'))->setRequired();
+		$form->addSelect('funkcia', '*Funkcia:', array('riaditeľ' => 'Riaditeľ', 'zamestnanec' => 'Zamestnanec'))->setRequired();
 		$form->addSubmit('editovat', 'Editovať');
 		$form->onSuccess[] = array($this, 'uspesne');
 		$form->setRenderer(new Bs3FormRenderer);
