@@ -109,6 +109,8 @@ class ZivocichPresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
+		$this->database->table('staraSa')->where('IDZivocicha', $this->Id)->delete();
+		$this->database->table('testoval')->where('IDZivocicha', $this->Id)->delete();
 		$this->database->table('zivocich')->where('IDZivocicha', $this->Id)->delete();
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}

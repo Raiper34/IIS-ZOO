@@ -196,6 +196,9 @@ class ZamestnanecPresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
+		$this->database->table('testoval')->where('RodneCislo', $this->RodneCislo)->delete();
+		$this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->delete();
+		$this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->delete();
 		$this->database->table('zamestnanec')->where('RodneCislo', $this->RodneCislo)->delete();
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}

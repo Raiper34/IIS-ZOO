@@ -15,6 +15,8 @@ if (!function_exists($_b->blocks['content'][] = '_lb059bc5a94e_content')) { func
 ?><div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
+	<div class="row">
+		<h1 class="text-center">Prihlásenie</h1>
 <?php $_l->tmp = $_control->getComponent("prihlasenie"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 	</div>
 	<div class="col-md-4"></div>

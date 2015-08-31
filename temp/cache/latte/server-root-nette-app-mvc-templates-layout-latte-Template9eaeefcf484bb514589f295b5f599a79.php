@@ -71,38 +71,55 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 <body>
 	
 	<!-- Navbar -->
-    <div class="navbar navbar-inverse menu">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand"  href="#" id="logo-small">IIS ZOO FIT</a>
+<?php if ($user->isLoggedIn()) { ?>
+        <div class="navbar navbar-inverse menu">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand" id="logo-small">IIS ZOO FIT</span>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav menu-button">
+<?php if ($user->identity->roles[0] == 'admin') { ?>
+                            <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:vypis"), ENT_COMPAT) ?>">Zamestnanci</a><li>
+<?php } ?>
+                            <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>">Umiestnenia</a><li>
+                            <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:vypis"), ENT_COMPAT) ?>">Druhy živočíchov</a><li>
+                            <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:vypis"), ENT_COMPAT) ?>">Živočíchy</a><li>
+                            <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Test:vypis"), ENT_COMPAT) ?>">Testy</a><li>
+                    </ul>
+                    <ul class="nav navbar-nav menu-button navbar-right">
+                        <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Homepage:odhlasit"), ENT_COMPAT) ?>
+">Odhlásiť <?php echo Latte\Runtime\Filters::escapeHtml($user->identity->meno, ENT_NOQUOTES) ?></a><li>
+                    </ul>
+                </div>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav menu-button navbar-right">
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:vypis"), ENT_COMPAT) ?>">Zamestnanci</a><li>
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Druh:vypis"), ENT_COMPAT) ?>">Druhy živočíchov</a><li>
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Umiestnenie:vypis"), ENT_COMPAT) ?>">Umiestnenia</a><li>
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zivocich:vypis"), ENT_COMPAT) ?>">Živočíchy</a><li>
-                    <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Test:vypis"), ENT_COMPAT) ?>">Testy</a><li>
-                </ul>
+        </div>
+<?php } ?>
+
+<?php $iterations = 0; foreach ($flashes as $flash) { ?>    <div>
+        <div class="container">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?>
+
             </div>
         </div>
     </div>
-
-<?php $iterations = 0; foreach ($flashes as $flash) { ?>    <div>
-        <script type="text/javascript">
-            alert(<?php echo Latte\Runtime\Filters::escapeJs($flash->message) ?>);
-        </script>
-    </div>
 <?php $iterations++; } ?>
+
 
 	<div class="container"><?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?></div>
 
+
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
+
+    <br>
 </body>
 </html>
 <?php

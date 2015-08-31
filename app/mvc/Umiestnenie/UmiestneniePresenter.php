@@ -151,6 +151,7 @@ class UmiestneniePresenter extends BasePresenter
 		{
 			$this->database->table('klietka')->where('IDUmiestnenia', $this->Id)->delete();
 			$this->database->table('vybeh')->where('IDUmiestnenia', $this->Id)->delete();
+			$this->database->table('spravuje')->where('IDUmiestnenia', $this->Id)->delete();
 			$this->database->table('umiestnenie')->where('IDUmiestnenia', $this->Id)->delete();
 			$form->getPresenter()->redirect('Umiestnenie:vypis');
 		}

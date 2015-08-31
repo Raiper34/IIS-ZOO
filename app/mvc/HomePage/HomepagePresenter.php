@@ -21,7 +21,6 @@ class HomepagePresenter extends BasePresenter
 	public function renderDefault()
 	{
 		$uzivatel = $this->getUser();
-		//$uzivatel->logout();
 		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny hed redirectujem
 		{
 			$this->redirect('Zamestnanec:vypis');
@@ -35,5 +34,15 @@ class HomepagePresenter extends BasePresenter
 	{
 		$form = (new PrihlasenieForm($this->database))->vytvorit();
 		return $form;
+	}
+
+	public function actionOdhlasit()
+	{
+		$uzivatel = $this->getUser();
+		if($uzivatel->isLoggedIn())
+		{
+			$uzivatel->logout();
+		}
+		$this->redirect('Homepage:default');
 	}
 }
