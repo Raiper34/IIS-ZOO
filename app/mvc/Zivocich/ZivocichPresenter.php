@@ -135,10 +135,17 @@ class ZivocichPresenter extends BasePresenter
 		$form = new Form;
 
 		$hodnoty = array();
-		$prvky = $this->database->table('zamestnanec');
-		foreach($prvky as $prvok)
+		if($this->getUser()->roles[0] == 'riaditeľ')
 		{
-			$hodnoty[$prvok->RodneCislo] = $prvok->meno . ' ' .$prvok->priezvisko;
+			$prvky = $this->database->table('zamestnanec');
+			foreach($prvky as $prvok)
+			{
+				$hodnoty[$prvok->RodneCislo] = $prvok->meno . ' ' .$prvok->priezvisko;
+			}
+		}
+		else
+		{
+			$hodnoty[$this->getUser()->id] = $this->getUser()->getIdentity()->data['meno'];
 		}
 		$form->addSelect('RodneCislo', 'Zamestnanec:', $hodnoty);
 

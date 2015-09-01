@@ -48,6 +48,6 @@ class HomepagePresenter extends BasePresenter
 		{
 			$uzivatel->logout();
 		}
-		$this->redirect('Homepage:default');
+		$this->redirect('Homepage:prihlasenie');
 	}
 }

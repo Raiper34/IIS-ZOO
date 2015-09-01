@@ -49,8 +49,10 @@
 	</tr>
 {foreach $zamestnanci as $zamestnanec}
 	<tr>
-		<td><a href="{link Zamestnanec:viac, $zamestnanec->RodneCislo}">{$zamestnanec->meno} {$zamestnanec->priezvisko}</a></td>  
-		<td>{control odstranitStaraSaButton-$zamestnanec->RodneCislo}</td>
+		<td><a href="{link Zamestnanec:viac, $zamestnanec->RodneCislo}">{$zamestnanec->meno} {$zamestnanec->priezvisko}</a></td>
+		{if $user->identity->roles[0] == 'riaditeľ' || $user->id == $zamestnanec->RodneCislo}  
+			<td>{control odstranitStaraSaButton-$zamestnanec->RodneCislo}</td>
+		{/if}
 	</tr>
 {/foreach}
 </table>

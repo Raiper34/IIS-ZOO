@@ -93,8 +93,9 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
                             <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Test:vypis"), ENT_COMPAT) ?>">Testy</a><li>
                     </ul>
                     <ul class="nav navbar-nav menu-button navbar-right">
-                        <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Homepage:odhlasit"), ENT_COMPAT) ?>
-">Odhlásiť <?php echo Latte\Runtime\Filters::escapeHtml($user->identity->meno, ENT_NOQUOTES) ?></a><li>
+                        <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:viac", array($user->identity->id)), ENT_COMPAT) ?>
+">Profil <?php echo Latte\Runtime\Filters::escapeHtml($user->identity->meno, ENT_NOQUOTES) ?></a><li>
+                        <li><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Homepage:odhlasit"), ENT_COMPAT) ?>">Odhlásiť</a><li>
                     </ul>
                 </div>
             </div>

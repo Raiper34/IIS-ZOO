@@ -51,11 +51,19 @@ class TestPresenter extends BasePresenter
 
 		//Zamestnanec
 		$hodnotyZamestnancov = array();
-		$zamestnanci = $this->database->table('zamestnanec');
-		foreach($zamestnanci as $zamestnanec)
+		if($this->getUser()->roles[0] == 'riaditeľ')
 		{
-			$hodnotyZamestnancov[$zamestnanec->RodneCislo] = $zamestnanec->meno . " " . $zamestnanec->priezvisko;
+			$zamestnanci = $this->database->table('zamestnanec');
+			foreach($zamestnanci as $zamestnanec)
+			{
+				$hodnotyZamestnancov[$zamestnanec->RodneCislo] = $zamestnanec->meno . " " . $zamestnanec->priezvisko;
+			}
 		}
+		else
+		{
+			$hodnotyZamestnancov[$this->getUser()->id] = $this->getUser()->getIdentity()->data['meno'];
+		}
+
 		$form->addSelect('RodneCislo', '*Zamestnanec:', $hodnotyZamestnancov)->setRequired();
 
 		$form->addText('hmotnostZivocicha', 'Hmotnosť živočícha:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');

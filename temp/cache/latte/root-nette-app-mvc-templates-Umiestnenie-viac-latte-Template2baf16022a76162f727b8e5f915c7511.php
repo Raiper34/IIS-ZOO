@@ -12,29 +12,31 @@ list($_b, $_g, $_l) = $template->initialize('c3657ce9c5', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb3bf7c9700e_content')) { function _lb3bf7c9700e_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><div class="row">
-	<div class="col-md-1">
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
-		  Editovať
-		</button>
-		<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
-		      </div>
-		      <div class="modal-body">
+;if ($user->identity->roles[0] == 'riaditeľ') { ?>
+	<div class="row">
+		<div class="col-md-1">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
+			  Editovať
+			</button>
+			<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			      </div>
+			      <div class="modal-body">
 <?php if ($mod) { $_l->tmp = $_control->getComponent("editovatVybehForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;} else { $_l->tmp = $_control->getComponent("editovatKlietkuForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;} ?>
-		      </div>
-		    </div>
-		  </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-1">
+<?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 		</div>
 	</div>
-	<div class="col-md-1">
-<?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
-	</div>
-</div>
+<?php } ?>
 
 <h3>Základné informácie:</h3>
 <strong>Identifiačné číslo:</strong> <?php echo Latte\Runtime\Filters::escapeHtml($umiestnenie->IDUmiestnenia, ENT_NOQUOTES) ?> <br>
@@ -80,8 +82,10 @@ Umiestnenie je typu Vybeh <br>
 	<tr>
 		<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:viac", array($zamestnanec->RodneCislo)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->meno, ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></a></td>  
+ <?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></a></td>
+<?php if ($user->identity->roles[0] == 'riaditeľ' || $user->id == $zamestnanec->RodneCislo) { ?>
 		<td><?php $_l->tmp = $_control->getComponent("odstranitSpravujeButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
+<?php } ?>
 	</tr>
 <?php $iterations++; } ?>
 </table>

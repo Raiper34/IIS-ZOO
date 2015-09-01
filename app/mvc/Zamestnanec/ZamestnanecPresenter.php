@@ -79,7 +79,10 @@ class ZamestnanecPresenter extends BasePresenter
 		}
 		else if($this->getUser()->roles[0] != 'riaditeľ')
 		{
-			$this->redirect('Homepage:prava');
+			if($this->getUser()->id != $RodneCislo)
+			{
+				$this->redirect('Homepage:prava');
+			}
 		}
 		$this->template->zamestnanec = $this->database->table('zamestnanec')->get($RodneCislo);
 

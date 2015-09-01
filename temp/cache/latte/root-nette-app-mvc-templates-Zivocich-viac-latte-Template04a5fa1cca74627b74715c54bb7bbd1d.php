@@ -66,8 +66,10 @@ if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { func
 	<tr>
 		<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:viac", array($zamestnanec->RodneCislo)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->meno, ENT_NOQUOTES) ?>
- <?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></a></td>  
-		<td><?php $_l->tmp = $_control->getComponent("odstranitStaraSaButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
+ <?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></a></td>
+<?php if ($user->identity->roles[0] == 'riaditeľ' || $user->id == $zamestnanec->RodneCislo) { ?>
+			<td><?php $_l->tmp = $_control->getComponent("odstranitStaraSaButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
+<?php } ?>
 	</tr>
 <?php $iterations++; } ?>
 </table>

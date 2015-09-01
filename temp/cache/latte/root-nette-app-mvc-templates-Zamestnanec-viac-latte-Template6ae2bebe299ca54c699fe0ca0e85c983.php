@@ -12,29 +12,31 @@ list($_b, $_g, $_l) = $template->initialize('118ba062af', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb038e2b8113_content')) { function _lb038e2b8113_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><div class="row">
-	<div class="col-md-1">
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
-		  Editovať
-		</button>
-		<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
-		      </div>
-		      <div class="modal-body">
+;if ($user->identity->roles[0] == 'riaditeľ') { ?>
+	<div class="row">
+		<div class="col-md-1">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
+			  Editovať
+			</button>
+			<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			      </div>
+			      <div class="modal-body">
 <?php $_l->tmp = $_control->getComponent("editovatForm"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
-		      </div>
-		    </div>
-		  </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-1">
+<?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 		</div>
 	</div>
-	<div class="col-md-1">
-<?php $_l->tmp = $_control->getComponent("vymazatButton"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
-	</div>
-</div>
+<?php } ?>
 
 
 

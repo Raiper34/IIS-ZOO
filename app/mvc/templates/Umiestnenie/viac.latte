@@ -1,31 +1,33 @@
 {block content}
-<div class="row">
-	<div class="col-md-1">
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
-		  Editovať
-		</button>
-		<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
-		      </div>
-		      <div class="modal-body">
-		        {if $mod}
-				{control editovatVybehForm}
-				{else}
-				{control editovatKlietkuForm}
-				{/if}
-		      </div>
-		    </div>
-		  </div>
+{if $user->identity->roles[0] == 'riaditeľ'}
+	<div class="row">
+		<div class="col-md-1">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
+			  Editovať
+			</button>
+			<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			      </div>
+			      <div class="modal-body">
+			        {if $mod}
+					{control editovatVybehForm}
+					{else}
+					{control editovatKlietkuForm}
+					{/if}
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-1">
+			{control vymazatButton}
 		</div>
 	</div>
-	<div class="col-md-1">
-		{control vymazatButton}
-	</div>
-</div>
+{/if}
 
 <h3>Základné informácie:</h3>
 <strong>Identifiačné číslo:</strong> {$umiestnenie->IDUmiestnenia} <br>
@@ -68,8 +70,10 @@ Umiestnenie je typu Vybeh <br>
 	</tr>
 {foreach $zamestnanci as $zamestnanec}
 	<tr>
-		<td><a href="{link Zamestnanec:viac, $zamestnanec->RodneCislo}">{$zamestnanec->meno} {$zamestnanec->priezvisko}</a></td>  
+		<td><a href="{link Zamestnanec:viac, $zamestnanec->RodneCislo}">{$zamestnanec->meno} {$zamestnanec->priezvisko}</a></td>
+		{if $user->identity->roles[0] == 'riaditeľ' || $user->id == $zamestnanec->RodneCislo}
 		<td>{control odstranitSpravujeButton-$zamestnanec->RodneCislo}</td>
+		{/if}
 	</tr>
 {/foreach}
 </table>

@@ -37,11 +37,11 @@ class PrihlasenieForm extends Nette\Object
 	/*
 	 * Prihlasenie uzivatela po odoslani formularu
 	 */
-	public function prihlasenie(Form $form, $values)
+	public function prihlasenie(Form $form, $hodnoty)
 	{
 		$uzivatel = $form->getPresenter()->getUser();
-		$uzivatel->login($values->RodneCislo, $values->heslo);
+		$uzivatel->login($hodnoty->RodneCislo, $hodnoty->heslo);
 		$uzivatel->setExpiration('1 hour', FALSE);
-		$form->getPresenter()->redirect('Zamestnanec:vypis');
+		$form->getPresenter()->redirect('Umiestnenie:vypis');
 	}
 }
