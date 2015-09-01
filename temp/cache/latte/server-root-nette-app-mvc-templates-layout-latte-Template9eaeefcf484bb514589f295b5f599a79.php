@@ -104,7 +104,8 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
 
 <?php $iterations = 0; foreach ($flashes as $flash) { ?>    <div>
         <div class="container">
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>
                 <?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?>
