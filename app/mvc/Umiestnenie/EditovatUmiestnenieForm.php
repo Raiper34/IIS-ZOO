@@ -50,6 +50,7 @@ class EditovatUmiestnenieForm extends Nette\Object
 
 	public function uspesne(Form $form, $hodnoty)
 	{
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$zaznam = $this->database->table('umiestnenie')->get($this->Id);
 		$zaznam->update($hodnoty['umiestnenie']);
 		if($this->mod == 0) //typ klietka

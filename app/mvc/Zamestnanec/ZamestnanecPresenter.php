@@ -99,12 +99,15 @@ class ZamestnanecPresenter extends BasePresenter
 		$zaznam = $this->database->table('zamestnanec')->get($RodneCislo);
 		$zaznam = $zaznam->toArray();
 
-		//Prevod datumu z databaze na korespondujuci datum pre uzivatela
-		$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
-		$rok =  $datum['year'];
-		$mesiac = $datum['month'];
-		$den = $datum['day'];
-		$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
+		if($zaznam['datumNarodenia'] != null)
+		{
+			//Prevod datumu z databaze na korespondujuci datum pre uzivatela
+			$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
+			$rok =  $datum['year'];
+			$mesiac = $datum['month'];
+			$den = $datum['day'];
+			$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
+		}
 
 		$this["editovatForm"]->setDefaults($zaznam);
 		$this->tovarna->RodneCislo = $RodneCislo;

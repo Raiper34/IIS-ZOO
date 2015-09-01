@@ -61,6 +61,7 @@ class EditovatZivocichaForm extends Nette\Object
 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$zaznam = $this->database->table('zivocich')->get($this->Id);
 		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Zivocich:viac', $this->Id);

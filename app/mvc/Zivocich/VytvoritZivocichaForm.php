@@ -57,6 +57,7 @@ class VytvoritZivocichaForm extends Nette\Object
 	 */ 
 	public function uspesne(Form $form, $hodnoty)
 	{
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$this->database->table('zivocich')->insert($hodnoty);
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}

@@ -44,6 +44,7 @@ class EditovatZamestnancaForm extends Nette\Object
 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$zaznam = $this->database->table('zamestnanec')->get($this->RodneCislo);
 		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:viac', $this->RodneCislo);

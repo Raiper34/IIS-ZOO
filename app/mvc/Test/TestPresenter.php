@@ -78,6 +78,7 @@ class TestPresenter extends BasePresenter
 
 	public function uspesne(Form $form, $hodnoty)
 	{
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$this->database->table('testoval')->insert($hodnoty);
 		$this->redirect('Test:vypis');
 	}

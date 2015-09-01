@@ -50,6 +50,7 @@ class VytvoritUmiestnenieForm extends Nette\Object
  
 	public function uspesne(Form $form, $hodnoty)
 	{
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$zaznam = $this->database->table('umiestnenie')->insert($hodnoty['umiestnenie']);
 
 		if($this->mod == 0) //typ klietka

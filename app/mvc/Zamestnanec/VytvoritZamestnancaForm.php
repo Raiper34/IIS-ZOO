@@ -45,9 +45,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 	 */ 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		//dump($hodnoty);
-		//$hodnoty->datumNarodenia = $hodnoty->datumNarodenia + ' 00:00:00';
-		//$hodnoty->datumNarodenia = new \DateTime($hodnoty->datumNarodenia);
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$this->database->table('zamestnanec')->insert($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
