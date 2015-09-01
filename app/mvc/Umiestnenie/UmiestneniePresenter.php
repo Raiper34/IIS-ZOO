@@ -40,8 +40,8 @@ class UmiestneniePresenter extends BasePresenter
 	{
 		return new Multiplier(function ($Id)
 		{
-			$form = (new ViacButton($this->database, $Id, 'Umiestnenie:viac'))->vytvorit();
-			return $form;
+			$form = (new ViacButton($this->database, $Id, 'Umiestnenie:viac'));
+			return $form->vytvorit();
 		});
 	}
 
@@ -75,14 +75,14 @@ class UmiestneniePresenter extends BasePresenter
 
 	protected function createComponentVytvoritKliektuForm()
 	{
-		$form = (new VytvoritUmiestnenieForm($this->database, 0))->vytvorit();
-		return $form;
+		$form = (new VytvoritUmiestnenieForm($this->database, 0));
+		return $form->vytvorit();
 	}
 
 	protected function createComponentVytvoritVybehForm()
 	{
-		$form = (new VytvoritUmiestnenieForm($this->database, 1))->vytvorit();
-		return $form;
+		$form = (new VytvoritUmiestnenieForm($this->database, 1));
+		return $form->vytvorit();
 	}
 
 	/******************* Vypis volne *******************/

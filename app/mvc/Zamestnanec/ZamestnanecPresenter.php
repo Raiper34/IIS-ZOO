@@ -53,8 +53,8 @@ class ZamestnanecPresenter extends BasePresenter
 	 */
 	protected function createComponentVytvoritForm()
 	{
-		$form = (new VytvoritZamestnancaForm($this->database, $this))->vytvorit();
-		return $form;
+		$form = (new VytvoritZamestnancaForm($this->database, $this));
+		return $form->vytvorit();
 	}
 
 	/*
@@ -64,8 +64,8 @@ class ZamestnanecPresenter extends BasePresenter
 	{
 		return new Multiplier(function ($RodneCislo)
 		{
-			$form = (new ViacButton($this->database, $RodneCislo, 'Zamestnanec:viac'))->vytvorit();
-			return $form;
+			$form = (new ViacButton($this->database, $RodneCislo, 'Zamestnanec:viac'));
+			return $form->vytvorit();
 		});
 	}
 

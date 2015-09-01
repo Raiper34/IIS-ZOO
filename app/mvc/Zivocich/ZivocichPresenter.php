@@ -41,16 +41,16 @@ class ZivocichPresenter extends BasePresenter
 
 	protected function createComponentVytvoritForm()
 	{
-		$form = (new VytvoritZivocichaForm($this->database, $this))->vytvorit();
-		return $form;
+		$form = (new VytvoritZivocichaForm($this->database, $this));
+		return $form->vytvorit();
 	}
 
 	protected function createComponentViacButton()
 	{
 		return new Multiplier(function ($Id)
 		{
-			$form = (new ViacButton($this->database, $Id, 'Zivocich:viac'))->vytvorit();
-			return $form;
+			$form = (new ViacButton($this->database, $Id, 'Zivocich:viac'));
+			return $form->vytvorit();
 		});
 	}
 

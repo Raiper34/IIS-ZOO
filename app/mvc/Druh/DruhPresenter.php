@@ -40,16 +40,16 @@ class DruhPresenter extends BasePresenter
 
 	protected function createComponentVytvoritForm()
 	{
-		$form = (new VytvoritDruhForm($this->database))->vytvorit();
-		return $form;
+		$form = (new VytvoritDruhForm($this->database));
+		return $form->vytvorit();
 	}
 
 	protected function createComponentViacButton()
 	{
 		return new Multiplier(function ($Id)
 		{
-			$form = (new ViacButton($this->database, $Id, 'Druh:viac'))->vytvorit();
-			return $form;
+			$form = (new ViacButton($this->database, $Id, 'Druh:viac'));
+			return $form->vytvorit();
 		});
 	}
 

@@ -37,8 +37,8 @@ class HomepagePresenter extends BasePresenter
 	 */
 	protected function createComponentPrihlasenie()
 	{
-		$form = (new PrihlasenieForm($this->database))->vytvorit();
-		return $form;
+		$form = (new PrihlasenieForm($this->database));
+		return $form->vytvorit();
 	}
 
 	public function actionOdhlasit()
