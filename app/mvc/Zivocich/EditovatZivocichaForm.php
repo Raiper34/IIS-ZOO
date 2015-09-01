@@ -7,7 +7,8 @@ use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
 /*
- * Tovarenska classa na vytvaranie editacnych formularov
+ * Tovarna na formy editovat zivocicha
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class EditovatZivocichaForm extends Nette\Object
 {
@@ -19,9 +20,6 @@ class EditovatZivocichaForm extends Nette\Object
 		$this->database = $databaza;
 	}
 
-	/*
-	 * Vytvori form na editovanie
-	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -33,7 +31,7 @@ class EditovatZivocichaForm extends Nette\Object
 		$form->addText('celad', 'Čelaď:');
 		$form->addText('rod', 'Rod:');
 
-		//Druh zivocicha
+		//Ziskam vsetky druhy zivocicha aby som to mohol dat do pola a pouzivat na vyber v select boxe
 		$hodnotyDruhu = array();
 		$druhyZivocichov = $this->database->table('druhZivocicha');
 		foreach($druhyZivocichov as $druhZivocicha)
@@ -42,7 +40,7 @@ class EditovatZivocichaForm extends Nette\Object
 		}
 		$form->addSelect('IDDruhuZivocicha', '*Druh:', $hodnotyDruhu)->setRequired();
 
-		//Umiestnenia
+		//Ziskam vsetky umiestnenia aby som to mohol dat do pola a pouzivat na vyber v select boxe
 		$hodnotyUmiestnenia = array();
 		$umiestnenia = $this->database->table('umiestnenie');
 		foreach($umiestnenia as $umiestnenie)
@@ -56,12 +54,9 @@ class EditovatZivocichaForm extends Nette\Object
 		return $form;
 	}
 
-	/*
-	 * Po odoslani formulara sa edituje uzivatel s novymi hodnotami
-	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //kvoli db lebo tam chcem null a nie prazdnyretazec
 		$zaznam = $this->database->table('zivocich')->get($this->Id);
 		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Zivocich:viac', $this->Id);

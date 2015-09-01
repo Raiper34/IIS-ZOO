@@ -1,4 +1,5 @@
 {block content}
+
 {if $user->identity->roles[0] == 'riaditeľ'}
 	<div class="row">
 		<div class="col-md-1">
@@ -10,7 +11,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			        <h4 class="modal-title" id="myModalLabel">Editovať</h4>
 			      </div>
 			      <div class="modal-body">
 			        {control editovatForm}
@@ -55,14 +56,14 @@
 </table>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
-	Pridať
+	Priradiť umiestnenie
 </button>
 <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			    <h4 class="modal-title" id="myModalLabel">Priradiť umiestnenie</h4>
 			</div>
 			     <div class="modal-body">
 			        {control pridatSpravuje}
@@ -88,14 +89,14 @@
 </table>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
-	Pridať
+	Priradiť živočícha
 </button>
 <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    <h4 class="modal-title" id="myModalLabel">Eitovať</h4>
+			    <h4 class="modal-title" id="myModalLabel">Priradiť živočícha</h4>
 			</div>
 			     <div class="modal-body">
 			        {control pridatStaraSa}
@@ -121,4 +122,5 @@
 {/foreach}
 </table>
 <a href="{link Test:vypis}" class="btn btn-primary">Pridať test</a>
+
 {/block}

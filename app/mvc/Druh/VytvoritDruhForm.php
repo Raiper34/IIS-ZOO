@@ -6,7 +6,10 @@ use Nette;
 use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
-
+/*
+ * Tovarna Vytvorit form, na vytvaranie druhu zivocicha
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
+ */
 class VytvoritDruhForm extends Nette\Object
 {
 	private $database;

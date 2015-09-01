@@ -7,7 +7,8 @@ use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
 /*
- * Tovarenska classa na vytvaranie editacnych formularov
+ * Tovarna na formy editovat zamestnanca
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class EditovatZamestnancaForm extends Nette\Object
 {
@@ -19,9 +20,6 @@ class EditovatZamestnancaForm extends Nette\Object
 		$this->database = $databaza;
 	}
 
-	/*
-	 * Vytvori form na editovanie
-	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -39,12 +37,9 @@ class EditovatZamestnancaForm extends Nette\Object
 		return $form;
 	}
 
-	/*
-	 * Po odoslani formulara sa edituje uzivatel s novymi hodnotami
-	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; // zmenim prazdne stringy na nully, kvoli db
 		$zaznam = $this->database->table('zamestnanec')->get($this->RodneCislo);
 		$zaznam->update($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:viac', $this->RodneCislo);

@@ -6,7 +6,8 @@ use Nette;
 use Nette\Application\UI\Form;
 
 /*
- * Tovarenska metoda na tlacidla na viac informacii
+ * Tovarenska metoda na tlacidla viac, ktore iba redirectuju na danu stranku polozky s viac informaciami
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class ViacButton extends Nette\Object
 {
@@ -17,13 +18,10 @@ class ViacButton extends Nette\Object
 	public function __construct(Nette\Database\Context $databaza, $Id, $stranka)
 	{
 		$this->database = $databaza;
-		$this->Id = $Id;
-		$this->stranka = $stranka;
+		$this->Id = $Id; //id polozky
+		$this->stranka = $stranka; //druh/zivocich/zamestnanec....
 	}
 
-	/*
-	 * Vytvori tlacitko
-	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -33,9 +31,6 @@ class ViacButton extends Nette\Object
 		return $form;
 	}
 
-	/*
-	 * Po kliknuti sa presmerujeme na stranku s viac info
-	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$form->getPresenter()->redirect($this->stranka, $this->Id);

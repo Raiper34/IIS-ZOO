@@ -7,7 +7,8 @@ use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
 /*
- * Tovarenska metoda formu na pridavanie uzivatelov
+ * Tovarna na formy vytvorit zamestnanca
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class VytvoritZamestnancaForm extends Nette\Object
 {
@@ -18,9 +19,6 @@ class VytvoritZamestnancaForm extends Nette\Object
 		$this->database = $databaza;
 	}
 
-	/*
-	 * Vytvori form a vrati ho
-	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -40,12 +38,9 @@ class VytvoritZamestnancaForm extends Nette\Object
 		return $form;
 	}
 
-	/*
-	 * Po uspesnom vytvoreni formulara sa uzivatel vytvori
-	 */ 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //menim prazdne stringy na nully kvoli db 
 		$this->database->table('zamestnanec')->insert($hodnoty);
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}

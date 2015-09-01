@@ -7,7 +7,8 @@ use Nette\Application\UI\Form;
 use App\Forms\PrihlasenieForm;
 
 /*
- * Hlavna stranka, zobrazuje iba prihlasenie
+ * Presenter na prihlasenie, prihlasovaci form, odhlasenie...
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class HomepagePresenter extends BasePresenter
 {
@@ -26,15 +27,12 @@ class HomepagePresenter extends BasePresenter
 	public function renderPrihlasenie()
 	{
 		$uzivatel = $this->getUser();
-		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny hed redirectujem
+		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny hned redirectujem
 		{
 			$this->redirect('Umiestnenie:vypis');
 		}
 	}
 
-	/*
-	 * Vytvorenie prihlasovacieho formu
-	 */
 	protected function createComponentPrihlasenie()
 	{
 		$form = (new PrihlasenieForm($this->database));
@@ -44,7 +42,7 @@ class HomepagePresenter extends BasePresenter
 	public function actionOdhlasit()
 	{
 		$uzivatel = $this->getUser();
-		if($uzivatel->isLoggedIn())
+		if($uzivatel->isLoggedIn()) //ak je uzivatel prihlaseny, tak ho odhlasim
 		{
 			$uzivatel->logout();
 		}

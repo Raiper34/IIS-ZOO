@@ -1,13 +1,14 @@
 {block content}
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
-  Pridať
+  Pridať test
 </button>
 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Pridať</h4>
+        <h4 class="modal-title" id="myModalLabel">Pridať test</h4>
       </div>
       <div class="modal-body">
         {control vytvoritForm}
@@ -16,8 +17,14 @@
   </div>
 </div>
 
+
+
+
+
+
 <table class="table table-bordered table-hover">
     <tr>
+        <th>Identifikačné číslo</th>
         <th>Testovaný živočích</th>
         <th>Testujúci zamestnanec</th>
         <th>Hmotnosť živočícha</th>
@@ -26,6 +33,7 @@
     </tr>
 {foreach $testy as $test}
     <tr>
+        <td>{$test->IDTestu}</td>
         <td><a href="{link Zivocich:viac, $test->IDZivocicha}">{$test->menoZivocicha}</a></td>
         <td><a href="{link Zamestnanec:viac, $test->RodneCislo}">{$test->menoZamestnanca} {$test->priezvisko}</a></td>
         <td>{$test->hmotnostZivocicha}</td>
@@ -34,4 +42,5 @@
     <tr>
 {/foreach}
 </table>
+
 {/block}

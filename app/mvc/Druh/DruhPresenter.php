@@ -10,13 +10,14 @@ use App\Forms\VytvoritDruhForm;
 use App\Forms\EditovatDruhForm;
 
 /*
- * Stranky s druhmi zvierat a prislusnych akciami
+ * Presenter Druh zivocicha
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class DruhPresenter extends BasePresenter
 {
 	private $database;
-	public $Id;
-	private $tovarna;
+	public $Id; //id druhu
+	private $tovarna; //tovarna na formy aby som mohol predat parametre
 
 	public function __construct(Nette\Database\Context $databaza)
 	{
@@ -28,14 +29,14 @@ class DruhPresenter extends BasePresenter
 		$this->redirect('Druh:vypis');
 	}
 
-	/******************* Vypis ***********************/
+	/******************* Vypis sablona ***********************/
 	public function renderVypis()
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //ak uzivatel neni prihlaseny tak ho presmerujem
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
-		$this->template->druhy = $this->database->table('druhZivocicha');
+		$this->template->druhy = $this->database->table('druhZivocicha'); //naplnim sablnu
 	}
 
 	protected function createComponentVytvoritForm()
@@ -53,13 +54,14 @@ class DruhPresenter extends BasePresenter
 		});
 	}
 
-	/******************* Viac ************************/
+	/******************* Viac sablona ************************/
 	public function renderViac($Id)
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //ak uzivatel neni prihlaseny tak presmerujem
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
+		//naplnim sablonu
 		$this->template->druh = $this->database->table('druhZivocicha')->get($Id);
 		$this->template->zivocichy = $this->database->table('zivocich')->where('IDDruhuZivocicha', $Id);
 	}
@@ -67,10 +69,10 @@ class DruhPresenter extends BasePresenter
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
-		$zaznam = $this->database->table('druhZivocicha')->get($Id);
+		$zaznam = $this->database->table('druhZivocicha')->get($Id); //vytiahnem si z db data ktore pouzijem na default hodnoty
 		$zaznam = $zaznam->toArray();
 
-		$this["editovatForm"]->setDefaults($zaznam);
+		$this["editovatForm"]->setDefaults($zaznam); //naplnim editacny form datami z databaze
 		$this->tovarna->Id = $Id;
 	}
 	protected function createComponentEditovatButton()
@@ -98,12 +100,12 @@ class DruhPresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
-		if($this->database->table('zivocich')->where('IDDruhuZivocicha', $this->Id)->count() == 0)
+		if($this->database->table('zivocich')->where('IDDruhuZivocicha', $this->Id)->count() == 0) //mozem mazat iba ak neexistuje zivocich priradeny k tomuto druhu
 		{
 			$this->database->table('druhZivocicha')->where('IDDruhuZivocicha', $this->Id)->delete();
 			$form->getPresenter()->redirect('Druh:vypis');
 		}
-		else
+		else //existuje taky zivocich tak iba ukazem hlasku
 		{
 			$form->getPresenter()->flashMessage('Ak chcete vymazať tento druh živočícha, zmente druhy živočíchom, ktorý majú nastavený tento druh!');
 		}

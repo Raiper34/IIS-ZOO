@@ -32,7 +32,7 @@ class ZivocichPresenter extends BasePresenter
 	/************************************ Vypis ****************************************/
 	public function renderVypis()
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
@@ -58,7 +58,7 @@ class ZivocichPresenter extends BasePresenter
 
 	public function renderViac($Id)
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
@@ -85,7 +85,7 @@ class ZivocichPresenter extends BasePresenter
 			$den = $datum['day'];
 			$zaznam['datumNarodenia'] = $rok . '-' . $mesiac . '-' . $den;
 		}
-
+		//Prevod datumu z databaze na korespondujuci datum pre uzivatela
 		if($zaznam['datumUmrtia'] != null)
 		{
 			$datum = date_parse($zaznam['datumUmrtia']); //iba roky mesiace a dni
@@ -98,6 +98,7 @@ class ZivocichPresenter extends BasePresenter
 		$this["editovatForm"]->setDefaults($zaznam);
 		$this->tovarna->Id = $Id;
 	}
+
 	protected function createComponentEditovatButton()
 	{
 		$form = new Form;
@@ -123,6 +124,7 @@ class ZivocichPresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
+		//vymazem aj ostatne zaznamy daneho zivociha v inch tabulkach
 		$this->database->table('staraSa')->where('IDZivocicha', $this->Id)->delete();
 		$this->database->table('testoval')->where('IDZivocicha', $this->Id)->delete();
 		$this->database->table('zivocich')->where('IDZivocicha', $this->Id)->delete();
@@ -141,15 +143,15 @@ class ZivocichPresenter extends BasePresenter
 		$form = new Form;
 
 		$hodnoty = array();
-		if($this->getUser()->roles[0] == 'riaditeľ')
+		if($this->getUser()->roles[0] == 'riaditeľ') //prihlaseny je riaditel moze pridavat vsektych zamestnancov 
 		{
-			$prvky = $this->database->table('zamestnanec');
+			$prvky = $this->database->table('zamestnanec'); //kovli select boxu si ziskam vsetkych existujucich zamestnancovv db
 			foreach($prvky as $prvok)
 			{
 				$hodnoty[$prvok->RodneCislo] = $prvok->meno . ' ' .$prvok->priezvisko;
 			}
 		}
-		else
+		else //prihlaseny je zamestanec moze pridavat iba sam seba
 		{
 			$hodnoty[$this->getUser()->id] = $this->getUser()->getIdentity()->data['meno'];
 		}
@@ -165,7 +167,7 @@ class ZivocichPresenter extends BasePresenter
 	public function uspesneStaraSa(Form $form, $hodnoty)
 	{
 		$hodnoty->IDZivocicha = $this->Id;
-		if($this->database->table('staraSa')->where('RodneCislo', $hodnoty->RodneCislo)->where('IDZivocicha', $this->Id)->count() == 0)
+		if($this->database->table('staraSa')->where('RodneCislo', $hodnoty->RodneCislo)->where('IDZivocicha', $this->Id)->count() == 0) //ak tam v db tabulke taky zanznam este neni tak mozem pridat
 		{
 			$this->database->table('staraSa')->insert($hodnoty);
 		}

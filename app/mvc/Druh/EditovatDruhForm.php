@@ -6,10 +6,14 @@ use Nette;
 use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
+/*
+ * Tovarna Editacny form, na editaciu druhu zivocicha
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
+ */
 class EditovatDruhForm extends Nette\Object
 {
 	private $database;
-	public $Id;
+	public $Id; //id druhu
 
 	public function __construct(Nette\Database\Context $databaza)
 	{

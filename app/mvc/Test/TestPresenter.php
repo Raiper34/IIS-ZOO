@@ -6,11 +6,14 @@ use Nette;
 use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
+/*
+ * Test presenter, na vypis testov, pridavanie...
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
+ */
 class TestPresenter extends BasePresenter
 {
 	private $database;
 	public $Id;
-	private $tovarna;
 
 	public function __construct(Nette\Database\Context $databaza)
 	{
@@ -25,14 +28,15 @@ class TestPresenter extends BasePresenter
 	/******************* Vypis ***********************/
 	public function renderVypis()
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny presmerujem
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
+		//Vytiahnem si z databaze test aj s vsetkymi menami, preto joinujem 3 tabulky
 		$this->template->testy = $this->database->query(
-			'SELECT T.RodneCislo, T.IDZivocicha, Zi.meno as menoZivocicha, Za.meno as menoZamestnanca, Za.priezvisko, T.hmotnostZivocicha, T.rozmerZivocicha, T.datumTestu 
+			'SELECT T.IDTestu, T.RodneCislo, T.IDZivocicha, Zi.meno as menoZivocicha, Za.meno as menoZamestnanca, Za.priezvisko, T.hmotnostZivocicha, T.rozmerZivocicha, T.datumTestu 
 			FROM testoval T, zamestnanec Za, zivocich Zi 
-			WHERE T.RodneCislo = Za.RodneCislo and T.IDZivocicha = Zi.IDZivocicha'
+			WHERE T.RodneCislo = Za.RodneCislo and T.IDZivocicha = Zi.IDZivocicha;'
 		);
 	}
 
@@ -42,8 +46,8 @@ class TestPresenter extends BasePresenter
 
 		//Zivocich
 		$hodnotyZivocich = array();
-		$zivocichy = $this->database->table('zivocich');
-		foreach($zivocichy as $zivocich)
+		$zivocichy = $this->database->table('zivocich'); //ziskam si vsetkych zivocichov
+		foreach($zivocichy as $zivocich) //a pridam ich do pola aby mohli byt v select boxe
 		{
 			$hodnotyZivocich[$zivocich->IDZivocicha] = $zivocich->meno;
 		}
@@ -51,15 +55,15 @@ class TestPresenter extends BasePresenter
 
 		//Zamestnanec
 		$hodnotyZamestnancov = array();
-		if($this->getUser()->roles[0] == 'riaditeľ')
+		if($this->getUser()->roles[0] == 'riaditeľ') //ak som riaditel tak mozem pridavat za kazdeho
 		{
-			$zamestnanci = $this->database->table('zamestnanec');
+			$zamestnanci = $this->database->table('zamestnanec'); //ziskam si vsetkych zamestnancov
 			foreach($zamestnanci as $zamestnanec)
 			{
 				$hodnotyZamestnancov[$zamestnanec->RodneCislo] = $zamestnanec->meno . " " . $zamestnanec->priezvisko;
 			}
 		}
-		else
+		else //neni som riaditel, mozem testovat iba pod svojim menom
 		{
 			$hodnotyZamestnancov[$this->getUser()->id] = $this->getUser()->getIdentity()->data['meno'];
 		}
@@ -78,7 +82,7 @@ class TestPresenter extends BasePresenter
 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //prazdne polia budu nully a nie praznde stringy ukladane do db
 		$this->database->table('testoval')->insert($hodnoty);
 		$this->redirect('Test:vypis');
 	}

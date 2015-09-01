@@ -10,11 +10,15 @@ use App\Forms\VytvoritUmiestnenieForm;
 use App\Forms\EditovatUmiestnenieForm;
 use Test\Bs3FormRenderer;
 
+/*
+ * Presenter na vypis umiestneni, pridanie, editovanie...
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
+ */
 class UmiestneniePresenter extends BasePresenter
 {
 	private $database;
 	public $Id;
-	private $tovarna;
+	private $tovarna; //aby som mohol naplnit form default hodnotami
 
 	public function __construct(Nette\Database\Context $databaza)
 	{
@@ -29,7 +33,7 @@ class UmiestneniePresenter extends BasePresenter
 	/******************* Vypis ***********************/
 	public function renderVypis()
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
@@ -89,7 +93,7 @@ class UmiestneniePresenter extends BasePresenter
 
 	public function renderVypisVolne()
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
@@ -99,7 +103,7 @@ class UmiestneniePresenter extends BasePresenter
 	/******************* Viac ************************/
 	public function renderViac($Id)
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
@@ -115,27 +119,27 @@ class UmiestneniePresenter extends BasePresenter
 	{
 		$this->Id = $Id;
 
-		if($this->database->table('klietka')->get($this->Id))
+		if($this->database->table('klietka')->get($this->Id)) //ak je umiestnenie typu klietka, nasiel som zaznam v db v tabulke klietka tk nastavim mod na 0
 		{
 			$mod = 0;
 		}
-		else
+		else //inak je typu vybeh mod je 1
 		{
 			$mod = 1;
 		}
 
-		$this->template->mod = $mod;
+		$this->template->mod = $mod; //predam mod aby som sa vedel aj v sablone podla toho riadit a zostavovat
 		$zaznam = $this->database->table('umiestnenie')->get($Id);
 		$zaznam = $zaznam->toArray();
 
-		if($mod == 0)
+		if($mod == 0) //pridavam form kliektu a naplnam
 		{
 			$this["editovatKlietkuForm"]->components['umiestnenie']->setDefaults($zaznam);
 			$zaznam = $this->database->table('klietka')->get($Id);
 			$zaznam = $zaznam->toArray();
 			$this["editovatKlietkuForm"]->components['klietka']->setDefaults($zaznam);
 		}
-		else
+		else //pridavam form vybehu a naplnam dafaulnymi z db
 		{
 			$this["editovatVybehForm"]->components['umiestnenie']->setDefaults($zaznam);
 			$zaznam = $this->database->table('vybeh')->get($Id);
@@ -157,7 +161,7 @@ class UmiestneniePresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
-		if($this->database->table('zivocich')->where('IDUmiestnenia', $this->Id)->count() == 0)
+		if($this->database->table('zivocich')->where('IDUmiestnenia', $this->Id)->count() == 0) //umiestnenie mozem vymazt iba ak neobsahuje ziadnych zivocichov
 		{
 			$this->database->table('klietka')->where('IDUmiestnenia', $this->Id)->delete();
 			$this->database->table('vybeh')->where('IDUmiestnenia', $this->Id)->delete();
@@ -165,7 +169,7 @@ class UmiestneniePresenter extends BasePresenter
 			$this->database->table('umiestnenie')->where('IDUmiestnenia', $this->Id)->delete();
 			$form->getPresenter()->redirect('Umiestnenie:vypis');
 		}
-		else
+		else //obshauje zivocichov, tak zobrazim spravu
 		{
 			$form->getPresenter()->flashMessage('Ak chcete odstrániť toto umiestnenie, najprv premiestnite všetky živočíchy z tohoto umiestnenia!');
 		}
@@ -190,15 +194,15 @@ class UmiestneniePresenter extends BasePresenter
 		$form = new Form;
 
 		$hodnoty = array();
-		if($this->getUser()->roles[0] == 'riaditeľ')
+		if($this->getUser()->roles[0] == 'riaditeľ') //ak som riaditel mozem pridavat vsetkych zamestnancov na spravovanie
 		{
-			$prvky = $this->database->table('zamestnanec');
+			$prvky = $this->database->table('zamestnanec'); //ziskam si zamestnancov a napnam pole pre pouzitie v select boxe, aby som mohol z nich vyberat
 			foreach($prvky as $prvok)
 			{
 				$hodnoty[$prvok->RodneCislo] = $prvok->meno . ' ' . $prvok->priezvisko;
 			}
 		}
-		else
+		else //ak som iba zamestnanec, tak mozem pridavat iba sebe umiestnenia na spravovanie
 		{
 			$hodnoty[$this->getUser()->id] = $this->getUser()->getIdentity()->data['meno'];
 		}
@@ -215,7 +219,7 @@ class UmiestneniePresenter extends BasePresenter
 	public function uspesneSpravuje(Form $form, $hodnoty)
 	{
 		$hodnoty->IDUmiestnenia = $this->Id;
-		if($this->database->table('spravuje')->where('RodneCislo', $hodnoty->RodneCislo)->where('IDUmiestnenia', $this->Id)->count() == 0)
+		if($this->database->table('spravuje')->where('RodneCislo', $hodnoty->RodneCislo)->where('IDUmiestnenia', $this->Id)->count() == 0) //este sa taky zaznam v db nenachadza tak vlozim
 		{
 			$this->database->table('spravuje')->insert($hodnoty);
 		}

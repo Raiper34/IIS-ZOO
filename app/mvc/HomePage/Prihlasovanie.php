@@ -6,7 +6,8 @@ use Nette;
 use Nette\Security;
 
 /*
- * Prihlasovanie uzivatela
+ * Authenticator na prihlasenie uzivatela
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticator
 {
@@ -22,7 +23,7 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
         $RodneCislo = $pouzivatel[0];
         $heslo = $pouzivatel[1];
         $zaznam = $this->database->table('zamestnanec')->where('RodneCislo', $RodneCislo)->fetch();
-        if ($zaznam == null) //overenie ci taky uzivatel vobec je v 
+        if ($zaznam == null) //overenie ci taky uzivatel vobec je v db
         {
             throw new Nette\Security\AuthenticationException('Používateľ sa nenašiel!');
         }

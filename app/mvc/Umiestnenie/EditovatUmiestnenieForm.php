@@ -6,10 +6,14 @@ use Nette;
 use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
+/*
+ * Tovarna na editacne formy umiestnenia
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
+ */
 class EditovatUmiestnenieForm extends Nette\Object
 {
 	private $database;
-	private $mod;
+	private $mod; //0 je klietka 1 je vybeh, aby som vedel co editujem
 	public $Id;
 
 	public function __construct(Nette\Database\Context $databaza, $mod)
@@ -27,14 +31,14 @@ class EditovatUmiestnenieForm extends Nette\Object
 		$umiestnenie->addText('dlzka', 'Dĺžka:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
 		$umiestnenie->addText('vyska', 'Výška:')->addCondition(Form::FILLED)->addRule(Form::FLOAT, 'Pole musi obsahovať iba čísla!');
 
-		if($this->mod == 0) //typ klietka
+		if($this->mod == 0) //editujem typ klietka do formu davam klietkove polozky
 		{
 			$klietka = $form->addContainer('klietka');
 			$klietka->addText('typ', 'Typ:');
 			$klietka->addText('podstielka', 'Podstielka:');
 			$klietka->addText('lokacia', 'Lokácia:');
 		}
-		else //typ vybeh
+		else // editujem typ vybeh
 		{
 			$vybeh = $form->addContainer('vybeh');
 			$vybeh->addText('teren', 'Terén:');
@@ -50,15 +54,15 @@ class EditovatUmiestnenieForm extends Nette\Object
 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //premena prazdnch retazcov na null kvoli db
 		$zaznam = $this->database->table('umiestnenie')->get($this->Id);
 		$zaznam->update($hodnoty['umiestnenie']);
-		if($this->mod == 0) //typ klietka
+		if($this->mod == 0) //vkladam typ klietka
 		{
 			$zaznam = $this->database->table('klietka')->get($this->Id);
 			$zaznam->update($hodnoty['klietka']);
 		}
-		else
+		else //vkladam typ vybeh
 		{
 			$zaznam = $this->database->table('vybeh')->get($this->Id);
 			$zaznam->update($hodnoty['vybeh']);

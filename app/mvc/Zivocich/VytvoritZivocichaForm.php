@@ -6,7 +6,10 @@ use Nette;
 use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
-
+/*
+ * Tovarna na formy vytvorit zivocicha
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
+ */
 class VytvoritZivocichaForm extends Nette\Object
 {
 	private $database;
@@ -27,7 +30,7 @@ class VytvoritZivocichaForm extends Nette\Object
 		$form->addText('celad', 'Čelaď:');
 		$form->addText('rod', 'Rod:');
 
-		//Druh zivocicha
+		//Ziskam vsetky druhy zivocicha aby som to mohol dat do pola a pouzivat na vyber v select boxe
 		$hodnotyDruhu = array();
 		$druhyZivocichov = $this->database->table('druhZivocicha');
 		foreach($druhyZivocichov as $druhZivocicha)
@@ -36,7 +39,7 @@ class VytvoritZivocichaForm extends Nette\Object
 		}
 		$form->addSelect('IDDruhuZivocicha', '*Druh:', $hodnotyDruhu)->setRequired();
 
-		//Umiestnenia
+		//Ziskam vsetky umiestnenia aby som to mohol dat do pola a pouzivat na vyber v select boxe
 		$hodnotyUmiestnenia = array();
 		$umiestnenia = $this->database->table('umiestnenie');
 		foreach($umiestnenia as $umiestnenie)
@@ -51,13 +54,10 @@ class VytvoritZivocichaForm extends Nette\Object
 		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
-
-	/*
-	 * Po uspesnom vytvoreni formulara sa uzivatel vytvori
-	 */ 
+ 
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //kvoli db chcem tam mat null a nie prazdny string
 		$this->database->table('zivocich')->insert($hodnoty);
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}

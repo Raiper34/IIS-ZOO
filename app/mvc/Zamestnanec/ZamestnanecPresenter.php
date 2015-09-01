@@ -13,7 +13,8 @@ use App\Forms\EditovatZamestnancaForm;
 use Test\Bs3FormRenderer;
 
 /*
- * Stranky s uzivatelmi a prislusnych akciami
+ * Presenter zamestnane, vypis zamestnancov editacia...
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class ZamestnanecPresenter extends BasePresenter
 {
@@ -32,34 +33,25 @@ class ZamestnanecPresenter extends BasePresenter
 	}
 
 	/************************************ Vypis ****************************************/
-	/*
-	 * Stranka s vypisom uzivatelov a formom na pridavanie uzivatelov
-	 */
 	public function renderVypis()
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny 
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
-		else if($this->getUser()->roles[0] != 'riaditeľ')
+		else if($this->getUser()->roles[0] != 'riaditeľ') //uzivatel je prihlaseny ale je to zamestnanec a ten nema prava
 		{
 			$this->redirect('Homepage:prava');
 		}
 		$this->template->zamestnanci = $this->database->table('zamestnanec');
 	}
 
-	/*
-	 * Vytvorenie formu na vytvorenie uzaivatela
-	 */
 	protected function createComponentVytvoritForm()
 	{
 		$form = (new VytvoritZamestnancaForm($this->database, $this));
 		return $form->vytvorit();
 	}
 
-	/*
-	 * Vytvorenie buttonu na eitovanie uzivatela
-	 */
 	protected function createComponentViacButton()
 	{
 		return new Multiplier(function ($RodneCislo)
@@ -73,13 +65,13 @@ class ZamestnanecPresenter extends BasePresenter
 
 	public function renderViac($RodneCislo)
 	{
-		if(!$this->getUser()->isLoggedIn())
+		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
 		{
 			$this->redirect('Homepage:prihlasenie');
 		}
-		else if($this->getUser()->roles[0] != 'riaditeľ')
+		else if($this->getUser()->roles[0] != 'riaditeľ') //prihlaseny je zamestnanec
 		{
-			if($this->getUser()->id != $RodneCislo)
+			if($this->getUser()->id != $RodneCislo) //zamestnanec moze prezerat iba svoj profil, teda ak je to iny profil nema prava
 			{
 				$this->redirect('Homepage:prava');
 			}
@@ -99,7 +91,7 @@ class ZamestnanecPresenter extends BasePresenter
 		$zaznam = $this->database->table('zamestnanec')->get($RodneCislo);
 		$zaznam = $zaznam->toArray();
 
-		if($zaznam['datumNarodenia'] != null)
+		if($zaznam['datumNarodenia'] != null) //datum je v db zadany
 		{
 			//Prevod datumu z databaze na korespondujuci datum pre uzivatela
 			$datum = date_parse($zaznam['datumNarodenia']); //iba roky mesiace a dni
@@ -154,7 +146,7 @@ class ZamestnanecPresenter extends BasePresenter
 		$form = new Form;
 
 		$hodnoty = array();
-		$prvky = $this->database->table('zivocich');
+		$prvky = $this->database->table('zivocich'); //najdem vsetkych zivocichov a pridam ich do pola by som ich potom mohol vyberat v select boxe
 		foreach($prvky as $prvok)
 		{
 			$hodnoty[$prvok->IDZivocicha] = $prvok->meno;
@@ -171,7 +163,7 @@ class ZamestnanecPresenter extends BasePresenter
 	public function uspesneStaraSa(Form $form, $hodnoty)
 	{
 		$hodnoty->RodneCislo = $this->RodneCislo;
-		if($this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->where('IDZivocicha', $hodnoty->IDZivocicha)->count() == 0)
+		if($this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->where('IDZivocicha', $hodnoty->IDZivocicha)->count() == 0) //taky zanzma este neexistuje tak ho mozem pridat
 		{
 			$this->database->table('staraSa')->insert($hodnoty);
 		}
@@ -183,6 +175,7 @@ class ZamestnanecPresenter extends BasePresenter
 		$form = new Form;
 
 		$hodnoty = array();
+		//najdem vsetky umiestnenia a pridam ich do pola by som ich potom mohol vyberat v select boxe
 		$prvky = $this->database->table('umiestnenie');
 		foreach($prvky as $prvok)
 		{
@@ -200,7 +193,7 @@ class ZamestnanecPresenter extends BasePresenter
 	public function uspesneSpravuje(Form $form, $hodnoty)
 	{
 		$hodnoty->RodneCislo = $this->RodneCislo;
-		if($this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->where('IDUmiestnenia', $hodnoty->IDUmiestnenia)->count() == 0)
+		if($this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->where('IDUmiestnenia', $hodnoty->IDUmiestnenia)->count() == 0) //zamznam este neexistuje tak ho mozem pridat
 		{
 			$this->database->table('spravuje')->insert($hodnoty);
 		}
@@ -218,6 +211,7 @@ class ZamestnanecPresenter extends BasePresenter
 
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
+		//musim vymazat aj vsetky dalsie zaznamy v inych tabulkach daneho zamestnanca
 		$this->database->table('testoval')->where('RodneCislo', $this->RodneCislo)->delete();
 		$this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->delete();
 		$this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->delete();

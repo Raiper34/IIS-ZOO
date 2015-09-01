@@ -7,21 +7,18 @@ use Nette\Application\UI\Form;
 use Test\Bs3FormRenderer;
 
 /*
- * Tovarna na prihlasovacie formy
+ * Tovarna prihlasenie form
+ * Autor: Filip Gulán xgulan00@stud.fit.vutbr.cz
  */
 class PrihlasenieForm extends Nette\Object
 {
 	private $databaza;
-	private $presenter;
 
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->databaza = $databaza;
 	}
 
-	/*
-	 * Vytvori form na prihlasenie
-	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -29,15 +26,12 @@ class PrihlasenieForm extends Nette\Object
 		$form->addPassword('heslo', 'Heslo:')->setRequired();
 		$form->addSubmit('prihlasit', 'Prihlásiť');
 
-		$form->onSuccess[] = array($this, 'prihlasenie');
+		$form->onSuccess[] = array($this, 'uspesne');
 		$form->setRenderer(new Bs3FormRenderer);
 		return $form;
 	}
 
-	/*
-	 * Prihlasenie uzivatela po odoslani formularu
-	 */
-	public function prihlasenie(Form $form, $hodnoty)
+	public function uspesne(Form $form, $hodnoty)
 	{
 		$uzivatel = $form->getPresenter()->getUser();
 		$uzivatel->login($hodnoty->RodneCislo, $hodnoty->heslo);
