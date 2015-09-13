@@ -65,3 +65,13 @@ form .error {
 {
     color: gray !important;   
 }
+
+#mydropdown li a
+{
+    color: black !important;
+}
+
+#mydropdown li a:hover
+{
+    color: darkgray !important;   
+}

@@ -34,8 +34,15 @@ class PrihlasenieForm extends Nette\Object
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$uzivatel = $form->getPresenter()->getUser();
-		$uzivatel->login($hodnoty->RodneCislo, $hodnoty->heslo);
-		$uzivatel->setExpiration('1 hour', FALSE);
-		$form->getPresenter()->redirect('Umiestnenie:vypis');
+		if($uzivatel->login($hodnoty->RodneCislo, $hodnoty->heslo) == null) //neexistujuci uzivatel alebo zle heslo
+		{
+			//$form->getPresenter()->flashMessage('Zlá kombinácia rodného čísla a hesla!');
+			$form->getPresenter()->redirect('Homepage:prihlasenie');
+		}
+		else //uspesne prihlasenie
+		{
+			$uzivatel->setExpiration('1 hour', FALSE);
+			$form->getPresenter()->redirect('Umiestnenie:vypis');
+		}
 	}
 }

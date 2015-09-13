@@ -141,8 +141,8 @@ ALTER TABLE vybeh ADD FOREIGN KEY(IDUmiestnenia) REFERENCES umiestnenie(IDUmiest
 -- ----- vkladanie do tabuliek ---------
 -- -------------------------------------
 
-INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('0', 'heslo', 'Filip', 'Gulán', 'Bc', '1993-12-15', 'Bzince pod Javorinou 1556, 916 11', 'riaditeľ', 'SK6508000000192000145399');
-INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('1', 'heslo', 'Eduard', 'Rybár', null, '1994-1-10', 'Bzince pod Javorinou Hrušové 100, 916 18', 'zamestnanec', 'CZ6508008894505');
+INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('1', 'heslo', 'Filip', 'Gulán', 'Bc', '1993-12-15', 'Bzince pod Javorinou 1556, 916 11', 'riaditeľ', 'SK6508000000192000145399');
+INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('2', 'heslo', 'Eduard', 'Rybár', null, '1994-1-10', 'Bzince pod Javorinou Hrušové 100, 916 18', 'zamestnanec', 'CZ6508008894505');
 INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('5680186', 'heslo', 'Alexandra', 'Milkova', null, '1990-8-25', 'Brno Semilasso', 'zamestnanec', 'SK6508000000192000145399');
 INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('565882', 'heslo', 'Jana', 'Pracovita', 'Mgr', '1989-10-5', 'Bratislava 4, Ľudovitová 2', 'zamestnanec', 'CZ655465465456');
 INSERT INTO zamestnanec (RodneCislo, heslo, meno, priezvisko, titul, datumNarodenia, adresa, funkcia, IBAN) VALUES('56465', 'heslo', 'Michal', 'Hralen', null, '1997-11-6', 'Praha 5, Divadelná 56', 'zamestnanec', 'CZ456464561564');
