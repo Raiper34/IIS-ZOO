@@ -4,6 +4,8 @@ namespace App\Model;
 
 use Nette;
 use Nette\Security;
+use Nette\Security\AuthenticationException;
+use Nette\Security\Identity;
 
 /*
  * Authenticator na prihlasenie uzivatela
@@ -25,8 +27,11 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
         $zaznam = $this->database->table('zamestnanec')->where('RodneCislo', $RodneCislo)->fetch();
         if ($zaznam == null || $heslo != $zaznam->heslo) //overenie ci taky uzivatel vobec je v db s takym heslom
         {
-            return null;
+            throw new AuthenticationException('User not found.');
         }
-        return new Nette\Security\Identity($zaznam->RodneCislo, $zaznam->funkcia, array('meno' => $zaznam->meno . ' ' . $zaznam->priezvisko)); //vratenie uzivatela
+        else
+        {
+            return new Identity($zaznam->RodneCislo, $zaznam->funkcia, array('meno' => $zaznam->meno . ' ' . $zaznam->priezvisko)); //vratenie uzivatela
+        }
     }
 }
