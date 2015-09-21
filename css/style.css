@@ -66,14 +66,14 @@ form .error {
     color: gray !important;   
 }
 
-#mydropdown li a
-{
-    color: black !important;
-}
-
 #mydropdown li a:hover
 {
-    color: darkgray !important;   
+    background-image: url("../images/backgroundHead.png");   
+}
+
+#mydropdown
+{
+	background-image: url("../images/backgroundHead.png");
 }
 
 #slon
