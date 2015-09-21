@@ -75,3 +75,17 @@ form .error {
 {
     color: darkgray !important;   
 }
+
+#slon
+{
+	width: 25%;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+#myfooter
+{
+	position: absolute;
+	bottom: 0px;		
+}

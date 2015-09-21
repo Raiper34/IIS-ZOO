@@ -22,8 +22,8 @@ class PrihlasenieForm extends Nette\Object
 	public function vytvorit()
 	{
 		$form = new Form;
-		$form->addText('RodneCislo', 'Rodné číslo:')->setRequired();
-		$form->addPassword('heslo', 'Heslo:')->setRequired();
+		$form->addText('RodneCislo', 'Rodné číslo*:')->setRequired();
+		$form->addPassword('heslo', 'Heslo*:')->setRequired();
 		$form->addSubmit('prihlasit', 'Prihlásiť');
 
 		$form->onSuccess[] = array($this, 'uspesne');

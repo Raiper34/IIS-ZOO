@@ -16,12 +16,19 @@ if (!function_exists($_b->blocks['content'][] = '_lb7154d6de8d_content')) { func
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		<div class="row">
-			<h1 class="text-center">Prihlásenie</h1>
+			<h1 class="text-center">IIS ZOO FIT</h1>
+			<h3 class="text-center">Prihlásenie</h3>
 <?php $_l->tmp = $_control->getComponent("prihlasenie"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
 		</div>
 	</div>
 	<div class="col-md-4"></div>
 </div>
+
+<img src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/images/elephant.gif" id="slon" alt="slon">
+
+<footer id="myfooter">
+<strong>Vytvoril Filip Gulán a Euard Rybár 2015</strong>
+</footer>
 
 <?php
 }}
