@@ -24,9 +24,9 @@ if (!function_exists($_b->blocks['content'][] = '_lb7154d6de8d_content')) { func
 	<div class="col-md-4"></div>
 </div>
 
-<img src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/images/elephant.gif" id="slon" alt="slon">
+<img src="<?php echo Latte\Runtime\Filters::escapeHtml(Latte\Runtime\Filters::safeUrl($basePath), ENT_COMPAT) ?>/images/elephant.gif" id="slon" alt="slon" class="hidden-xs">
 
-<footer id="myfooter">
+<footer id="myfooter" class="hidden-xs">
 <strong>Vytvoril Filip Gulán a Euard Rybár 2015</strong>
 </footer>
 
