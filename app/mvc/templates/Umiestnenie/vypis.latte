@@ -21,12 +21,12 @@
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
 			  Pridať klietku
 			</button>
-			<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">Pridať klietku</h4>
+			        <h4 class="modal-title" id="myModalLabel2">Pridať klietku</h4>
 			      </div>
 			      <div class="modal-body">
 			        {control vytvoritKliektuForm}
@@ -49,13 +49,14 @@
 		    <tr>
 		        <th>Identifikačné číslo</th>
 		        <th>Názov</th>
+		        <th></th>
 		    </tr>
 		{foreach $umiestnenia as $umiestnenie}
 		    <tr>
 		        <td>{$umiestnenie->IDUmiestnenia}</td>
 		        <td>{$umiestnenie->nazov}</td>
 		        <td>{control viacButton-$umiestnenie->IDUmiestnenia}</td>
-		    <tr>
+		    </tr>
 		{/foreach}
 		</table>
 	</div>

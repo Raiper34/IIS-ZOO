@@ -12,7 +12,8 @@ list($_b, $_g, $_l) = $template->initialize('f9ae95ad17', 'html')
 // block content
 //
 if (!function_exists($_b->blocks['content'][] = '_lb12edeffee9_content')) { function _lb12edeffee9_content($_b, $_args) { foreach ($_args as $__k => $__v) $$__k = $__v
-?><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+?><!-- Akcie -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
   Pridať zamestnanca
 </button>
 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -31,13 +32,14 @@ if (!function_exists($_b->blocks['content'][] = '_lb12edeffee9_content')) { func
 
 
 
-
+<!-- Obsah -->
 <table class="table table-bordered table-hover">
     <tr>
         <th>Rodné číslo</th>
-        <th>Meno</td>
+        <th>Meno</th>
         <th>Priezvisko</th>
         <th>Funkcia</th>
+        <th></th>
     </tr>
 <?php $iterations = 0; foreach ($zamestnanci as $zamestnanec) { ?>
     <tr>
@@ -46,7 +48,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb12edeffee9_content')) { func
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->funkcia, ENT_NOQUOTES) ?></td>
         <td><?php $_l->tmp = $_control->getComponent("viacButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
-    <tr>
+    </tr>
 <?php $iterations++; } ?>
 </table>
 

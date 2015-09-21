@@ -37,13 +37,14 @@ if (!function_exists($_b->blocks['content'][] = '_lb41dca56bd7_content')) { func
     <tr>
         <th>Identifikačné číslo</th>
         <th>Názov</th>
+        <th></th>
     </tr>
 <?php $iterations = 0; foreach ($druhy as $druh) { ?>
     <tr>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($druh->IDDruhuZivocicha, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($druh->nazov, ENT_NOQUOTES) ?></td>
         <td><?php $_l->tmp = $_control->getComponent("viacButton-$druh->IDDruhuZivocicha"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
-    <tr>
+    </tr>
 <?php $iterations++; } ?>
 </table>
 

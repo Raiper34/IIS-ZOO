@@ -25,13 +25,14 @@
     <tr>
         <th>Identifikačné číslo</th>
         <th>Názov</th>
+        <th></th>
     </tr>
 {foreach $druhy as $druh}
     <tr>
         <td>{$druh->IDDruhuZivocicha}</td>
         <td>{$druh->nazov}</td>
         <td>{control viacButton-$druh->IDDruhuZivocicha}</td>
-    <tr>
+    </tr>
 {/foreach}
 </table>
 

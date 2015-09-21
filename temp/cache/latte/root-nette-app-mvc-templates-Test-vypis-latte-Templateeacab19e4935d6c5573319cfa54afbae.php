@@ -54,7 +54,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb0ed93c508f_content')) { func
         <td><?php echo Latte\Runtime\Filters::escapeHtml($test->hmotnostZivocicha, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($test->rozmerZivocicha, ENT_NOQUOTES) ?></td>
         <td><?php echo Latte\Runtime\Filters::escapeHtml($test->datumTestu, ENT_NOQUOTES) ?></td>
-    <tr>
+    </tr>
 <?php $iterations++; } ?>
 </table>
 

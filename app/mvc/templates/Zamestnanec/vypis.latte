@@ -1,5 +1,6 @@
 {block content}
 
+<!-- Akcie -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
   Pridať zamestnanca
 </button>
@@ -19,13 +20,14 @@
 
 
 
-
+<!-- Obsah -->
 <table class="table table-bordered table-hover">
     <tr>
         <th>Rodné číslo</th>
-        <th>Meno</td>
+        <th>Meno</th>
         <th>Priezvisko</th>
         <th>Funkcia</th>
+        <th></th>
     </tr>
 {foreach $zamestnanci as $zamestnanec}
     <tr>
@@ -34,7 +36,7 @@
         <td>{$zamestnanec->priezvisko}</td>
         <td>{$zamestnanec->funkcia}</td>
         <td>{control viacButton-$zamestnanec->RodneCislo}</td>
-    <tr>
+    </tr>
 {/foreach}
 </table>
 

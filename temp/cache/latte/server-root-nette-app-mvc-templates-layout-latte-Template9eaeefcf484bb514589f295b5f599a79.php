@@ -106,6 +106,7 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
         </div>
 <?php } ?>
 
+    <!-- Flash messages -->
 <?php $iterations = 0; foreach ($flashes as $flash) { ?>    <div>
         <div class="container">
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -119,8 +120,10 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
     </div>
 <?php $iterations++; } ?>
 
-
-	<div class="container"><?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?></div>
+    <!-- Obsah -->
+	<div class="container">
+<?php Latte\Macros\BlockMacrosRuntime::callBlock($_b, 'content', $template->getParameters()) ?>
+    </div>
 
 <?php call_user_func(reset($_b->blocks['scripts']), $_b, get_defined_vars())  ?>
 

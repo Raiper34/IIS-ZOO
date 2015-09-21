@@ -58,6 +58,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb038e2b8113_content')) { func
 <table class="table table-bordered table-hover">
 	<tr>
 	    <th>Umiestnenie</th>
+	    <th></th>
 	</tr>
 <?php $iterations = 0; foreach ($umiestnenia as $umiestnenie) { ?>
 	<tr>
@@ -71,12 +72,12 @@ if (!function_exists($_b->blocks['content'][] = '_lb038e2b8113_content')) { func
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
 	Priradiť umiestnenie
 </button>
-<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    <h4 class="modal-title" id="myModalLabel">Priradiť umiestnenie</h4>
+			    <h4 class="modal-title" id="myModalLabel2">Priradiť umiestnenie</h4>
 			</div>
 			     <div class="modal-body">
 <?php $_l->tmp = $_control->getComponent("pridatSpravuje"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
@@ -92,6 +93,7 @@ if (!function_exists($_b->blocks['content'][] = '_lb038e2b8113_content')) { func
 <table class="table table-bordered table-hover">
 	<tr>
 	    <th>Živočích</th>
+	    <th></th>
 	</tr>
 <?php $iterations = 0; foreach ($zivocichy as $zivocich) { ?>
 	<tr>
@@ -105,12 +107,12 @@ if (!function_exists($_b->blocks['content'][] = '_lb038e2b8113_content')) { func
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
 	Priradiť živočícha
 </button>
-<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    <h4 class="modal-title" id="myModalLabel">Priradiť živočícha</h4>
+			    <h4 class="modal-title" id="myModalLabel3">Priradiť živočícha</h4>
 			</div>
 			     <div class="modal-body">
 <?php $_l->tmp = $_control->getComponent("pridatStaraSa"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>

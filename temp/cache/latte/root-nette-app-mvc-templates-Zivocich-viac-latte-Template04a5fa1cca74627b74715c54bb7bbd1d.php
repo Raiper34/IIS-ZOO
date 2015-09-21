@@ -63,15 +63,16 @@ if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { func
 <table class="table table-bordered table-hover">
 	<tr>
 	    <th>Zamestnanec</th>
+	    <th></th>
 	</tr>
 <?php $iterations = 0; foreach ($zamestnanci as $zamestnanec) { ?>
 	<tr>
 		<td><a href="<?php echo Latte\Runtime\Filters::escapeHtml($_control->link("Zamestnanec:viac", array($zamestnanec->RodneCislo)), ENT_COMPAT) ?>
 "><?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->meno, ENT_NOQUOTES) ?>
  <?php echo Latte\Runtime\Filters::escapeHtml($zamestnanec->priezvisko, ENT_NOQUOTES) ?></a></td>
-<?php if ($user->identity->roles[0] == 'riaditeľ' || $user->id == $zamestnanec->RodneCislo) { ?>
-			<td><?php $_l->tmp = $_control->getComponent("odstranitStaraSaButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?></td>
-<?php } ?>
+		<td>
+<?php if ($user->identity->roles[0] == 'riaditeľ' || $user->id == $zamestnanec->RodneCislo) { $_l->tmp = $_control->getComponent("odstranitStaraSaButton-$zamestnanec->RodneCislo"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ;} ?>
+		</td>
 	</tr>
 <?php $iterations++; } ?>
 </table>
@@ -79,12 +80,12 @@ if (!function_exists($_b->blocks['content'][] = '_lbd2683a82ae_content')) { func
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
 	Priradiť zamestnanca
 </button>
-<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    <h4 class="modal-title" id="myModalLabel">Priradiť zamestnanca</h4>
+			    <h4 class="modal-title" id="myModalLabel2">Priradiť zamestnanca</h4>
 			</div>
 			     <div class="modal-body">
 <?php $_l->tmp = $_control->getComponent("pridatStaraSa"); if ($_l->tmp instanceof Nette\Application\UI\IRenderable) $_l->tmp->redrawControl(NULL, FALSE); $_l->tmp->render() ?>
