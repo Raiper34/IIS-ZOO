@@ -65,16 +65,18 @@ class VytvoritUmiestnenieForm extends Nette\Object
  	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;
+		foreach ($hodnoty['umiestnenie'] as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 		$zaznam = $this->database->table('umiestnenie')->insert($hodnoty['umiestnenie']);
 
 		if($this->mod == 0) //pridavam typ klietka
 		{
+			foreach ($hodnoty['klietka'] as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 			$hodnoty['klietka']->IDUmiestnenia = $zaznam->IDUmiestnenia;
 			$this->database->table('klietka')->insert($hodnoty['klietka']);
 		}
 		else //pridavam typ vybeh
 		{
+			foreach ($hodnoty['vybeh'] as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 			$hodnoty['vybeh']->IDUmiestnenia = $zaznam->IDUmiestnenia;
 			$this->database->table('vybeh')->insert($hodnoty['vybeh']);
 		}

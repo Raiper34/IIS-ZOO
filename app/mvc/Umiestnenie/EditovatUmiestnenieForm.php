@@ -66,16 +66,18 @@ class EditovatUmiestnenieForm extends Nette\Object
 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
-		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //premena prazdnch retazcov na null kvoli db
+		foreach ($hodnoty['umiestnenie'] as &$hodnota) if ($hodnota === '') $hodnota = NULL; //premena prazdnch retazcov na null kvoli db
 		$zaznam = $this->database->table('umiestnenie')->get($this->Id);
 		$zaznam->update($hodnoty['umiestnenie']);
 		if($this->mod == 0) //vkladam typ klietka
 		{
+			foreach ($hodnoty['klietka'] as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 			$zaznam = $this->database->table('klietka')->get($this->Id);
 			$zaznam->update($hodnoty['klietka']);
 		}
 		else //vkladam typ vybeh
 		{
+			foreach ($hodnoty['vybeh'] as &$hodnota) if ($hodnota === '') $hodnota = NULL;
 			$zaznam = $this->database->table('vybeh')->get($this->Id);
 			$zaznam->update($hodnoty['vybeh']);
 		}
