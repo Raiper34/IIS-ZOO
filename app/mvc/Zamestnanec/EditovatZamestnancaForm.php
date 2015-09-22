@@ -13,13 +13,20 @@ use Test\Bs3FormRenderer;
 class EditovatZamestnancaForm extends Nette\Object
 {
 	private $database;
-	public $RodneCislo;
+	public $RodneCislo; //rodne cislo na identifikaciu polozky, ktoru cheme editovat
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -37,6 +44,11 @@ class EditovatZamestnancaForm extends Nette\Object
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspensom odoslani formu
+	 * form: samotny form
+	 * hodnoty: naplnene hondoty fomru
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; // zmenim prazdne stringy na nully, kvoli db

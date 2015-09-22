@@ -17,19 +17,28 @@ class ZivocichPresenter extends BasePresenter
 {
 	private $database;
 	private $tovarna;
-	private $Id;
+	private $Id; //id aby sme vedeli pre viac presenter, o ktorom zivocichovy chceme viac info
 
+	/*
+	 * Konstruktro triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Iba rpesmeruje na spravny presenter
+	 */
 	public function actionDefault()
 	{
 		$this->redirect('Zamestnanec:vypis');
 	}
 
 	/************************************ Vypis ****************************************/
+	/*
+	 * Presenter na vypis zivocihcov
+	 */
 	public function renderVypis()
 	{
 		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
@@ -39,12 +48,20 @@ class ZivocichPresenter extends BasePresenter
 		$this->template->zivocichi = $this->database->table('zivocich');
 	}
 
+	/*
+	 * Vytvori form na pridavanie zivocichov
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentVytvoritForm()
 	{
 		$form = (new VytvoritZivocichaForm($this->database, $this));
 		return $form->vytvorit();
 	}
 
+	/*
+	 * Vytvori viac button
+	 * Vracia: vytvorney button
+	 */
 	protected function createComponentViacButton()
 	{
 		return new Multiplier(function ($Id)
@@ -55,7 +72,10 @@ class ZivocichPresenter extends BasePresenter
 	}
 
 	/********************************** Viac **********************************/
-
+	/*
+	 * Presneter na zobrazenie viac informaci o danom zivocichovi
+	 * Id: id zivocicha, o ktorom cheme vediet viac
+	 */
 	public function renderViac($Id)
 	{
 		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
@@ -70,6 +90,10 @@ class ZivocichPresenter extends BasePresenter
 		$this->template->zamestnanci = $this->database->query('SELECT * FROM staraSa NATURAL JOIN zamestnanec WHERE IDZivocicha = ' . $Id);
 	}
 
+	/*
+	 * Presneter na zobrazenie viac informaci o danom zivocichovi
+	 * Id: id zivocicha, o ktorom cheme vediet viac
+	 */
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
@@ -99,20 +123,10 @@ class ZivocichPresenter extends BasePresenter
 		$this->tovarna->Id = $Id;
 	}
 
-	protected function createComponentEditovatButton()
-	{
-		$form = new Form;
-		$form->addSubmit('editovat', 'Editovať')->setAttribute('class', 'btn btn-success');
-
-		$form->onSuccess[] = array($this, 'uspesneEditovatButton');
-		return $form;
-	}
-
-	public function uspesneEditovatButton(Form $form, $hodnoty)
-	{
-		$this->redirect('Zivocich:editovat', $this->Id);
-	}
-
+	/*
+	 * Vytvori button na vymazavanie zivocicha
+	 * Vracia: vytvoreny button
+	 */
 	protected function createComponentVymazatButton()
 	{
 		$form = new Form;
@@ -122,6 +136,11 @@ class ZivocichPresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani vymazavacieho tlacidla
+	 * form: samotny form
+	 * hodnoty: naplnene hodnoty formu
+	 */
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
 		//vymazem aj ostatne zaznamy daneho zivociha v inch tabulkach
@@ -131,6 +150,10 @@ class ZivocichPresenter extends BasePresenter
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}
 
+	/*
+	 * Vytvori form na editovanie zivocicha
+	 * Vacia: vytovreny form
+	 */
 	protected function createComponentEditovatForm()
 	{
 		$this->tovarna = new EditovatZivocichaForm($this->database, $this->Id);
@@ -138,6 +161,10 @@ class ZivocichPresenter extends BasePresenter
 		return $form;
 	}
 	
+	/*
+	 * Vytvori form na pridavanie kto sa stara o tohoto zivocicha
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentPridatStaraSa()
 	{
 		$form = new Form;
@@ -164,6 +191,11 @@ class ZivocichPresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani formu na pridavanie kto sa o zivocicha stara
+	 * form: samotny form
+	 * hodnoty: naplnene hodnoty formu
+	 */
 	public function uspesneStaraSa(Form $form, $hodnoty)
 	{
 		$hodnoty->IDZivocicha = $this->Id;
@@ -174,6 +206,10 @@ class ZivocichPresenter extends BasePresenter
 		$this->redirect('Zivocich:viac', $this->Id);
 	}
 
+	/*
+	 * Button na odstranenie kto sa stara o zivocicha
+	 * Vracia: vytvorney form
+	 */
 	protected function createComponentOdstranitStaraSaButton()
 	{
 		return new Multiplier(function ($RodneCislo)
@@ -187,6 +223,9 @@ class ZivocichPresenter extends BasePresenter
 		});
 	}
 
+	/*
+	 * Udalost po suepsnom odoslani buttonu na odstranenie kto sa o zivocicha strara
+	 */
 	public function uspesneOdstranitStaraSa($form)
 	{
 		$this->database->table('staraSa')->where('IDZivocicha', $this->Id)->where('RodneCislo', $form['RodneCislo']->getValue())->delete();

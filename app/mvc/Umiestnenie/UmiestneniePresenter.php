@@ -17,7 +17,7 @@ use Test\Bs3FormRenderer;
 class UmiestneniePresenter extends BasePresenter
 {
 	private $database;
-	public $Id;
+	public $Id; //id umiestnenia, pre presenter viac info, aby som vedel o com chcem viac info
 	private $tovarna; //aby som mohol naplnit form default hodnotami
 
 	public function __construct(Nette\Database\Context $databaza)
@@ -25,12 +25,18 @@ class UmiestneniePresenter extends BasePresenter
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Iba presmeruje na iny presenter
+	 */
 	public function actionDefault()
 	{
 		$this->redirect('Umiestnenie:vypis');
 	}
 
 	/******************* Vypis ***********************/
+	/*
+	 * Presenter na vypis umiestneni
+	 */
 	public function renderVypis()
 	{
 		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
@@ -40,6 +46,10 @@ class UmiestneniePresenter extends BasePresenter
 		$this->template->umiestnenia = $this->database->query('SELECT * FROM umiestnenie NATURAL JOIN klietka UNION SELECT * FROM umiestnenie NATURAL JOIN vybeh');
 	}
 
+	/*
+	 * Vytvori viac button
+	 * Vracia: vytvoreny button
+	 */
 	protected function createComponentViacButton()
 	{
 		return new Multiplier(function ($Id)
@@ -49,40 +59,20 @@ class UmiestneniePresenter extends BasePresenter
 		});
 	}
 
-	protected function createComponentPridatKlietkuButton()
-	{
-		$form = new Form;
-		$form->addSubmit('pridatKlietku', 'Pridať umiestnenie typu klietka');
-
-		$form->onSuccess[] = array($this, 'uspesnePridatKlietkuButton');
-		return $form;
-	}
-
-	public function uspesnePridatKlietkuButton(Form $form, $hodnoty)
-	{
-		$this->redirect('Umiestnenie:pridat', 0);
-	}
-
-	protected function createComponentPridatVybehButton()
-	{
-		$form = new Form;
-		$form->addSubmit('pridatVybeh', 'Pridať umiestnenie typu vybeh');
-
-		$form->onSuccess[] = array($this, 'uspesnePridatVybehButton');
-		return $form;
-	}
-
-	public function uspesnePridatVybehButton(Form $form, $hodnoty)
-	{
-		$this->redirect('Umiestnenie:pridat', 1);
-	}
-
+	/*
+	 * Vytvori form na pridavanie kliekty
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentVytvoritKliektuForm()
 	{
 		$form = (new VytvoritUmiestnenieForm($this->database, 0));
 		return $form->vytvorit();
 	}
 
+	/*
+	 * Vytvori form na pridavanie vybehu
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentVytvoritVybehForm()
 	{
 		$form = (new VytvoritUmiestnenieForm($this->database, 1));
@@ -90,7 +80,9 @@ class UmiestneniePresenter extends BasePresenter
 	}
 
 	/******************* Vypis volne *******************/
-
+	/*
+	 * Presenter na vypis iba volnych umiestneni
+	 */
 	public function renderVypisVolne()
 	{
 		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
@@ -101,6 +93,10 @@ class UmiestneniePresenter extends BasePresenter
 	}
 
 	/******************* Viac ************************/
+	/*
+	 * Presenter na vypis viac informacii
+	 * Id: id umiestnenia, o ktorom cheme vediet viac
+	 */
 	public function renderViac($Id)
 	{
 		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny
@@ -115,6 +111,10 @@ class UmiestneniePresenter extends BasePresenter
 		$this->template->zamestnanci = $this->database->query('SELECT * FROM spravuje NATURAL JOIN zamestnanec WHERE IDUmiestnenia = ' . $Id);
 	}
 
+	/*
+	 * Presenter na vypis viac informacii
+	 * Id: id umiestnenia, o ktorom cheme vediet viac
+	 */
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
@@ -150,6 +150,10 @@ class UmiestneniePresenter extends BasePresenter
 		$this->tovarna->Id = $Id;
 	}
 
+	/*
+	 * Vytvori button na vymazavanie
+	 * Vracia: vytvoreny button
+	 */
 	protected function createComponentVymazatButton()
 	{
 		$form = new Form;
@@ -159,6 +163,11 @@ class UmiestneniePresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani vymazavacieho buttonu
+	 * form: samotny form
+	 * hodnoty: hondoty formu
+	 */
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
 		if($this->database->table('zivocich')->where('IDUmiestnenia', $this->Id)->count() == 0) //umiestnenie mozem vymazt iba ak neobsahuje ziadnych zivocichov
@@ -175,6 +184,10 @@ class UmiestneniePresenter extends BasePresenter
 		}
 	}
 
+	/*
+	 * Vytvori formna editovanie klietky
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentEditovatKlietkuForm()
 	{
 		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 0));
@@ -182,6 +195,10 @@ class UmiestneniePresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Vytvori form na editovanie vybehu
+	 * Vracia: vytvorney form
+	 */
 	protected function createComponentEditovatVybehForm()
 	{
 		$this->tovarna = (new EditovatUmiestnenieForm($this->database, 1));
@@ -189,6 +206,10 @@ class UmiestneniePresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Vytvori form na rpdiavanie vztahov, kto spravuje toto uiestnenie
+	 * Vracia: vytvorneny form
+	 */
 	protected function createComponentPridatSpravuje()
 	{
 		$form = new Form;
@@ -216,6 +237,11 @@ class UmiestneniePresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspensom odoslani spravovacieho formu
+	 * form: samotny form
+	 * hodnoty: hodnoty formu
+	 */
 	public function uspesneSpravuje(Form $form, $hodnoty)
 	{
 		$hodnoty->IDUmiestnenia = $this->Id;
@@ -226,6 +252,10 @@ class UmiestneniePresenter extends BasePresenter
 		$this->redirect('Umiestnenie:viac', $this->Id);
 	}	
 
+	/*
+	 * Vytvori button na odstranovanie vztahu spravovania, teda kto spravuje toto umiestnenie
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentOdstranitSpravujeButton()
 	{
 		return new Multiplier(function ($RodneCislo)
@@ -239,6 +269,10 @@ class UmiestneniePresenter extends BasePresenter
 		});
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani odstraovacieho buttonu spravovania
+	 * form: samotny form
+	 */
 	public function uspesneOdstranitSpravuje($form)
 	{
 		$this->database->table('spravuje')->where('IDUmiestnenia', $this->Id)->where('RodneCislo', $form['RodneCislo']->getValue())->delete();

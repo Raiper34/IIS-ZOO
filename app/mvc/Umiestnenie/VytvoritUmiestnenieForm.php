@@ -15,12 +15,19 @@ class VytvoritUmiestnenieForm extends Nette\Object
 	private $database;
 	private $mod; //0 je klietka 1 je vybeh, aby som vedel aky form tvorim
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza, $mod)
 	{
 		$this->database = $databaza;
 		$this->mod = $mod;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -51,6 +58,11 @@ class VytvoritUmiestnenieForm extends Nette\Object
 		return $form;
 	}
  
+ 	/*
+ 	 * Udalost po uspesnom odoslani formu
+ 	 * form: samotny fomr
+ 	 * hodnoty: nalnene hodnoty formu
+ 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL;

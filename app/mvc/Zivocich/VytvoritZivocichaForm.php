@@ -14,11 +14,18 @@ class VytvoritZivocichaForm extends Nette\Object
 {
 	private $database;
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvorney form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -55,6 +62,11 @@ class VytvoritZivocichaForm extends Nette\Object
 		return $form;
 	}
  
+ 	/*
+ 	 * Udalost po suepsnom odoslani fomr
+ 	 * form: samotny form
+ 	 * hodnoty: naplnene hodnoty formu
+ 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //kvoli db chcem tam mat null a nie prazdny string

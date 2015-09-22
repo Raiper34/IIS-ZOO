@@ -14,14 +14,21 @@ class EditovatUmiestnenieForm extends Nette\Object
 {
 	private $database;
 	private $mod; //0 je klietka 1 je vybeh, aby som vedel co editujem
-	public $Id;
+	public $Id; //id aby sme vedeli, koho editujeme
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza, $mod)
 	{
 		$this->database = $databaza;
 		$this->mod = $mod;
 	}
 
+	/*
+	 * Vytvori form na editovanie 
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -52,6 +59,11 @@ class EditovatUmiestnenieForm extends Nette\Object
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani formu
+	 * form: samotny form
+	 * hodnoty: hodnoty formu
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //premena prazdnch retazcov na null kvoli db

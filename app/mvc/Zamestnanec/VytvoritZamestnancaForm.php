@@ -14,11 +14,18 @@ class VytvoritZamestnancaForm extends Nette\Object
 {
 	private $database;
 
+	/*
+	 * Konstruktor
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvorney form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -38,6 +45,11 @@ class VytvoritZamestnancaForm extends Nette\Object
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani formu
+	 * form: samotny form
+	 * hodnoty: naplnene hondoty formu
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //menim prazdne stringy na nully kvoli db 
