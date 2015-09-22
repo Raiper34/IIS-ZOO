@@ -16,20 +16,29 @@ use App\Forms\EditovatDruhForm;
 class DruhPresenter extends BasePresenter
 {
 	private $database;
-	public $Id; //id druhu
+	public $Id; //id druhu pre viac informaci
 	private $tovarna; //tovarna na formy aby som mohol predat parametre
 
+	/*
+	 * Konstruktor presenteru
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Default presenter iba presmeruje
+	 */
 	public function actionDefault()
 	{
 		$this->redirect('Druh:vypis');
 	}
 
 	/******************* Vypis sablona ***********************/
+	/*
+	 * Presenter na vypis druhov
+	 */
 	public function renderVypis()
 	{
 		if(!$this->getUser()->isLoggedIn()) //ak uzivatel neni prihlaseny tak ho presmerujem
@@ -39,15 +48,23 @@ class DruhPresenter extends BasePresenter
 		$this->template->druhy = $this->database->table('druhZivocicha'); //naplnim sablnu
 	}
 
+	/*
+	 * Vytvori form na pridavanie druhov
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentVytvoritForm()
 	{
 		$form = (new VytvoritDruhForm($this->database));
 		return $form->vytvorit();
 	}
 
+	/*
+	 * Vytvori tlacidlo, viac, po ktorom kliku sa dostaneme na detaily druhu
+	 * Vracia: vytvoreny button/form
+	 */
 	protected function createComponentViacButton()
 	{
-		return new Multiplier(function ($Id)
+		return new Multiplier(function ($Id) //kvoli predaniu parametru
 		{
 			$form = (new ViacButton($this->database, $Id, 'Druh:viac'));
 			return $form->vytvorit();
@@ -55,6 +72,10 @@ class DruhPresenter extends BasePresenter
 	}
 
 	/******************* Viac sablona ************************/
+	/*
+	 * Presenter na zobrazenie podrobnosti o druhu
+	 * id: id druhu, ktoreho podrobnosti zobrazujeme
+	 */
 	public function renderViac($Id)
 	{
 		if(!$this->getUser()->isLoggedIn()) //ak uzivatel neni prihlaseny tak presmerujem
@@ -66,6 +87,10 @@ class DruhPresenter extends BasePresenter
 		$this->template->zivocichy = $this->database->table('zivocich')->where('IDDruhuZivocicha', $Id);
 	}
 
+	/*
+	 * Presenter na zobrazenie podrobnosti o druhu
+	 * id: id druhu, ktoreho podrobnosti zobrazujeme
+	 */
 	public function actionViac($Id)
 	{
 		$this->Id = $Id;
@@ -75,6 +100,11 @@ class DruhPresenter extends BasePresenter
 		$this["editovatForm"]->setDefaults($zaznam); //naplnim editacny form datami z databaze
 		$this->tovarna->Id = $Id;
 	}
+
+	/*
+	 * Vytvori button na editovanie druhu
+	 * Vracia: vytvoreny button
+	 */
 	protected function createComponentEditovatButton()
 	{
 		$form = new Form;
@@ -84,11 +114,20 @@ class DruhPresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost pri uspesnom odoslani formu
+	 * form: samotny form
+	 * hodnoty: hodnoty formu
+	 */
 	public function uspesneEditovatButton(Form $form, $hodnoty)
 	{
 		$this->redirect('Druh:editovat', $this->Id);
 	}
 
+	/*
+	 * Vytvori button na vymazavanie druhu
+	 * Vracia: vytvoreny button
+	 */
 	protected function createComponentVymazatButton()
 	{
 		$form = new Form;
@@ -98,6 +137,11 @@ class DruhPresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspensom stlaceni vymazavacieho buttonu
+	 * form: samotny form
+	 * hodnoty: hodnoty formu
+	 */
 	public function uspesneVymazatButton(Form $form, $hodnoty)
 	{
 		if($this->database->table('zivocich')->where('IDDruhuZivocicha', $this->Id)->count() == 0) //mozem mazat iba ak neexistuje zivocich priradeny k tomuto druhu
@@ -111,6 +155,10 @@ class DruhPresenter extends BasePresenter
 		}
 	}
 
+	/*
+	 * Vytvori form na editaciudruhu
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentEditovatForm()
 	{
 		$this->tovarna = (new EditovatDruhForm($this->database));

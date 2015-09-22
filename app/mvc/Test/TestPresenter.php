@@ -13,19 +13,28 @@ use Test\Bs3FormRenderer;
 class TestPresenter extends BasePresenter
 {
 	private $database;
-	public $Id;
+	public $Id; //id testu
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Iba presmeruje na spravny presenter
+	 */
 	public function actionDefault()
 	{
 		$this->redirect('Test:vypis');
 	}
 
 	/******************* Vypis ***********************/
+	/*
+	 * Presentr na vypis testov z db
+	 */
 	public function renderVypis()
 	{
 		if(!$this->getUser()->isLoggedIn()) //uzivatel neni prihlaseny presmerujem
@@ -40,6 +49,10 @@ class TestPresenter extends BasePresenter
 		);
 	}
 
+	/*
+	 * Vytvori form na pridavanie testov
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentVytvoritForm()
 	{
 		$form = new Form;
@@ -80,6 +93,9 @@ class TestPresenter extends BasePresenter
 		return $form;
 	}
 
+	/*
+	 * Udalost pri uspesnom odoslani formu
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //prazdne polia budu nully a nie praznde stringy ukladane do db

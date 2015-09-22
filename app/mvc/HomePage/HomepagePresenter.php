@@ -14,16 +14,25 @@ class HomepagePresenter extends BasePresenter
 {
 	private $database;
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $database)
 	{
 		$this->database = $database;
 	}
 
+	/*
+	 * Iba presmeruje na iny presenter
+	 */
 	public function renderDefault()
 	{
 		$this->redirect('Homepage:prihlasenie');
 	}
 
+	/*
+	 * Presenter na prihlasenie
+	 */
 	public function renderPrihlasenie()
 	{
 		$uzivatel = $this->getUser();
@@ -33,12 +42,19 @@ class HomepagePresenter extends BasePresenter
 		}
 	}
 
+	/*
+	 * Vytvori form na prihlasenie
+	 * Vracia: vytvoreny form
+	 */
 	protected function createComponentPrihlasenie()
 	{
 		$form = (new PrihlasenieForm($this->database));
 		return $form->vytvorit();
 	}
 
+	/*
+	 * Presenter na odhlasenie, iba odhlasi a presmeruje
+	 */
 	public function actionOdhlasit()
 	{
 		$uzivatel = $this->getUser();

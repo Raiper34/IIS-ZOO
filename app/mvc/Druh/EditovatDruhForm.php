@@ -13,13 +13,20 @@ use Test\Bs3FormRenderer;
 class EditovatDruhForm extends Nette\Object
 {
 	private $database;
-	public $Id; //id druhu
+	public $Id; //id druhu ktoreho cheme editovat
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -30,6 +37,11 @@ class EditovatDruhForm extends Nette\Object
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani formulara
+	 * form: samotny form
+	 * hodnoty: hondoty formu
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$zaznam = $this->database->table('druhZivocicha')->get($this->Id);

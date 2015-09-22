@@ -14,11 +14,18 @@ class PrihlasenieForm extends Nette\Object
 {
 	private $databaza;
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->databaza = $databaza;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -31,6 +38,11 @@ class PrihlasenieForm extends Nette\Object
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani formu
+	 * form: samotny form
+	 * hodnoty: hondoty formu
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$uzivatel = $form->getPresenter()->getUser();

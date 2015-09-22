@@ -15,11 +15,18 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
 {
     private $database;
 
+    /*
+     * Konstruktor triedy
+     */
     function __construct(Nette\Database\Context $databaza)
     {
         $this->database = $databaza;
     }
 
+    /*
+     * Funkcia na overovanie uzivatela, ktory sa pokusa prihlasit
+     * pouzivatel: meno a heslo, ktore sa overuje
+     */
     function authenticate(array $pouzivatel)
     {
         $RodneCislo = $pouzivatel[0];

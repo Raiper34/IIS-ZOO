@@ -12,9 +12,12 @@ use Nette\Application\UI\Form;
 class ViacButton extends Nette\Object
 {
 	private $database;
-	public $Id;
-	public $stranka;
+	public $Id; //id niecoco, coho chceme viac informacii, napriklad id zivocicha
+	public $stranka; //stranka alebo to coho chceme viac informaci napriklad zivocich
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza, $Id, $stranka)
 	{
 		$this->database = $databaza;
@@ -22,6 +25,10 @@ class ViacButton extends Nette\Object
 		$this->stranka = $stranka; //druh/zivocich/zamestnanec....
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -31,6 +38,9 @@ class ViacButton extends Nette\Object
 		return $form;
 	}
 
+	/*
+	 * Udalost po uspesnom odoslani formu
+	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$form->getPresenter()->redirect($this->stranka, $this->Id);

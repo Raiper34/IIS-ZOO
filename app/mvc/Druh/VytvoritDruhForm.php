@@ -13,14 +13,19 @@ use Test\Bs3FormRenderer;
 class VytvoritDruhForm extends Nette\Object
 {
 	private $database;
-	public $Id;
-	private $mod;
 
+	/*
+	 * Konstruktor triedy
+	 */
 	public function __construct(Nette\Database\Context $databaza)
 	{
 		$this->database = $databaza;
 	}
 
+	/*
+	 * Vytvori form
+	 * Vracia: vytvoreny form
+	 */
 	public function vytvorit()
 	{
 		$form = new Form;
@@ -31,6 +36,11 @@ class VytvoritDruhForm extends Nette\Object
 		return $form;
 	}
  
+ 	/*
+ 	 * Udalost po uspensnom odoslani formu
+ 	 * form: samotny form
+ 	 * hodnoty: hodnoty formu
+ 	 */
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$this->database->table('druhZivocicha')->insert($hodnoty);
