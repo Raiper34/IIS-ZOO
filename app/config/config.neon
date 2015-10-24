@@ -23,12 +23,6 @@ services:
 	authenticator: App\Model\Prihlasovanie
 	router: App\Router::vytvoritRouter
 
-database:
-	dsn: 'mysql:host=127.0.0.1:3307;dbname=zoo'
-	user: 'root'
-	password: 'usbw'
-	options:
-
 forms:
 	messages:
 		REQUIRED: 'Polia označené * sú povinné!'

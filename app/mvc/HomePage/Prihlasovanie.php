@@ -32,9 +32,9 @@ class Prihlasovanie extends Nette\Object implements Nette\Security\IAuthenticato
         $RodneCislo = $pouzivatel[0];
         $heslo = $pouzivatel[1];
         $zaznam = $this->database->table('zamestnanec')->where('RodneCislo', $RodneCislo)->fetch();
-        if ($zaznam == null || $heslo != $zaznam->heslo) //overenie ci taky uzivatel vobec je v db s takym heslom
+        if ($zaznam == null || strcmp(md5($heslo), $zaznam->heslo) != 0 ) //overenie ci taky uzivatel vobec je v db s takym heslom
         {
-            throw new AuthenticationException('User not found.');
+            throw new AuthenticationException('Chybná kombinácia mena a hesla.');
         }
         else
         {

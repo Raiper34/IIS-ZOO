@@ -53,6 +53,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 	public function uspesne(Form $form, $hodnoty)
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //menim prazdne stringy na nully kvoli db 
+		$hodnoty['heslo'] = md5($hodnoty['heslo']);
 		$this->database->table('zamestnanec')->insert($hodnoty);
 		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
