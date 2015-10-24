@@ -39,13 +39,24 @@
 </table>
 
 <h2>Implementácia</h2>
-<p>Struèná dokumentace k implementaci, která popisuje, které PHP skripty implementují jednotlivé pøípady pou¾ití uvedené v use-case diagramu z IDS. V pøípadì, ¾e bylo nutno pøi implementaci uèinit zmìny v návrhu, musí být v dokumentaci zdùvodnìny.</p>
+<dl>
+	<dt>Pou¾ité frameworky a kni¾nice:</dt>
+	<dd>Nette</dd>
+	<dd>Bootstrap</dd>
+	<dd>jQuery</dd>
+	<dd>Bs3FormRenderer</dd>
+</dl>
+<p>Na vypracovanie projektu je pou¾itý framework Nette, tak¾e aplikácia je postavená na MVC (MVP) architektúre, èi¾e skripty sú rozdelené na 3 èasti. Na model, view a presenter. Prièom väè¹inou si vystaèíme iba s èas»ou view a presenter. V zlo¾ke app\mvc\templates sa nachádzajú jednotlivé pohµady (view), kde sa iba predávajú získané informácie z presenteru, ktoré chceme zobrazi». V zlo¾ke app\mvc má ka¾dý presenter zvlá¹» svoju zlo¾ku, napríklad presenter Druh. V tejto zlo¾ke sa typicky nachádzajú 3 súbory, a to (napríklad pre zlo¾ku Druh): DruhPresenter.php (kde sa nachádzajú v¹etky akcie, manipulácie s databázovou tabuµkou druh, pridávanie do tabuµky druh...), VytvoritDruhForm.php (továrenská metóda na tvorbu formulárov pre pridávanie nového druhu) a EditovatDruhForm.php (továrenská metóda na tvorbu formulárov, pre editovanie druhu). Ka¾dému pohµadu prislúcha v na¹om prípade práve jeden presenter. Model v aplikácií uva¾ujeme iba minimálne, vzhµadom na to, ¾e v presenteri sa nachádzajú iba po¾iadavky na databázu. Model vyu¾ívame napríklad pri implementácií autentifikátoru. </p>
 
 <h2>In¹talácia</h2>
 <ul>
-<li>Struènì popi¹te postup instalace na server</li>
-<li>Softwarové po¾adavky (verze PHP apod.)</li>
-<li>Jak rozbalit, konfigurovat, inicializovat databází, ...</li>
+<li>Softwarové po¾iadavky: PHP 5.4 MYSQL 5.6</li>
+<li>
+	<ol>
+		<li>Najprv vytvorte v phpMyAdmin, alebo inom, databázu a spustite skript databaza.sql, ktorý vytvorí tabuµky a naplní ich dátami.</li> 
+		<li>Potom editujte súbor app/config/config.local.neon va¹imi prístupovými údajmi k databázi.</li><li>Nakoniec nahrajte na server v¹etky súbory.</li>
+	</ol>
+</li>
 </ul>
 
 <h2>Známe problémy</h2>
