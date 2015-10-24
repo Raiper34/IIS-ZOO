@@ -147,6 +147,7 @@ class ZivocichPresenter extends BasePresenter
 		$this->database->table('staraSa')->where('IDZivocicha', $this->Id)->delete();
 		$this->database->table('testoval')->where('IDZivocicha', $this->Id)->delete();
 		$this->database->table('zivocich')->where('IDZivocicha', $this->Id)->delete();
+		$form->getPresenter()->flashMessage('Úspešne odstránené!', 'uspech');
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}
 
@@ -203,6 +204,7 @@ class ZivocichPresenter extends BasePresenter
 		{
 			$this->database->table('staraSa')->insert($hodnoty);
 		}
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$this->redirect('Zivocich:viac', $this->Id);
 	}
 
@@ -229,6 +231,8 @@ class ZivocichPresenter extends BasePresenter
 	public function uspesneOdstranitStaraSa($form)
 	{
 		$this->database->table('staraSa')->where('IDZivocicha', $this->Id)->where('RodneCislo', $form['RodneCislo']->getValue())->delete();
+		$form->getPresenter()->flashMessage('Úspešne odstránené!', 'uspech');
+		$this->redirect('Zivocich:viac', $this->Id);
 	}
 
 }

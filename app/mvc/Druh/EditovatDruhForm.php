@@ -46,6 +46,7 @@ class EditovatDruhForm extends Nette\Object
 	{
 		$zaznam = $this->database->table('druhZivocicha')->get($this->Id);
 		$zaznam->update($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne editované!', 'uspech');
 		$form->getPresenter()->redirect('Druh:viac', $this->Id);
 	}
 

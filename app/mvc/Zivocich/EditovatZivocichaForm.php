@@ -59,6 +59,7 @@ class EditovatZivocichaForm extends Nette\Object
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //kvoli db lebo tam chcem null a nie prazdnyretazec
 		$zaznam = $this->database->table('zivocich')->get($this->Id);
 		$zaznam->update($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne editované!', 'uspech');
 		$form->getPresenter()->redirect('Zivocich:viac', $this->Id);
 	}
 

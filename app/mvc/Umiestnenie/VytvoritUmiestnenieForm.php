@@ -81,6 +81,7 @@ class VytvoritUmiestnenieForm extends Nette\Object
 			$this->database->table('vybeh')->insert($hodnoty['vybeh']);
 		}
 
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$form->getPresenter()->redirect('Umiestnenie:vypis');
 	}
 

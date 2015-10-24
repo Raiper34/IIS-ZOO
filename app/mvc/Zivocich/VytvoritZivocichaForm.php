@@ -71,6 +71,7 @@ class VytvoritZivocichaForm extends Nette\Object
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //kvoli db chcem tam mat null a nie prazdny string
 		$this->database->table('zivocich')->insert($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$form->getPresenter()->redirect('Zivocich:vypis');
 	}
 

@@ -81,6 +81,8 @@ class EditovatUmiestnenieForm extends Nette\Object
 			$zaznam = $this->database->table('vybeh')->get($this->Id);
 			$zaznam->update($hodnoty['vybeh']);
 		}
+		
+		$form->getPresenter()->flashMessage('Úspešne editované!', 'uspech');
 		$form->getPresenter()->redirect('Umiestnenie:viac', $this->Id);
 	}
 

@@ -54,6 +54,7 @@ class EditovatZamestnancaForm extends Nette\Object
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; // zmenim prazdne stringy na nully, kvoli db
 		$zaznam = $this->database->table('zamestnanec')->get($this->RodneCislo);
 		$zaznam->update($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne editované!', 'uspech');
 		$form->getPresenter()->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 

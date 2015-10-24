@@ -147,6 +147,7 @@ class DruhPresenter extends BasePresenter
 		if($this->database->table('zivocich')->where('IDDruhuZivocicha', $this->Id)->count() == 0) //mozem mazat iba ak neexistuje zivocich priradeny k tomuto druhu
 		{
 			$this->database->table('druhZivocicha')->where('IDDruhuZivocicha', $this->Id)->delete();
+			$form->getPresenter()->flashMessage('Úspešne odstránené!', 'uspech');
 			$form->getPresenter()->redirect('Druh:vypis');
 		}
 		else //existuje taky zivocich tak iba ukazem hlasku

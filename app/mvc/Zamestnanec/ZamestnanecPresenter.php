@@ -153,6 +153,8 @@ class ZamestnanecPresenter extends BasePresenter
 	public function uspesneOdstranitStaraSa($form)
 	{
 		$this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->where('IDZivocicha', $form['id']->getValue())->delete();
+		$this->flashMessage('Úspešne odstránené!', 'uspech');
+		$this->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 
 	/*
@@ -179,6 +181,8 @@ class ZamestnanecPresenter extends BasePresenter
 	public function uspesneOdstranitSpravuje($form)
 	{
 		$this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->where('IDUmiestnenia', $form['id']->getValue())->delete();
+		$this->flashMessage('Úspešne odstránené!', 'uspech');
+		$this->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 
 	/*
@@ -216,6 +220,7 @@ class ZamestnanecPresenter extends BasePresenter
 		{
 			$this->database->table('staraSa')->insert($hodnoty);
 		}
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$this->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 
@@ -255,6 +260,7 @@ class ZamestnanecPresenter extends BasePresenter
 		{
 			$this->database->table('spravuje')->insert($hodnoty);
 		}
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$this->redirect('Zamestnanec:viac', $this->RodneCislo);
 	}
 
@@ -283,7 +289,9 @@ class ZamestnanecPresenter extends BasePresenter
 		$this->database->table('staraSa')->where('RodneCislo', $this->RodneCislo)->delete();
 		$this->database->table('spravuje')->where('RodneCislo', $this->RodneCislo)->delete();
 		$this->database->table('zamestnanec')->where('RodneCislo', $this->RodneCislo)->delete();
+		$form->getPresenter()->flashMessage('Úspešne odstránené!', 'uspech');
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
+
 	}
 
 	/*

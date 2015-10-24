@@ -109,13 +109,23 @@ call_user_func(reset($_b->blocks['head']), $_b, get_defined_vars())  ?>
     <!-- Flash messages -->
 <?php $iterations = 0; foreach ($flashes as $flash) { ?>    <div>
         <div class="container">
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
-                <?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?>
+<?php if ($flash->type == "uspech") { ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?>
 
-            </div>
+                </div>
+<?php } else { ?>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <?php echo Latte\Runtime\Filters::escapeHtml($flash->message, ENT_NOQUOTES) ?>
+
+                </div>
+<?php } ?>
         </div>
     </div>
 <?php $iterations++; } ?>

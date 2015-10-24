@@ -54,6 +54,7 @@ class VytvoritZamestnancaForm extends Nette\Object
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //menim prazdne stringy na nully kvoli db 
 		$this->database->table('zamestnanec')->insert($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$form->getPresenter()->redirect('Zamestnanec:vypis');
 	}
 

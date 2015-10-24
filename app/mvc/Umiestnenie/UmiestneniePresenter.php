@@ -249,6 +249,7 @@ class UmiestneniePresenter extends BasePresenter
 		{
 			$this->database->table('spravuje')->insert($hodnoty);
 		}
+		$this->flashMessage('Úspešne pridané!', 'uspech');
 		$this->redirect('Umiestnenie:viac', $this->Id);
 	}	
 
@@ -276,5 +277,7 @@ class UmiestneniePresenter extends BasePresenter
 	public function uspesneOdstranitSpravuje($form)
 	{
 		$this->database->table('spravuje')->where('IDUmiestnenia', $this->Id)->where('RodneCislo', $form['RodneCislo']->getValue())->delete();
+		$this->flashMessage('Úspešne odstránené!', 'uspech');
+		$this->redirect('Umiestnenie:viac', $this->Id);
 	}
 }

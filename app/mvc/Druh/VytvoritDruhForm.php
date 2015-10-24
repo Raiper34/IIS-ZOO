@@ -44,6 +44,7 @@ class VytvoritDruhForm extends Nette\Object
 	public function uspesne(Form $form, $hodnoty)
 	{
 		$this->database->table('druhZivocicha')->insert($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$form->getPresenter()->redirect('Druh:vypis');
 	}
 

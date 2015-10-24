@@ -100,6 +100,7 @@ class TestPresenter extends BasePresenter
 	{
 		foreach ($hodnoty as &$hodnota) if ($hodnota === '') $hodnota = NULL; //prazdne polia budu nully a nie praznde stringy ukladane do db
 		$this->database->table('testoval')->insert($hodnoty);
+		$form->getPresenter()->flashMessage('Úspešne pridané!', 'uspech');
 		$this->redirect('Test:vypis');
 	}
 
